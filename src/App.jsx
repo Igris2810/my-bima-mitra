@@ -11,7 +11,7 @@ const card={background:"white",padding:30,borderRadius:18,boxShadow:"0 10px 30px
 function Navbar(){
   return (
     <div style={{display:"flex",justifyContent:"space-between",padding:"18px 40px",background:"white",boxShadow:"0 6px 20px rgba(0,0,0,0.08)",position:"sticky",top:0,zIndex:9}}>
-      <b style={{color:colors.primary,fontSize:20}}>My Bima Mitra</b>
+      <b style={{color:colors.primary,fontSize:22}}>My Bima Mitra</b>
       <div>
         <a href="#/" style={{margin:15}}>Home</a>
         <a href="#/plans" style={{margin:15}}>Plans</a>
@@ -39,23 +39,33 @@ function FloatingButtons(){
 // ===== HERO =====
 function Hero(){
   return (
-    <section style={{background:"linear-gradient(135deg,#0B3D91,#2d9cdb)",color:"white",padding:"120px 20px"}}>
-      <h1 style={{fontSize:48}}>Protect Your Family With Star Health Insurance</h1>
-      <p style={{fontSize:20}}>Expert advisor support across India</p>
+    <section style={{background:"linear-gradient(135deg,#0B3D91,#2d9cdb)",color:"white",padding:"130px 20px"}}>
+      <h1 style={{fontSize:48}}>Star Health Insurance Advisor</h1>
+      <p style={{fontSize:22}}>Personalized guidance. Lifetime claim support.</p>
       <br/>
       <a href="#/consultation"><button style={{...btn,background:"white",color:colors.primary}}>Get Free Consultation</button></a>
     </section>
   )
 }
 
-// ===== TRUST =====
+// ===== BRAND TRUST =====
+function BrandSection(){
+  return(
+    <section style={section}>
+      <h2>Authorized Star Health Advisor</h2>
+      <p>Helping families choose the right health insurance plans with expert support and lifetime service.</p>
+    </section>
+  )
+}
+
+// ===== TRUST STRIP =====
 function Trust(){
   return(
     <div style={{display:"flex",justifyContent:"center",gap:40,padding:30,background:"white",fontWeight:600}}>
       <div>✔ IRDAI Registered Advisor</div>
       <div>✔ 14,000+ Cashless Hospitals</div>
       <div>✔ Lifetime Claim Support</div>
-      <div>✔ Serving Clients Across India</div>
+      <div>✔ Pan India Service</div>
     </div>
   )
 }
@@ -80,13 +90,13 @@ function WhyAdvisor(){
   )
 }
 
-// ===== PLANS PAGE =====
-function Plans(){
-  const plans=["Family Floater","Senior Citizen","Super Top-Up","Critical Illness"];
+// ===== CITY SEO =====
+function Cities(){
+  const cities=["Bhopal","Indore","Delhi","Mumbai","Pune","Bangalore","Hyderabad"];
   return(
     <section style={section}>
-      <h2>Popular Star Health Plans</h2>
-      {plans.map(p=>(<div key={p} style={{...card,margin:15}}>{p}<br/><br/><a href="#/consultation"><button style={btn}>Get Quote</button></a></div>))}
+      <h2>Serving Clients Across India</h2>
+      <p>{cities.join(" • ")}</p>
     </section>
   )
 }
@@ -99,6 +109,16 @@ function Testimonials(){
       <div style={{display:"flex",gap:25,justifyContent:"center",flexWrap:"wrap",marginTop:30}}>
         {t.map(x=>(<div key={x} style={{...card,width:300}}>★★★★★<br/><br/>{x}</div>))}
       </div>
+    </section>
+  )
+}
+
+// ===== PLANS PAGE =====
+function Plans(){
+  const plans=["Family Floater","Senior Citizen","Super Top-Up","Critical Illness"];
+  return(
+    <section style={section}><h2>Popular Star Health Plans</h2>
+      {plans.map(p=>(<div key={p} style={{...card,margin:15}}>{p}<br/><br/><a href="#/consultation"><button style={btn}>Get Quote</button></a></div>))}
     </section>
   )
 }
@@ -143,13 +163,13 @@ function Footer(){
   return(
     <div style={{background:colors.dark,color:"white",padding:40,textAlign:"center"}}>
       <h3>My Bima Mitra</h3>
-      <p>Serving Bhopal, Indore, Delhi, Mumbai & All Cities</p>
+      <p>Health Insurance Advisor | Star Health</p>
       <p>© 2026 My Bima Mitra</p>
     </div>
   )
 }
 
-function Home(){return(<><Hero/><Trust/><WhyAdvisor/><Testimonials/></>)}
+function Home(){return(<><Hero/><BrandSection/><Trust/><WhyAdvisor/><Testimonials/><Cities/></>)}
 
 // ===== ROUTER =====
 export default function App(){
