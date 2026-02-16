@@ -23,8 +23,16 @@ function Navbar(){
     }}>
       
       <div style={{display:"flex",alignItems:"center",gap:15}}>
-        <img src="/logo.jpeg" style={{height:50}} />
-        <div>
+        <img 
+  src="/logo.jpeg"
+  style={{
+    height:60,
+    width:60,
+    objectFit:"cover",
+    borderRadius:12
+  }}
+/>
+      <div>
           <div style={{fontWeight:900,color:"#0B3D91",fontSize:24}}>
             My Bima Mitra
           </div>
