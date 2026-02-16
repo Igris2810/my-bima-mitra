@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import emailjs from "@emailjs/browser";
 
 const navLink={margin:"0 14px",textDecoration:"none",color:"#0b3d91",fontWeight:600}
