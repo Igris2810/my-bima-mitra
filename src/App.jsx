@@ -10,23 +10,40 @@ const card={background:"white",padding:30,borderRadius:18,boxShadow:"0 10px 30px
 // ===== NAVBAR =====
 function Navbar(){
   return (
-    <div style={{display:"flex",justifyContent:"space-between",padding:"18px 40px",background:"white",boxShadow:"0 6px 20px rgba(0,0,0,0.08)",position:"sticky",top:0,zIndex:9}}>
-    <div style={{display:"flex",alignItems:"center",gap:10}}>
-  <img src="/logo.jpeg" style={{height:120}} />
-  <div>
-    <div style={{fontWeight:800,color:"#0B3D91",fontSize:20}}>My Bima Mitra</div>
-    <div style={{fontSize:12,color:"#0b5ed7"}}>Insurance Advisor</div>
-  </div>
-</div>
-      <div>
-        <a href="#/" style={{margin:15}}>Home</a>
-        <a href="#/plans" style={{margin:15}}>Plans</a>
-        <a href="#/consultation" style={{margin:15}}>Free Consultation</a>
-        <a href="#/contact" style={{margin:15}}>Contact</a>
+    <div style={{
+      display:"flex",
+      justifyContent:"space-between",
+      alignItems:"center",
+      padding:"18px 60px",
+      background:"white",
+      boxShadow:"0 6px 20px rgba(0,0,0,0.08)",
+      position:"sticky",
+      top:0,
+      zIndex:9
+    }}>
+      
+      <div style={{display:"flex",alignItems:"center",gap:15}}>
+        <img src="/logo.jpeg" style={{height:50}} />
+        <div>
+          <div style={{fontWeight:900,color:"#0B3D91",fontSize:24}}>
+            My Bima Mitra
+          </div>
+          <div style={{fontSize:13,color:"#0b5ed7"}}>
+            Your Personal Insurance Expert
+          </div>
+        </div>
+      </div>
+
+      <div style={{fontWeight:600}}>
+        <a href="#/" style={{margin:20}}>Home</a>
+        <a href="#/plans" style={{margin:20}}>Plans</a>
+        <a href="#/consultation" style={{margin:20}}>Free Consultation</a>
+        <a href="#/contact" style={{margin:20}}>Contact</a>
       </div>
     </div>
   );
 }
+
 
 // ===== FLOATING BUTTONS =====
 function FloatingButtons(){
