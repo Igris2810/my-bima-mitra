@@ -1,18 +1,18 @@
 import { useState, useEffect } from "react";
 import emailjs from "@emailjs/browser";
 
-// DESIGN SYSTEM
-const colors={primary:"#0B3D91",accent:"#0b5ed7",bg:"#F4F7FB",dark:"#081f4a"}
-const btn={padding:"14px 28px",background:colors.accent,color:"white",border:0,borderRadius:10,fontWeight:700,cursor:"pointer",boxShadow:"0 6px 18px rgba(0,0,0,0.15)"}
-const section={maxWidth:1100,margin:"auto",padding:"90px 20px",textAlign:"center"}
-const card={background:"white",padding:28,borderRadius:16,boxShadow:"0 10px 25px rgba(0,0,0,0.08)"}
+// ===== DESIGN SYSTEM =====
+const colors={primary:"#0B3D91",accent:"#0b5ed7",bg:"#F4F7FB",dark:"#0e1b3d"}
+const btn={padding:"14px 28px",background:colors.accent,color:"white",border:0,borderRadius:12,fontWeight:700,cursor:"pointer",boxShadow:"0 8px 22px rgba(0,0,0,0.18)"}
+const section={maxWidth:1150,margin:"auto",padding:"90px 20px",textAlign:"center"}
+const card={background:"white",padding:30,borderRadius:18,boxShadow:"0 10px 30px rgba(0,0,0,0.08)"}
 
-// NAVBAR
+// ===== NAVBAR =====
 function Navbar(){
   return (
     <div style={{display:"flex",justifyContent:"space-between",padding:"18px 40px",background:"white",boxShadow:"0 6px 20px rgba(0,0,0,0.08)",position:"sticky",top:0,zIndex:9}}>
       <b style={{color:colors.primary,fontSize:20}}>My Bima Mitra</b>
-      <div style={{fontWeight:600}}>
+      <div>
         <a href="#/" style={{margin:15}}>Home</a>
         <a href="#/plans" style={{margin:15}}>Plans</a>
         <a href="#/consultation" style={{margin:15}}>Free Consultation</a>
@@ -22,22 +22,36 @@ function Navbar(){
   );
 }
 
-// HERO
+// ===== FLOATING BUTTONS =====
+function FloatingButtons(){
+  return(
+    <>
+      <a href="https://wa.me/918319600171" target="_blank">
+        <div style={{position:"fixed",bottom:25,right:25,background:"#25D366",color:"white",padding:"14px 18px",borderRadius:50,fontWeight:700,boxShadow:"0 8px 20px rgba(0,0,0,0.3)"}}>WhatsApp</div>
+      </a>
+      <a href="tel:+918319600171">
+        <div style={{position:"fixed",bottom:90,right:25,background:colors.primary,color:"white",padding:"14px 18px",borderRadius:50,fontWeight:700}}>Call</div>
+      </a>
+    </>
+  )
+}
+
+// ===== HERO =====
 function Hero(){
   return (
-    <section style={{background:"linear-gradient(135deg,#0B3D91,#2d9cdb)",color:"white",padding:"130px 20px"}}>
-      <h1 style={{fontSize:48,marginBottom:10}}>Health Insurance Made Simple</h1>
-      <p style={{fontSize:20}}>Protect your family with Star Health Insurance + Expert Advisor Support</p>
+    <section style={{background:"linear-gradient(135deg,#0B3D91,#2d9cdb)",color:"white",padding:"120px 20px"}}>
+      <h1 style={{fontSize:48}}>Protect Your Family With Star Health Insurance</h1>
+      <p style={{fontSize:20}}>Expert advisor support across India</p>
       <br/>
       <a href="#/consultation"><button style={{...btn,background:"white",color:colors.primary}}>Get Free Consultation</button></a>
     </section>
   )
 }
 
-// TRUST STRIP
+// ===== TRUST =====
 function Trust(){
-  return (
-    <div style={{display:"flex",justifyContent:"center",gap:40,padding:30,background:"white",fontWeight:600,flexWrap:"wrap"}}>
+  return(
+    <div style={{display:"flex",justifyContent:"center",gap:40,padding:30,background:"white",fontWeight:600}}>
       <div>✔ IRDAI Registered Advisor</div>
       <div>✔ 14,000+ Cashless Hospitals</div>
       <div>✔ Lifetime Claim Support</div>
@@ -46,13 +60,13 @@ function Trust(){
   )
 }
 
-// WHY ADVISOR
+// ===== WHY ADVISOR =====
 function WhyAdvisor(){
   const items=[
-    {e:"🛟",t:"Claim Support",d:"We assist during hospitalization & claim filing."},
-    {e:"📊",t:"Right Plan Selection",d:"We compare plans & suggest best coverage."},
-    {e:"♻️",t:"Lifetime Policy Support",d:"Renewals, upgrades & claim help."},
-    {e:"👨‍👩‍👧",t:"Parents & Family Cover",d:"Expert guidance for senior citizen plans."}
+    {e:"🛟",t:"Claim Support",d:"Help during hospitalization"},
+    {e:"📊",t:"Right Plan",d:"Compare best options"},
+    {e:"♻️",t:"Lifetime Support",d:"Renewals & upgrades"},
+    {e:"👨‍👩‍👧",t:"Parents Cover",d:"Senior citizen guidance"}
   ];
   return (
     <section style={{...section,background:colors.bg}}>
@@ -66,79 +80,30 @@ function WhyAdvisor(){
   )
 }
 
-// PLANS
+// ===== PLANS PAGE =====
 function Plans(){
-  const plans=[
-    {e:"👨‍👩‍👧‍👦",t:"Family Floater"},
-    {e:"🧓",t:"Senior Citizen"},
-    {e:"⬆️",t:"Super Top‑Up"},
-    {e:"❤️",t:"Critical Illness"}
-  ];
-  return (
+  const plans=["Family Floater","Senior Citizen","Super Top-Up","Critical Illness"];
+  return(
     <section style={section}>
       <h2>Popular Star Health Plans</h2>
-      <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(250px,1fr))",gap:25,marginTop:30}}>
-        {plans.map(p=>(
-          <div key={p.t} style={card}>
-            <div style={{fontSize:36}}>{p.e}</div>
-            <h3>{p.t}</h3>
-            <p>Comprehensive coverage with cashless hospitals.</p>
-            <br/>
-            <a href="#/consultation"><button style={{...btn,width:"100%"}}>Get Quote</button></a>
-          </div>
-        ))}
-      </div>
+      {plans.map(p=>(<div key={p} style={{...card,margin:15}}>{p}<br/><br/><a href="#/consultation"><button style={btn}>Get Quote</button></a></div>))}
     </section>
   )
 }
 
-// PROCESS
-function Process(){
-  return (
-    <section style={{...section,background:colors.bg}}>
-      <h2>How It Works</h2>
-      <p>1️⃣ Contact us → 2️⃣ Compare plans → 3️⃣ Choose best → 4️⃣ Lifetime support</p>
-    </section>
-  )
-}
-
-// TESTIMONIALS
+// ===== TESTIMONIALS =====
 function Testimonials(){
-  const t=["Cashless claim approved in 4 hours – Bhopal","Best advisor for parents insurance – Indore","Smooth purchase & support – Delhi"];
-  return (
-    <section style={section}>
-      <h2>Happy Clients</h2>
-      <div style={{display:"flex",justifyContent:"center",gap:20,flexWrap:"wrap",marginTop:30}}>
-        {t.map(x=>(<div key={x} style={{...card,width:260}}>⭐️⭐️⭐️⭐️⭐️<br/>{x}</div>))}
+  const t=["Cashless claim approved in 4 hours – Bhopal","Best advisor for parents insurance – Indore","Smooth purchase – Delhi"]
+  return(
+    <section style={section}><h2>Trusted By Families Across India</h2>
+      <div style={{display:"flex",gap:25,justifyContent:"center",flexWrap:"wrap",marginTop:30}}>
+        {t.map(x=>(<div key={x} style={{...card,width:300}}>★★★★★<br/><br/>{x}</div>))}
       </div>
     </section>
   )
 }
 
-// FAQ
-function FAQ(){
-  return (
-    <section style={{...section,background:colors.bg}}>
-      <h2>FAQs</h2>
-      <p><b>Which plan is best?</b> Depends on age & family size.</p>
-      <p><b>Cashless hospitals?</b> Yes across India.</p>
-      <p><b>Can parents be covered?</b> Yes senior plans available.</p>
-    </section>
-  )
-}
-
-// FINAL CTA
-function FinalCTA(){
-  return (
-    <section style={{background:colors.dark,color:"white",padding:"90px 20px",textAlign:"center"}}>
-      <h2>Get Your Free Star Health Consultation Today</h2>
-      <br/>
-      <a href="#/consultation"><button style={btn}>Start Now</button></a>
-    </section>
-  )
-}
-
-// CONSULTATION FORM
+// ===== CONSULTATION FORM =====
 function Consultation(){
   const [submitted,setSubmitted]=useState(false);
   const [formData,setFormData]=useState({name:"",phone:"",city:"",message:""});
@@ -148,8 +113,7 @@ function Consultation(){
     emailjs.send("service_prwxv5e","template_lnnkfoo",{from_name:formData.name,phone:formData.phone,city:formData.city,message:formData.message},"6LcmS8gSIq2vvPppX").then(()=>setSubmitted(true));
   };
   return (
-    <section style={section}>
-      <h2>Free Consultation</h2>
+    <section style={section}><h2>Free Consultation</h2>
       {submitted? <h3>We will contact you soon.</h3>:(
         <form onSubmit={handleSubmit} style={{maxWidth:420,margin:"auto"}}>
           <input name="name" placeholder="Full Name" onChange={handleChange} required style={{width:"100%",padding:14,margin:8,borderRadius:8}}/>
@@ -163,33 +127,34 @@ function Consultation(){
   )
 }
 
-// CONTACT
+// ===== CONTACT =====
 function Contact(){
-  return (
+  return(
     <section style={section}>
       <h2>Contact</h2>
       <p><a href="tel:+918319600171">📞 8319600171</a></p>
-      <p><a href="mailto:manish.starhealth.in@gmail.com">✉️ manish.starhealth.in@gmail.com</a></p>
+      <p><a href="mailto:manish.starhealth.in@gmail.com">✉️ Email</a></p>
     </section>
   )
 }
 
-// FOOTER
+// ===== FOOTER =====
 function Footer(){
-  return (
-    <div style={{background:colors.dark,color:"white",textAlign:"center",padding:25}}>
-      © 2026 My Bima Mitra | Star Health Advisor | All India Service
+  return(
+    <div style={{background:colors.dark,color:"white",padding:40,textAlign:"center"}}>
+      <h3>My Bima Mitra</h3>
+      <p>Serving Bhopal, Indore, Delhi, Mumbai & All Cities</p>
+      <p>© 2026 My Bima Mitra</p>
     </div>
   )
 }
 
-// HOME PAGE
-function Home(){return(<><Hero/><Trust/><WhyAdvisor/><Plans/><Process/><Testimonials/><FAQ/><FinalCTA/></>)}
+function Home(){return(<><Hero/><Trust/><WhyAdvisor/><Testimonials/></>)}
 
-// ROUTER
+// ===== ROUTER =====
 export default function App(){
   const [route,setRoute]=useState(window.location.hash.replace("#/","")||"");
   useEffect(()=>{window.addEventListener("hashchange",()=>setRoute(window.location.hash.replace("#/","")));},[]);
-  let Page=Home;if(route==="consultation")Page=Consultation;if(route==="contact")Page=Contact;if(route==="plans")Page=Plans;
-  return(<div style={{fontFamily:"Arial",background:colors.bg}}><Navbar/><Page/><Footer/></div>)
+  let Page=Home;if(route==="plans")Page=Plans;if(route==="consultation")Page=Consultation;if(route==="contact")Page=Contact;
+  return(<div style={{fontFamily:"Arial",background:colors.bg}}><Navbar/><Page/><FloatingButtons/><Footer/></div>)
 }
