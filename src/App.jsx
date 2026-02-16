@@ -11,7 +11,7 @@ const card={background:"white",padding:30,borderRadius:18,boxShadow:"0 10px 30px
 function Navbar(){
   return (
     <div style={{display:"flex",justifyContent:"space-between",padding:"18px 40px",background:"white",boxShadow:"0 6px 20px rgba(0,0,0,0.08)",position:"sticky",top:0,zIndex:9}}>
-     <img src="/logo.jpeg" style={{height:45}} />
+     <img src="/logo.jpeg" style={{height:150}} />
       <div>
         <a href="#/" style={{margin:15}}>Home</a>
         <a href="#/plans" style={{margin:15}}>Plans</a>
