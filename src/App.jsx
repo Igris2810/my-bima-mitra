@@ -29,7 +29,7 @@ function Navbar(){
   borderRadius:14
 }}>
   <img 
-    src="/logo.jpeg"
+    src="/logo.png"
     style={{
       height:120,
       marginLeft:-30,
