@@ -12,7 +12,7 @@ function Navbar(){
   return (
     <div style={{display:"flex",justifyContent:"space-between",padding:"18px 40px",background:"white",boxShadow:"0 6px 20px rgba(0,0,0,0.08)",position:"sticky",top:0,zIndex:9}}>
     <div style={{display:"flex",alignItems:"center",gap:10}}>
-  <img src="/logo.jpeg" style={{height:40}} />
+  <img src="/logo.jpeg" style={{height:70}} />
   <div>
     <div style={{fontWeight:800,color:"#0B3D91",fontSize:20}}>My Bima Mitra</div>
     <div style={{fontSize:12,color:"#0b5ed7"}}>Insurance Advisor</div>
