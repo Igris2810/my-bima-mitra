@@ -147,7 +147,7 @@ export default function App(){
   const [route,setRoute]=useState(window.location.hash.replace("#/","")||"");
   useEffect(()=>{window.addEventListener("hashchange",()=>setRoute(window.location.hash.replace("#/","")));},[]);
   let Page=Home;if(route==="plans")Page=Plans;if(route==="consultation")Page=Consultation;if(route==="contact")Page=Contact;
-  return(<div style={{fontFamily:"Inter, Arial",background:colors.bg}}><Navbar/><Page/></div>)
+ return(<div style={{fontFamily:"Arial",background:colors.bg}}>
 }
 
     <section style={{background:"linear-gradient(135deg,#0b5ed7,#2d9cdb)",color:"white",padding:"110px 20px",textAlign:"center"}}>
