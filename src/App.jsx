@@ -86,12 +86,47 @@ export default function MyBimaMitra() {
             <p className="text-center text-green-600 font-semibold">Lead sent successfully! We will contact you soon.</p>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
-              <Input name="name" placeholder="Full Name" onChange={handleChange} required />
-              <Input name="phone" placeholder="Phone Number" onChange={handleChange} required />
-              <Input name="city" placeholder="City" onChange={handleChange} required />
-              <Textarea name="message" placeholder="Age, Members & Coverage Needed" onChange={handleChange} />
-              <Button type="submit" className="w-full">Submit</Button>
-            </form>
+
+  <input 
+    name="name" 
+    placeholder="Full Name" 
+    onChange={handleChange} 
+    required 
+    className="w-full p-3 border rounded" 
+  />
+
+  <input 
+    name="phone" 
+    placeholder="Phone Number" 
+    onChange={handleChange} 
+    required 
+    className="w-full p-3 border rounded" 
+  />
+
+  <input 
+    name="city" 
+    placeholder="City" 
+    onChange={handleChange} 
+    required 
+    className="w-full p-3 border rounded" 
+  />
+
+  <textarea 
+    name="message" 
+    placeholder="Age, Members & Coverage Needed" 
+    onChange={handleChange} 
+    className="w-full p-3 border rounded"
+  ></textarea>
+
+  <button 
+    type="submit" 
+    className="w-full bg-blue-600 text-white p-3 rounded"
+  >
+    Submit
+  </button>
+
+</form>
+
           )}
         </div>
       </section>
