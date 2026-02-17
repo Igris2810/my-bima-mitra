@@ -21,24 +21,15 @@ function Navbar(){
       top:0,
       zIndex:9
     }}>
-      
-      <div style={{
-  height:60,
-  width:60,
-  overflow:"hidden",
-  borderRadius:14
-}}>
-  <img 
-    src="/logo.png"
-    style={{
-      height:120,
-      marginLeft:-30,
-      marginTop:-25
-    }}
-  />
-</div>
 
-      <div>
+      {/* LOGO + BRAND */}
+      <div style={{display:"flex",alignItems:"center",gap:16}}>
+        <img 
+          src="/logo.png"
+          style={{height:60}}
+        />
+
+        <div>
           <div style={{fontWeight:900,color:"#0B3D91",fontSize:24}}>
             My Bima Mitra
           </div>
@@ -48,15 +39,18 @@ function Navbar(){
         </div>
       </div>
 
+      {/* NAV LINKS */}
       <div style={{fontWeight:600}}>
         <a href="#/" style={{margin:20}}>Home</a>
         <a href="#/plans" style={{margin:20}}>Plans</a>
         <a href="#/consultation" style={{margin:20}}>Free Consultation</a>
         <a href="#/contact" style={{margin:20}}>Contact</a>
       </div>
+
     </div>
   );
 }
+
 
 
 // ===== FLOATING BUTTONS =====
