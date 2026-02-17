@@ -23,7 +23,7 @@ function Navbar(){
     }}>
 
       {/* LOGO + BRAND */}
-      <div style={{display:"flex",alignItems:"center",gap:16}}>
+      <div style={{display:"flex",alignItems:"center",gap:14}}>
        <img 
   src="/logo.png"
   style={{
