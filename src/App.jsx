@@ -14,7 +14,7 @@ function Navbar(){
       display:"flex",
       justifyContent:"space-between",
       alignItems:"center",
-      padding:"18px 60px",
+      padding:"22px 70px",
       background:"white",
       boxShadow:"0 6px 20px rgba(0,0,0,0.08)",
       position:"sticky",
@@ -24,16 +24,19 @@ function Navbar(){
 
       {/* LOGO + BRAND */}
       <div style={{display:"flex",alignItems:"center",gap:16}}>
-        <img 
-          src="/logo.png"
-          style={{height:60}}
-        />
-
-        <div>
-          <div style={{fontWeight:900,color:"#0B3D91",fontSize:24}}>
+       <img 
+  src="/logo.png"
+  style={{
+    height:95,
+    width:"auto",
+    objectFit:"contain"
+  }}
+/>
+      <div>
+          <div style={{fontWeight:900,color:"#0B3D91",fontSize:30}}>
             My Bima Mitra
           </div>
-          <div style={{fontSize:13,color:"#0b5ed7"}}>
+          <div style={{fontSize:15,color:"#0b5ed7"}}>
             Your Personal Insurance Expert
           </div>
         </div>
