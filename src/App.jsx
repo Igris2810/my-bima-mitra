@@ -24,7 +24,7 @@ function Navbar(){
 
       {/* LOGO + BRAND */}
       <div style={{display:"flex",alignItems:"center",gap:14}}>
-       <img 
+     <img 
   src="/logo.png"
   style={{
     height:95,
@@ -32,6 +32,7 @@ function Navbar(){
     objectFit:"contain"
   }}
 />
+
       <div>
           <div style={{fontWeight:900,color:"#0B3D91",fontSize:30}}>
             My Bima Mitra
