@@ -93,7 +93,7 @@ function Hero(){
     "7,000+ Happy Clients Served",
     "14,000+ Network Hospitals",
     "Lifetime Claim Support",
-    "Serving Clients Across India"
+    "Serving Clients Across India & World Wide"
   ];
 
   return (
@@ -130,7 +130,7 @@ function Hero(){
             marginBottom:30,
             opacity:.95
           }}>
-            Personalized insurance guidance, claim support,
+            Personalized Insurance guidance, claim support,
             and the best Star Health plans with
             lifetime advisor support.
           </p>
