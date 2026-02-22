@@ -88,6 +88,14 @@ function FloatingButtons(){
 
 // ===== HERO =====
 function Hero(){
+
+  const stats = [
+    "7,000+ Happy Clients Served",
+    "14,000+ Network Hospitals",
+    "Lifetime Claim Support",
+    "Serving Clients Across India"
+  ];
+
   return (
     <section style={{
       background:"linear-gradient(135deg,#0B3D91,#2d9cdb)",
@@ -104,7 +112,7 @@ function Hero(){
         gap:60
       }}>
 
-        {/* LEFT SIDE TEXT */}
+        {/* LEFT CONTENT */}
         <div style={{maxWidth:520}}>
 
           <h1 style={{
@@ -123,7 +131,7 @@ function Hero(){
             opacity:.95
           }}>
             Personalized insurance guidance, claim support,
-            and the best Star Health plans — all with
+            and the best Star Health plans with
             lifetime advisor support.
           </p>
 
@@ -146,13 +154,13 @@ function Hero(){
         </div>
 
 
-        {/* RIGHT SIDE TRUST BOX */}
+        {/* TRUST BOX */}
         <div style={{
           background:"white",
           padding:30,
           borderRadius:16,
           color:"#333",
-          width:320,
+          width:340,
           boxShadow:"0 12px 30px rgba(0,0,0,0.15)"
         }}>
 
@@ -160,10 +168,11 @@ function Hero(){
             Why Choose Us
           </h3>
 
-          <div style={{marginBottom:10}}>✔ IRDAI Registered Advisor</div>
-          <div style={{marginBottom:10}}>✔ 14,000+ Cashless Hospitals</div>
-          <div style={{marginBottom:10}}>✔ Lifetime Claim Support</div>
-          <div style={{marginBottom:10}}>✔ Serving Clients Across India</div>
+          {stats.map((item,i)=>(
+            <div key={i} style={{marginBottom:12}}>
+              ✔ {item}
+            </div>
+          ))}
 
         </div>
 
