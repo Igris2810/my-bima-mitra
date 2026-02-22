@@ -14,40 +14,56 @@ function Navbar(){
       display:"flex",
       justifyContent:"space-between",
       alignItems:"center",
-      padding:"22px 70px",
+      padding:"20px 80px",
       background:"white",
-      boxShadow:"0 6px 20px rgba(0,0,0,0.08)",
+      boxShadow:"0 4px 18px rgba(0,0,0,0.08)",
       position:"sticky",
       top:0,
-      zIndex:9
+      zIndex:10
     }}>
 
-      {/* LOGO + BRAND */}
-     <div style={{display:"flex",alignItems:"center",gap:16}}>
-  <img 
-    src="/logo.png"
-    style={{
-      height:70,
-      objectFit:"contain"
-    }}
-  />
+      {/* Logo + Brand */}
+      <div style={{display:"flex",alignItems:"center",gap:16}}>
 
-  <div>
-    <div style={{fontWeight:900,color:"#0B3D91",fontSize:26}}>
-      My Bima Mitra
-    </div>
-    <div style={{fontSize:14,color:"#0b5ed7"}}>
-      Your Personal Insurance Expert
-    </div>
-  </div>
-</div>
+        <img
+          src="/logo.png"
+          style={{
+            height:65,
+            objectFit:"contain"
+          }}
+        />
 
-      {/* NAV LINKS */}
-      <div style={{fontWeight:600}}>
-        <a href="#/" style={{margin:20}}>Home</a>
-        <a href="#/plans" style={{margin:20}}>Plans</a>
-        <a href="#/consultation" style={{margin:20}}>Free Consultation</a>
-        <a href="#/contact" style={{margin:20}}>Contact</a>
+        <div>
+          <div style={{
+            fontSize:24,
+            fontWeight:800,
+            color:"#0B3D91"
+          }}>
+            My Bima Mitra
+          </div>
+
+          <div style={{
+            fontSize:13,
+            color:"#0b5ed7"
+          }}>
+            Your Personal Insurance Expert
+          </div>
+        </div>
+
+      </div>
+
+
+      {/* Navigation */}
+      <div style={{
+        display:"flex",
+        gap:32,
+        fontWeight:600,
+        fontSize:15
+      }}>
+        <a href="#/" style={{textDecoration:"none",color:"#333"}}>Home</a>
+        <a href="#/plans" style={{textDecoration:"none",color:"#333"}}>Plans</a>
+        <a href="#/consultation" style={{textDecoration:"none",color:"#333"}}>Free Consultation</a>
+        <a href="#/contact" style={{textDecoration:"none",color:"#333"}}>Contact</a>
       </div>
 
     </div>
