@@ -302,8 +302,106 @@ function Footer(){
     </div>
   )
 }
+function PlansSection(){
 
-function Home(){return(<><Hero/><BrandSection/><Trust/><WhyAdvisor/><Testimonials/><Cities/></>)}
+  const plans = [
+    {
+      title:"Family Floater",
+      desc:"One policy covering the entire family under a single sum insured."
+    },
+    {
+      title:"Senior Citizen Plans",
+      desc:"Special health insurance plans designed for parents and senior citizens."
+    },
+    {
+      title:"Super Top-Up Plans",
+      desc:"Increase your health coverage at a lower premium with top-up insurance."
+    },
+    {
+      title:"Critical Illness Plans",
+      desc:"Financial protection against major illnesses like cancer, stroke, and heart disease."
+    }
+  ];
+
+  return (
+    <section style={{
+      padding:"100px 80px",
+      background:"#F4F7FB"
+    }}>
+
+      <div style={{maxWidth:1200,margin:"auto"}}>
+
+        <h2 style={{
+          textAlign:"center",
+          fontSize:36,
+          marginBottom:60,
+          color:"#0B3D91"
+        }}>
+          Popular Health Insurance Plans
+        </h2>
+
+        <div style={{
+          display:"grid",
+          gridTemplateColumns:"repeat(auto-fit,minmax(250px,1fr))",
+          gap:30
+        }}>
+
+          {plans.map((plan,i)=>(
+            <div key={i} style={{
+              background:"white",
+              padding:30,
+              borderRadius:16,
+              boxShadow:"0 10px 25px rgba(0,0,0,0.08)"
+            }}>
+
+              <h3 style={{marginBottom:12}}>
+                {plan.title}
+              </h3>
+
+              <p style={{
+                fontSize:14,
+                marginBottom:20,
+                color:"#555"
+              }}>
+                {plan.desc}
+              </p>
+
+              <a href="#/consultation">
+                <button style={{
+                  padding:"10px 18px",
+                  borderRadius:8,
+                  border:"none",
+                  background:"#0B3D91",
+                  color:"white",
+                  cursor:"pointer"
+                }}>
+                  Get Quote
+                </button>
+              </a>
+
+            </div>
+          ))}
+
+        </div>
+
+      </div>
+
+    </section>
+  );
+}
+function Home(){
+  return(
+    <>
+      <Hero/>
+      <PlansSection/>
+      <BrandSection/>
+      <Trust/>
+      <WhyAdvisor/>
+      <Testimonials/>
+      <Cities/>
+    </>
+  )
+}
 
 // ===== ROUTER =====
 export default function App(){
