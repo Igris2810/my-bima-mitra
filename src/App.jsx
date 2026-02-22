@@ -89,11 +89,86 @@ function FloatingButtons(){
 // ===== HERO =====
 function Hero(){
   return (
-    <section style={{background:"linear-gradient(135deg,#0B3D91,#2d9cdb)",color:"white",padding:"130px 20px"}}>
-      <h1 style={{fontSize:48}}>Star Health Insurance Advisor</h1>
-      <p style={{fontSize:22}}>Personalized guidance. Lifetime claim support.</p>
-      <br/>
-      <a href="#/consultation"><button style={{...btn,background:"white",color:colors.primary}}>Get Free Consultation</button></a>
+    <section style={{
+      background:"linear-gradient(135deg,#0B3D91,#2d9cdb)",
+      color:"white",
+      padding:"120px 80px"
+    }}>
+
+      <div style={{
+        maxWidth:1200,
+        margin:"auto",
+        display:"flex",
+        alignItems:"center",
+        justifyContent:"space-between",
+        gap:60
+      }}>
+
+        {/* LEFT SIDE TEXT */}
+        <div style={{maxWidth:520}}>
+
+          <h1 style={{
+            fontSize:48,
+            lineHeight:1.2,
+            marginBottom:20
+          }}>
+            Protect Your Family With
+            <br/>
+            Star Health Insurance
+          </h1>
+
+          <p style={{
+            fontSize:18,
+            marginBottom:30,
+            opacity:.95
+          }}>
+            Personalized insurance guidance, claim support,
+            and the best Star Health plans — all with
+            lifetime advisor support.
+          </p>
+
+          <a href="#/consultation">
+            <button style={{
+              padding:"16px 32px",
+              borderRadius:10,
+              border:"none",
+              background:"white",
+              color:"#0B3D91",
+              fontWeight:700,
+              fontSize:16,
+              cursor:"pointer",
+              boxShadow:"0 6px 18px rgba(0,0,0,0.2)"
+            }}>
+              Get Free Consultation
+            </button>
+          </a>
+
+        </div>
+
+
+        {/* RIGHT SIDE TRUST BOX */}
+        <div style={{
+          background:"white",
+          padding:30,
+          borderRadius:16,
+          color:"#333",
+          width:320,
+          boxShadow:"0 12px 30px rgba(0,0,0,0.15)"
+        }}>
+
+          <h3 style={{marginBottom:20}}>
+            Why Choose Us
+          </h3>
+
+          <div style={{marginBottom:10}}>✔ IRDAI Registered Advisor</div>
+          <div style={{marginBottom:10}}>✔ 14,000+ Cashless Hospitals</div>
+          <div style={{marginBottom:10}}>✔ Lifetime Claim Support</div>
+          <div style={{marginBottom:10}}>✔ Serving Clients Across India</div>
+
+        </div>
+
+      </div>
+
     </section>
   )
 }
