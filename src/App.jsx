@@ -179,11 +179,11 @@ const CSS = `
   .cta-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
 
   /* ---- Resources ---- */
-  .resources-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
-  .resource-card { display: flex; align-items: center; gap: 20px; padding: 24px 28px; font-weight: 700; }
+  .resources-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; align-items: stretch; }
+  .resource-card { display: flex; align-items: center; gap: 20px; padding: 24px 28px; height: 100%; box-sizing: border-box; font-weight: 700; }
   .resource-card:hover .resource-arrow { transform: translateX(5px); }
-  .resource-icon { font-size: 32px; flex-shrink: 0; }
-  .resource-name { font-size: 16px; font-weight: 700; flex: 1; color: var(--navy); }
+  .resource-icon { font-size: 32px; flex-shrink: 0; line-height: 1; }
+  .resource-name { font-size: 16px; font-weight: 700; flex: 1; color: var(--navy); line-height: 1.4; }
   .resource-arrow { color: var(--blue); font-weight: 800; font-size: 20px; transition: var(--transition); }
 
   /* ---- Consultation Form ---- */
@@ -413,8 +413,8 @@ function Plans() {
   const plans = [
     { title: "Super Star Flexi", link: "#/super-star-flexi", desc: "Flexible coverage plan with customizable sum insured and enhanced benefits tailored to your lifestyle." },
     { title: "Star Health Assure", link: "#/star-health-assure", desc: "Comprehensive protection offering strong coverage and modern medical benefits for long-term security." },
-    { title: "Family Floater Plans", link: "#/consultation", desc: "A single policy covering your entire family with shared sum insured and complete peace of mind." },
-    { title: "Senior Citizen Plans", link: "#/consultation", desc: "Specialized health insurance designed with the unique needs of parents and senior citizens in mind." },
+    { title: "Star Women Care", link: "#/women-care", desc: "Exclusively designed health insurance meeting the unique healthcare needs of women and their families." },
+    { title: "Star Travel Protect", link: "#/overseas", desc: "Complete medical and travel emergency protection for your international trips." },
   ];
   return (
     <section className="plans-bg">
@@ -644,12 +644,22 @@ function CTABanner() {
 }
 
 // ===== PLAN DETAIL =====
-function PlanDetail({ title, description, features, ctaLabel = "Request Consultation" }) {
+function PlanDetail({ title, description, ages, features, ctaLabel = "Request Consultation" }) {
   return (
     <div className="section plan-detail reveal">
       <a href="#/plans" className="back-link">← Back to Plans</a>
       <h2>{title}</h2>
       <p>{description}</p>
+      
+      <div style={{ display: "flex", gap: "16px", marginBottom: "36px", flexWrap: "wrap" }}>
+        {ages.map((age, i) => (
+          <div key={i} style={{ background: "var(--sky)", padding: "16px 20px", borderRadius: "12px", flex: "1 1 200px", border: "1px solid #c5d8f8" }}>
+            <div style={{ fontSize: "11px", fontWeight: 800, color: "var(--blue)", textTransform: "uppercase", marginBottom: "6px", letterSpacing: "0.06em" }}>{age.label}</div>
+            <div style={{ fontSize: "16px", fontWeight: 700, color: "var(--navy)" }}>{age.value}</div>
+          </div>
+        ))}
+      </div>
+
       <ul className="feature-list">
         {features.map((f, i) => (
           <li key={i}><span className="feature-check">✓</span> {f}</li>
@@ -664,6 +674,10 @@ function SuperStarFlexi() {
   return <PlanDetail
     title="Super Star Flexi"
     description="A flexible modern health insurance plan offering customizable coverage options and extensive hospital network access — designed to adapt as your needs grow."
+    ages={[
+      { label: "Adult Age Limit", value: "18 to 65 years" },
+      { label: "Child Age Limit", value: "16 days to 25 years" }
+    ]}
     features={["Flexible coverage slabs to match your budget", "Cashless treatment at 14,000+ network hospitals", "Restoration of sum insured after a claim", "Pre and post hospitalization expenses covered", "No-claim bonus for claim-free years", "Day care procedures covered"]}
     ctaLabel="Request Plan Consultation"
   />;
@@ -673,19 +687,50 @@ function StarHealthAssure() {
   return <PlanDetail
     title="Star Health Assure"
     description="Comprehensive health insurance protection designed for long-term medical security and reliable hospital coverage across India."
+    ages={[
+      { label: "Adult Age Limit", value: "18 to 75 years" },
+      { label: "Child Age Limit", value: "16 days to 17 years" }
+    ]}
     features={["High sum insured options available", "Extensive hospital and daycare coverage", "Reliable claim support guidance", "Maternity and newborn benefits", "Annual health check-up included", "AYUSH treatment coverage"]}
     ctaLabel="Check Eligibility"
+  />;
+}
+
+function WomenCare() {
+  return <PlanDetail
+    title="Star Women Care Insurance"
+    description="A specialized policy designed for women at every stage of life, offering maternity benefits, newborn cover, and regular hospitalization."
+    ages={[
+      { label: "Individual (Females Only)", value: "18 to 75 years" },
+      { label: "Floater (Min 1 Female)", value: "Adults 18 to 75 years" },
+      { label: "Dependent Child", value: "91 days to 25 years" }
+    ]}
+    features={["Maternity and delivery expenses covered", "Newborn baby cover starting from day 1", "No pre-policy medical check-up required", "Automatic restoration of sum insured", "Preventive health check-ups included", "Voluntary sterilization expenses covered"]}
+    ctaLabel="Get Women Care Quote"
+  />;
+}
+
+function Overseas() {
+  return <PlanDetail
+    title="Star Travel Protect (Overseas)"
+    description="Complete medical and emergency protection for international travel, ensuring you and your family are safe anywhere in the world."
+    ages={[
+      { label: "General Age Limit", value: "6 months to 70 years" },
+      { label: "Senior Citizens (70+)", value: "Available with premium loading" }
+    ]}
+    features={["Comprehensive medical coverage up to $500,000", "Cashless hospitalization worldwide", "Coverage for trip delay, cancellation, or interruption", "Compensation for loss of passport or checked baggage", "Emergency dental treatment and medical evacuation", "No pre-medical screening for up to 65 years"]}
+    ctaLabel="Get Travel Quote"
   />;
 }
 
 // ===== RESOURCES =====
 function Resources() {
   const resources = [
-    { icon: "📋", title: "Download Claim Form", link: "https://d28c6jni2fmamz.cloudfront.net/CLAIMFORM_89ec9742bd.pdf", external: true },
+    { icon: "📄", title: "Download Claim Form", link: "https://d28c6jni2fmamz.cloudfront.net/CLAIMFORM_89ec9742bd.pdf", external: true },
     { icon: "🔍", title: "Check Claim Status", link: "https://www.starhealth.in/claims/claim-status", external: true },
     { icon: "🔄", title: "Instant Policy Renewal", link: "https://customer.starhealth.in/customerportal/instant-renewal/", external: true },
     { icon: "💳", title: "EMI Online Registration", link: "https://customer.starhealth.in/customerportal/emi-online-registration", external: true },
-    { icon: "🤖", title: "Star Health App (Android)", link: "https://play.google.com/store/apps/details?id=com.star.customer_app", external: true },
+    { icon: "📱", title: "Star Health App (Android)", link: "https://play.google.com/store/apps/details?id=com.star.customer_app", external: true },
     { icon: "🍏", title: "Star Health App (iOS)", link: "https://apps.apple.com/in/app/star-health/id1477621177", external: true },
   ];
   
@@ -707,6 +752,7 @@ function Resources() {
     </div>
   );
 }
+
 // ===== CONSULTATION =====
 function Consultation() {
   const [submitted, setSubmitted] = useState(false);
@@ -861,6 +907,8 @@ const ROUTES = {
   contact: Contact,
   "super-star-flexi": SuperStarFlexi,
   "star-health-assure": StarHealthAssure,
+  "women-care": WomenCare,
+  "overseas": Overseas,
 };
 
 export default function App() {
