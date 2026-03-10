@@ -681,16 +681,18 @@ function StarHealthAssure() {
 // ===== RESOURCES =====
 function Resources() {
   const resources = [
-    { icon: "📋", title: "Claim Form", link: "#", external: false },
-    { icon: "🔐", title: "Pre Authorization Form", link: "#", external: false },
-    { icon: "🔄", title: "Policy Renewal", link: "https://www.starhealth.in/renewal", external: true },
-    { icon: "💳", title: "EMI Renewal", link: "https://www.starhealth.in", external: true },
-    { icon: "📱", title: "Star Health Mobile App", link: "https://play.google.com/store/apps/details?id=in.starhealth", external: true },
+    { icon: "📋", title: "Download Claim Form", link: "https://d28c6jni2fmamz.cloudfront.net/CLAIMFORM_89ec9742bd.pdf", external: true },
+    { icon: "🔍", title: "Check Claim Status", link: "https://www.starhealth.in/claims/claim-status", external: true },
+    { icon: "🔄", title: "Instant Policy Renewal", link: "https://customer.starhealth.in/customerportal/instant-renewal/", external: true },
+    { icon: "💳", title: "EMI Online Registration", link: "https://customer.starhealth.in/customerportal/emi-online-registration", external: true },
+    { icon: "🤖", title: "Star Health App (Android)", link: "https://play.google.com/store/apps/details?id=com.star.customer_app", external: true },
+    { icon: "🍏", title: "Star Health App (iOS)", link: "https://apps.apple.com/in/app/star-health/id1477621177", external: true },
   ];
+  
   return (
     <div className="section reveal">
-      <h2 className="section-title">Claims & Policy Resources</h2>
-      <p className="section-sub">Quick access to forms and tools you need</p>
+      <h2 className="section-title">Client Resources</h2>
+      <p className="section-sub">Quick, direct access to official Star Health portals and forms</p>
       <div className="resources-grid">
         {resources.map((r, i) => (
           <a key={i} href={r.link} target={r.external ? "_blank" : undefined} rel={r.external ? "noopener noreferrer" : undefined}>
@@ -705,7 +707,6 @@ function Resources() {
     </div>
   );
 }
-
 // ===== CONSULTATION =====
 function Consultation() {
   const [submitted, setSubmitted] = useState(false);
