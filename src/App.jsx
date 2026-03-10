@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import emailjs from "@emailjs/browser";
 
 // ===== CONSTANTS =====
@@ -130,8 +130,8 @@ const CSS = `
   .est-select:focus, .est-select:hover { border-color: var(--blue); }
   
   /* Modern Button Group for Sum Insured */
-  .sum-group { display: flex; flex-wrap: wrap; gap: 10px; }
-  .sum-btn { flex: 1; padding: 10px; border: 2px solid #dde3f0; background: white; border-radius: 10px; font-size: 14px; font-weight: 700; color: var(--muted); cursor: pointer; transition: var(--transition); text-align: center; }
+  .sum-group { display: flex; flex-wrap: wrap; gap: 8px; }
+  .sum-btn { flex: 1 1 calc(33% - 8px); min-width: 70px; padding: 10px 6px; border: 2px solid #dde3f0; background: white; border-radius: 10px; font-size: 13px; font-weight: 700; color: var(--muted); cursor: pointer; transition: var(--transition); text-align: center; }
   .sum-btn.active { background: var(--sky); border-color: var(--blue); color: var(--blue); }
   .sum-btn:hover:not(.active) { border-color: var(--blue); color: var(--navy); }
 
@@ -233,7 +233,7 @@ const CSS = `
   .wa-pulse { animation: wa-pulse 2s infinite; }
 
   /* ---- Call Float ---- */
-  .call-float { position: fixed; bottom: 108px; right: 28px; z-index: 200; background: var(--navy); color: white; padding: 14px 22px; border-radius: 100px; font-weight: 800; font-size: 15px; box-shadow: 0 8px 24px rgba(11,61,145,0.4); transition: var(--transition); display: flex; align-items: center; gap: 8px; border: 2px solid white; }
+  .call-float { position: fixed; bottom: 28px; left: 28px; z-index: 200; background: var(--navy); color: white; padding: 14px 22px; border-radius: 100px; font-weight: 800; font-size: 15px; box-shadow: 0 8px 24px rgba(11,61,145,0.4); transition: var(--transition); display: flex; align-items: center; gap: 8px; border: 2px solid white; }
   .call-float:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(11,61,145,0.5); background: var(--blue); }
 
   /* ---- Footer ---- */
@@ -260,7 +260,7 @@ const CSS = `
     .footer { padding: 48px 24px 24px; }
     .footer-inner { flex-direction: column; gap: 36px; }
     .wa-widget { bottom: 20px; right: 20px; }
-    .call-float { bottom: 100px; right: 20px; }
+    .call-float { bottom: 20px; left: 20px; }
   }
 `;
 
@@ -274,24 +274,6 @@ function useRoute() {
     return () => window.removeEventListener("hashchange", h);
   }, []);
   return route;
-}
-
-function useScrollReveal() {
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-    const elements = document.querySelectorAll(".reveal");
-    elements.forEach((el) => observer.observe(el));
-    return () => elements.forEach((el) => observer.unobserve(el));
-  });
 }
 
 // ===== ANNOUNCE BAR =====
@@ -461,7 +443,19 @@ const PREMIUM_TABLE = {
   "3-4": { "18-35": [900,1500],  "36-45": [1400,2400], "46-55": [2200,3600], "56-65": [3400,5600], "65+": [5000,8200] },
   "5+":  { "18-35": [1200,2000], "36-45": [1800,3000], "46-55": [2800,4600], "56-65": [4400,7200], "65+": [6400,10500] },
 };
-const SUM_MULTIPLIER = { "3": 0.8, "5": 1.0, "10": 1.45, "15": 1.85, "20": 2.2 };
+
+// Updated Multipliers to account for the larger range
+const SUM_MULTIPLIER = { 
+  "5": 1.0, 
+  "7.5": 1.2, 
+  "10": 1.45, 
+  "15": 1.85, 
+  "20": 2.2, 
+  "25": 2.5, 
+  "50": 3.5, 
+  "100": 5.0, 
+  "unlimited": 6.5 
+};
 const fmt = (n) => "₹" + n.toLocaleString("en-IN");
 
 function PremiumEstimator() {
@@ -480,11 +474,15 @@ function PremiumEstimator() {
   };
 
   const sums = [
-    { value: "3", label: "₹3 L" },
     { value: "5", label: "₹5 L" },
+    { value: "7.5", label: "₹7.5 L" },
     { value: "10", label: "₹10 L" },
     { value: "15", label: "₹15 L" },
     { value: "20", label: "₹20 L" },
+    { value: "25", label: "₹25 L" },
+    { value: "50", label: "₹50 L" },
+    { value: "100", label: "₹1 Cr" },
+    { value: "unlimited", label: "Unlimited" },
   ];
 
   return (
@@ -514,7 +512,7 @@ function PremiumEstimator() {
                   <option value="65+">65+ years</option>
                 </select>
               </div>
-              <div>
+              <div style={{ gridColumn: "1 / -1" }}>
                 <label className="est-label">Sum Insured</label>
                 <div className="sum-group">
                   {sums.map(s => (
@@ -647,7 +645,6 @@ function CTABanner() {
 
 // ===== PLAN DETAIL =====
 function PlanDetail({ title, description, features, ctaLabel = "Request Consultation" }) {
-  useScrollReveal();
   return (
     <div className="section plan-detail reveal">
       <a href="#/plans" className="back-link">← Back to Plans</a>
@@ -683,7 +680,6 @@ function StarHealthAssure() {
 
 // ===== RESOURCES =====
 function Resources() {
-  useScrollReveal();
   const resources = [
     { icon: "📋", title: "Claim Form", link: "#", external: false },
     { icon: "🔐", title: "Pre Authorization Form", link: "#", external: false },
@@ -712,7 +708,6 @@ function Resources() {
 
 // ===== CONSULTATION =====
 function Consultation() {
-  useScrollReveal();
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({ name: "", phone: "", city: "", message: "" });
@@ -739,7 +734,6 @@ function Consultation() {
         <form onSubmit={handleSubmit} className="form-wrapper">
           <input name="name" type="text" placeholder="Full Name" value={formData.name} onChange={handleChange} required className="form-field" />
           
-          {/* Added robust phone number validation */}
           <input 
             name="phone" 
             type="tel" 
@@ -764,7 +758,6 @@ function Consultation() {
 
 // ===== CONTACT =====
 function Contact() {
-  useScrollReveal();
   return (
     <div className="section reveal">
       <h2 className="section-title">Contact Advisor</h2>
@@ -844,7 +837,6 @@ function Footer() {
 
 // ===== HOME =====
 function Home() {
-  useScrollReveal();
   return (
     <>
       <Hero />
@@ -874,9 +866,29 @@ export default function App() {
   const route = useRoute();
   const Page = ROUTES[route] ?? Home;
   
-  // Re-trigger scroll reveal when route changes
+  // Re-trigger scroll reveal when route changes centrally
   useEffect(() => {
     window.scrollTo(0, 0);
+    
+    // Set up observer for this specific page render
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    
+    // Slight delay to ensure DOM is fully painted after route change
+    setTimeout(() => {
+      const elements = document.querySelectorAll(".reveal:not(.visible)");
+      elements.forEach((el) => observer.observe(el));
+    }, 50);
+
+    return () => observer.disconnect();
   }, [route]);
 
   return (
