@@ -55,14 +55,30 @@ const CSS = `
   .nav-link.cta { background: var(--navy); color: white; padding: 10px 22px; font-weight: 700; box-shadow: 0 4px 14px rgba(11,61,145,0.3); }
   .nav-link.cta:hover { background: var(--blue); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(28,95,212,0.4); }
 
-  /* ---- Google Translate Widget Styling ---- */
-  #google_translate_element { display: flex; align-items: center; margin-right: 12px; }
-  .goog-te-gadget { font-size: 0px !important; color: transparent !important; display: flex; flex-direction: column; }
-  .goog-te-gadget .goog-te-combo { margin: 0 !important; padding: 8px 14px; border-radius: 8px; border: 2px solid #dde3f0; background: var(--sky); color: var(--navy); font-weight: 700; font-family: 'DM Sans', sans-serif; font-size: 14px; cursor: pointer; outline: none; transition: var(--transition); }
-  .goog-te-gadget .goog-te-combo:hover { border-color: var(--blue); }
-  .goog-te-banner-frame { display: none !important; }
+  /* ---- Custom Google Translate Toggle ---- */
+  #google_translate_element, .skiptranslate, .goog-te-banner-frame { display: none !important; }
   body { top: 0 !important; }
-  .skiptranslate iframe { display: none !important; }
+  .goog-tooltip { display: none !important; }
+  .goog-tooltip:hover { display: none !important; }
+  .goog-text-highlight { background-color: transparent !important; box-shadow: none !important; }
+
+  .lang-toggle {
+    display: flex; align-items: center; justify-content: center;
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: #1e3a8a;
+    border: 2px solid white;
+    cursor: pointer;
+    margin-right: 12px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    outline: none;
+    user-select: none;
+  }
+  .lang-toggle:hover { transform: scale(1.05); box-shadow: 0 6px 14px rgba(0,0,0,0.2); }
+  .lang-hi { color: white; font-weight: 800; font-size: 15px; font-family: 'DM Sans', sans-serif; }
+  .lang-divider { color: rgba(255,255,255,0.5); margin: 0 3px; font-size: 12px; }
+  .lang-en { color: #f97316; font-weight: 800; font-size: 15px; font-family: 'DM Sans', sans-serif; }
 
   /* ---- Hero ---- */
   .hero { background: linear-gradient(135deg, #0a2f72 0%, #0B3D91 45%, #1c5fd4 100%); color: white; padding: 100px 60px; position: relative; overflow: hidden; }
@@ -285,6 +301,23 @@ function useRoute() {
   return route;
 }
 
+// ===== TRANSLATION LOGIC =====
+function toggleLanguage() {
+  const isHi = document.cookie.includes('googtrans=/en/hi') || document.cookie.includes('googtrans=/auto/hi');
+  const domain = window.location.hostname;
+  
+  if (isHi) {
+    document.cookie = 'googtrans=/en/en; path=/';
+    document.cookie = \`googtrans=/en/en; domain=\${domain}; path=/\`;
+    document.cookie = \`googtrans=/en/en; domain=.\${domain}; path=/\`;
+  } else {
+    document.cookie = 'googtrans=/en/hi; path=/';
+    document.cookie = \`googtrans=/en/hi; domain=\${domain}; path=/\`;
+    document.cookie = \`googtrans=/en/hi; domain=.\${domain}; path=/\`;
+  }
+  window.location.reload();
+}
+
 // ===== ANNOUNCE BAR =====
 function AnnounceBar() {
   return (
@@ -313,8 +346,15 @@ function Navbar() {
         </div>
       </div>
       <div className="navbar-links">
-        {/* Google Translate Dropdown Container */}
+        {/* Hidden Google Element (Required for script to work) */}
         <div id="google_translate_element"></div>
+        
+        {/* Custom Toggle Button */}
+        <button className="lang-toggle" onClick={toggleLanguage} title="Translate to Hindi / English">
+          <span className="lang-hi">अ</span>
+          <span className="lang-divider">|</span>
+          <span className="lang-en">A</span>
+        </button>
 
         {links.map(({ label, path }) => (
           <a key={path} href={`#/${path}`} className="nav-link">{label}</a>
@@ -931,7 +971,7 @@ export default function App() {
   useEffect(() => {
     window.scrollTo(0, 0);
     
-    // Set up observer for this specific page render
+    // 1. Set up observer for scroll animations
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -943,20 +983,19 @@ export default function App() {
       { threshold: 0.1 }
     );
     
-    // Slight delay to ensure DOM is fully painted after route change
     setTimeout(() => {
       const elements = document.querySelectorAll(".reveal:not(.visible)");
       elements.forEach((el) => observer.observe(el));
     }, 50);
 
-    // Setup Google Translate (Only load script once)
+    // 2. Setup Google Translate Script (Only loads once)
     if (!window.googleTranslateElementInit) {
       window.googleTranslateElementInit = () => {
         new window.google.translate.TranslateElement(
           { 
             pageLanguage: 'en', 
-            includedLanguages: 'en,hi', // Only show English and Hindi
-            layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE 
+            includedLanguages: 'en,hi',
+            autoDisplay: false
           },
           'google_translate_element'
         );
