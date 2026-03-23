@@ -55,6 +55,15 @@ const CSS = `
   .nav-link.cta { background: var(--navy); color: white; padding: 10px 22px; font-weight: 700; box-shadow: 0 4px 14px rgba(11,61,145,0.3); }
   .nav-link.cta:hover { background: var(--blue); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(28,95,212,0.4); }
 
+  /* ---- Google Translate Widget Styling ---- */
+  #google_translate_element { display: flex; align-items: center; margin-right: 12px; }
+  .goog-te-gadget { font-size: 0px !important; color: transparent !important; display: flex; flex-direction: column; }
+  .goog-te-gadget .goog-te-combo { margin: 0 !important; padding: 8px 14px; border-radius: 8px; border: 2px solid #dde3f0; background: var(--sky); color: var(--navy); font-weight: 700; font-family: 'DM Sans', sans-serif; font-size: 14px; cursor: pointer; outline: none; transition: var(--transition); }
+  .goog-te-gadget .goog-te-combo:hover { border-color: var(--blue); }
+  .goog-te-banner-frame { display: none !important; }
+  body { top: 0 !important; }
+  .skiptranslate iframe { display: none !important; }
+
   /* ---- Hero ---- */
   .hero { background: linear-gradient(135deg, #0a2f72 0%, #0B3D91 45%, #1c5fd4 100%); color: white; padding: 100px 60px; position: relative; overflow: hidden; }
   .hero::before { content: ''; position: absolute; top: -120px; right: -80px; width: 560px; height: 560px; background: radial-gradient(circle, rgba(255,255,255,0.07) 0%, transparent 70%); border-radius: 50%; pointer-events: none; }
@@ -304,6 +313,9 @@ function Navbar() {
         </div>
       </div>
       <div className="navbar-links">
+        {/* Google Translate Dropdown Container */}
+        <div id="google_translate_element"></div>
+
         {links.map(({ label, path }) => (
           <a key={path} href={`#/${path}`} className="nav-link">{label}</a>
         ))}
@@ -915,7 +927,7 @@ export default function App() {
   const route = useRoute();
   const Page = ROUTES[route] ?? Home;
   
-  // Re-trigger scroll reveal when route changes centrally
+  // Re-trigger scroll reveal when route changes centrally & Init Translate
   useEffect(() => {
     window.scrollTo(0, 0);
     
@@ -936,6 +948,24 @@ export default function App() {
       const elements = document.querySelectorAll(".reveal:not(.visible)");
       elements.forEach((el) => observer.observe(el));
     }, 50);
+
+    // Setup Google Translate (Only load script once)
+    if (!window.googleTranslateElementInit) {
+      window.googleTranslateElementInit = () => {
+        new window.google.translate.TranslateElement(
+          { 
+            pageLanguage: 'en', 
+            includedLanguages: 'en,hi', // Only show English and Hindi
+            layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE 
+          },
+          'google_translate_element'
+        );
+      };
+      const script = document.createElement('script');
+      script.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+      script.async = true;
+      document.body.appendChild(script);
+    }
 
     return () => observer.disconnect();
   }, [route]);
