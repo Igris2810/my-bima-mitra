@@ -224,14 +224,14 @@ const CSS = `
   .success-box h3 { color: var(--navy); margin-bottom: 12px; font-size: 28px; font-weight: 900; }
   .success-box p { color: var(--muted); line-height: 1.7; font-size: 16px; }
 
-  /* ---- Contact ---- */
-  .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; max-width: 760px; margin: auto; }
-  .contact-card { display: flex; align-items: center; gap: 16px; padding: 26px; border-radius: 20px; background: white; box-shadow: var(--shadow); border: 1px solid #eef1f8; transition: var(--transition); }
+  /* ---- Contact (Updated Layout for long emails) ---- */
+  .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; max-width: 860px; margin: auto; align-items: stretch; }
+  .contact-card { display: flex; flex-direction: column; text-align: center; justify-content: center; align-items: center; gap: 16px; padding: 32px 20px; border-radius: 20px; background: white; box-shadow: var(--shadow); border: 1px solid #eef1f8; transition: var(--transition); height: 100%; box-sizing: border-box; }
   .contact-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
-  .contact-card-text { flex: 1; min-width: 0; }
-  .contact-icon { font-size: 36px; background: var(--sky); width: 64px; height: 64px; display: flex; align-items: center; justify-content: center; border-radius: 16px; flex-shrink: 0; }
-  .contact-label { font-size: 11px; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
-  .contact-value { font-size: 15px; font-weight: 600; color: var(--navy); overflow-wrap: anywhere; word-break: break-word; }
+  .contact-card-text { display: flex; flex-direction: column; align-items: center; width: 100%; }
+  .contact-icon { font-size: 36px; background: var(--sky); width: 64px; height: 64px; display: flex; align-items: center; justify-content: center; border-radius: 16px; flex-shrink: 0; margin-bottom: 4px; }
+  .contact-label { font-size: 11.5px; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+  .contact-value { font-size: 14.5px; font-weight: 700; color: var(--navy); word-break: break-word; overflow-wrap: break-word; line-height: 1.4; width: 100%; }
 
   /* ---- Plan Detail ---- */
   .plan-detail { max-width: 800px; }
@@ -784,7 +784,7 @@ function Resources() {
     { icon: "🔍", title: "Check Claim Status", link: "https://www.starhealth.in/claims/claim-status", external: true },
     { icon: "🔄", title: "Instant Policy Renewal", link: "https://customer.starhealth.in/customerportal/instant-renewal/", external: true },
     { icon: "💳", title: "EMI Online Registration", link: "https://customer.starhealth.in/customerportal/emi-online-registration", external: true },
-    { icon: "🤖", title: "Star Health App (Android)", link: "https://play.google.com/store/apps/details?id=com.star.customer_app", external: true },
+    { icon: "📱", title: "Star Health App (Android)", link: "https://play.google.com/store/apps/details?id=com.star.customer_app", external: true },
     { icon: "🍏", title: "Star Health App (iOS)", link: "https://apps.apple.com/in/app/star-health/id1477621177", external: true },
   ];
   
