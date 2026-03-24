@@ -64,19 +64,19 @@ const CSS = `
   .announce-bar a { color: #facc15; margin-left: 8px; text-decoration: underline; transition: var(--transition); }
   .announce-bar a:hover { color: white; }
 
-  /* ---- Navbar ---- */
-  .navbar-container { position: sticky; top: 0; z-index: 1000; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
-  .navbar { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 16px 24px; }
+  /* ---- Navbar (Updated for Space and Logo Size) ---- */
+  .navbar-container { position: sticky; top: 0; z-index: 1000; background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); box-shadow: var(--shadow-sm); }
+  .navbar { display: flex; justify-content: space-between; align-items: center; max-width: 1400px; width: 100%; margin: 0 auto; padding: 12px 32px; }
   .navbar-brand { display: flex; align-items: center; gap: 16px; transition: var(--transition); }
   .navbar-brand:hover { opacity: 0.9; }
-  .navbar-logo { height: 64px; object-fit: contain; }
-  .navbar-title { font-size: 24px; font-weight: 900; color: var(--dark); line-height: 1; margin-bottom: 4px; }
-  .navbar-sub { font-size: 11px; color: var(--brand); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+  .navbar-logo { height: 86px; width: auto; object-fit: contain; } /* Much larger logo */
+  .navbar-title { font-size: 26px; font-weight: 900; color: var(--dark); line-height: 1; margin-bottom: 4px; letter-spacing: -0.5px; }
+  .navbar-sub { font-size: 12px; color: var(--brand); font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; }
   
-  .navbar-links { display: flex; align-items: center; gap: 8px; }
-  .nav-link { padding: 10px 18px; border-radius: var(--radius-sm); font-weight: 600; font-size: 15px; color: var(--text); transition: var(--transition); }
+  .navbar-links { display: flex; align-items: center; gap: 12px; }
+  .nav-link { padding: 10px 20px; border-radius: var(--radius-sm); font-weight: 700; font-size: 15px; color: var(--text); transition: var(--transition); }
   .nav-link:hover { background: #f1f5f9; color: var(--dark); }
-  .nav-link.cta { background: var(--brand); color: white; box-shadow: var(--shadow-sm); }
+  .nav-link.cta { background: var(--brand); color: white; box-shadow: var(--shadow-sm); padding: 12px 24px; margin-left: 8px; }
   .nav-link.cta:hover { background: var(--brand-hover); color: white; transform: translateY(-1px); box-shadow: var(--shadow-md); }
 
   /* ---- Hero Section ---- */
@@ -141,24 +141,27 @@ const CSS = `
   .back-link { color: var(--muted); font-size: 14px; font-weight: 700; display: inline-flex; align-items: center; gap: 8px; margin-bottom: 32px; transition: var(--transition); text-transform: uppercase; letter-spacing: 0.05em; }
   .back-link:hover { color: var(--dark); transform: translateX(-4px); }
 
-  /* ---- Contact (THE EMAIL BUG FIX) ---- */
+  /* ---- Contact (Email Fix) ---- */
   .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px; max-width: 1000px; margin: auto; align-items: stretch; }
   .contact-card { display: flex; flex-direction: column; text-align: center; justify-content: center; align-items: center; padding: 40px 24px; border-radius: 24px; background: white; box-shadow: var(--shadow-sm); border: 1px solid var(--border); transition: var(--transition); height: 100%; box-sizing: border-box; }
   .contact-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: #cbd5e1; }
   .contact-icon { font-size: 32px; background: #eff6ff; width: 72px; height: 72px; display: flex; align-items: center; justify-content: center; border-radius: 20px; flex-shrink: 0; margin-bottom: 20px; color: var(--brand); }
   .contact-label { font-size: 12px; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; text-align: center; }
   .contact-value { font-size: 16px; font-weight: 800; color: var(--dark); text-align: center; }
+  .contact-value.email-text { white-space: normal !important; word-wrap: break-word !important; overflow-wrap: break-word !important; word-break: break-all !important; font-size: 15px; line-height: 1.4; width: 100%; }
+
+  /* ---- FinTech FAQ Accordion (Redesigned & Separated) ---- */
+  .faq-bg { background: var(--bg); padding-bottom: 120px; }
+  .faq-list { max-width: 860px; margin: auto; display: flex; flex-direction: column; gap: 20px; } /* Increased Gap for Separation */
+  .faq-item { background: var(--surface); border-radius: var(--radius-md); border: 1px solid var(--border); box-shadow: var(--shadow-sm); transition: var(--transition); overflow: hidden; }
+  .faq-item:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: #cbd5e1; }
+  .faq-q { display: flex; justify-content: space-between; align-items: center; padding: 24px 32px; cursor: pointer; font-weight: 800; font-size: 18px; color: var(--dark); gap: 24px; user-select: none; }
   
-  /* ULTIMATE EMAIL FIX - Forces long text to break cleanly instead of overflowing */
-  .contact-value.email-text { 
-    white-space: normal !important;
-    word-wrap: break-word !important;
-    overflow-wrap: break-word !important;
-    word-break: break-all !important;
-    font-size: 15px;
-    line-height: 1.4;
-    width: 100%;
-  }
+  .faq-chevron { font-size: 20px; color: var(--brand); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); flex-shrink: 0; background: #eff6ff; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; }
+  .faq-item.open { border-color: var(--brand); box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.15); }
+  .faq-item.open .faq-chevron { transform: rotate(180deg); background: var(--brand); color: white; }
+  
+  .faq-a { padding: 0 32px 28px; font-size: 16px; color: var(--text); line-height: 1.8; font-weight: 500; border-top: 1px solid var(--border); margin-top: 4px; padding-top: 24px; animation: slideUp .4s ease; }
 
   /* ---- Fixed Action Buttons ---- */
   .fixed-actions { position: fixed; bottom: 24px; left: 0; width: 100%; padding: 0 24px; display: flex; justify-content: space-between; align-items: flex-end; z-index: 9999; pointer-events: none; }
@@ -177,11 +180,21 @@ const CSS = `
   .footer-link:hover { color: white; transform: translateX(4px); }
   .footer-bottom { max-width: 1200px; margin: auto; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; font-size: 14px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
 
+  /* ---- Misc CSS ---- */
+  .why-bg { background: var(--dark); color: white; }
+  .why-bg h2 { color: white; }
+  .why-bg .section-sub { color: #94a3b8; }
+  .why-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-md); padding: 32px; transition: var(--transition); display: flex; flex-direction: column; height: 100%; }
+  .why-icon { font-size: 36px; margin-bottom: 20px; }
+  .why-title { font-size: 20px; font-weight: 800; margin-bottom: 12px; color: white; }
+  .why-desc { font-size: 15px; color: #cbd5e1; line-height: 1.7; flex-grow: 1; }
+
   /* ---- Mobile Adjustments ---- */
   @media (max-width: 900px) {
     .navbar-container { padding: 0; }
-    .navbar { padding: 16px 20px; border-radius: 0; border-left: none; border-right: none; border-top: none; }
+    .navbar { padding: 12px 20px; border-radius: 0; border-left: none; border-right: none; border-top: none; }
     .navbar-links { display: none; }
+    .navbar-logo { height: 60px; } /* Slightly scaled for mobile to fit */
     .hero { padding: 60px 20px; }
     .hero h1 { font-size: 42px; }
     .hero-inner { flex-direction: column; gap: 40px; text-align: center; }
@@ -195,6 +208,8 @@ const CSS = `
     .fixed-actions { padding: 0 16px; bottom: 16px; }
     .action-btn { padding: 12px 20px; font-size: 14px; }
     .btn-wa-round { width: 56px; height: 56px; font-size: 28px; }
+    .faq-q { padding: 20px; font-size: 16px; }
+    .faq-a { padding: 0 20px 20px; }
   }
 `;
 
@@ -485,7 +500,7 @@ function Overseas() {
   />;
 }
 
-// ===== FAQ =====
+// ===== FAQ ACCORDION (REDESIGNED) =====
 function FAQ() {
   const faqs = [
     {
@@ -512,15 +527,18 @@ function FAQ() {
         <h2 className="section-title">Client FAQs</h2>
         <p className="section-sub">Quick answers to important policy questions</p>
         <div className="faq-list">
-          {faqs.map((f, i) => (
-            <div key={i} className="faq-item">
-              <div className="faq-q" onClick={() => setOpen(open === i ? null : i)}>
-                <span>{f.q}</span>
-                <span className={`faq-chevron ${open === i ? "open" : ""}`}>▼</span>
+          {faqs.map((f, i) => {
+            const isOpen = open === i;
+            return (
+              <div key={i} className={`faq-item ${isOpen ? 'open' : ''}`}>
+                <div className="faq-q" onClick={() => setOpen(isOpen ? null : i)}>
+                  <span>{f.q}</span>
+                  <span className={`faq-chevron ${isOpen ? 'open' : ''}`}>▼</span>
+                </div>
+                {isOpen && <div className="faq-a">{f.a}</div>}
               </div>
-              {open === i && <div className="faq-a">{f.a}</div>}
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
@@ -611,7 +629,6 @@ function Contact() {
           <div className="contact-card">
             <span className="contact-icon">✉️</span>
             <div className="contact-label">Email</div>
-            {/* The Bug Fix is Applied Here via the 'email-text' class */}
             <div className="contact-value email-text">manish.starhealth.in@gmail.com</div>
           </div>
         </a>
