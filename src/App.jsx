@@ -224,14 +224,13 @@ const CSS = `
   .success-box h3 { color: var(--navy); margin-bottom: 12px; font-size: 28px; font-weight: 900; }
   .success-box p { color: var(--muted); line-height: 1.7; font-size: 16px; }
 
-  /* ---- Contact (Updated Layout for long emails) ---- */
-  .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; max-width: 860px; margin: auto; align-items: stretch; }
-  .contact-card { display: flex; flex-direction: column; text-align: center; justify-content: center; align-items: center; gap: 16px; padding: 32px 20px; border-radius: 20px; background: white; box-shadow: var(--shadow); border: 1px solid #eef1f8; transition: var(--transition); height: 100%; box-sizing: border-box; }
+  /* ---- Contact (Perfectly Fixed for Long Emails) ---- */
+  .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 24px; max-width: 1040px; margin: auto; align-items: stretch; }
+  .contact-card { display: flex; flex-direction: column; text-align: center; justify-content: center; align-items: center; padding: 36px 20px; border-radius: 20px; background: white; box-shadow: var(--shadow); border: 1px solid #eef1f8; transition: var(--transition); height: 100%; box-sizing: border-box; }
   .contact-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
-  .contact-card-text { display: flex; flex-direction: column; align-items: center; width: 100%; }
-  .contact-icon { font-size: 36px; background: var(--sky); width: 64px; height: 64px; display: flex; align-items: center; justify-content: center; border-radius: 16px; flex-shrink: 0; margin-bottom: 4px; }
-  .contact-label { font-size: 11.5px; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
-  .contact-value { font-size: 14.5px; font-weight: 700; color: var(--navy); word-break: break-word; overflow-wrap: break-word; line-height: 1.4; width: 100%; }
+  .contact-icon { font-size: 36px; background: var(--sky); width: 64px; height: 64px; display: flex; align-items: center; justify-content: center; border-radius: 16px; flex-shrink: 0; margin-bottom: 12px; }
+  .contact-label { font-size: 11.5px; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
+  .contact-value { font-size: 15px; font-weight: 700; color: var(--navy); line-height: 1.4; white-space: nowrap; }
 
   /* ---- Plan Detail ---- */
   .plan-detail { max-width: 800px; }
@@ -288,6 +287,7 @@ const CSS = `
     .footer-inner { flex-direction: column; gap: 36px; }
     .wa-widget { bottom: 20px; right: 20px; }
     .call-float { bottom: 20px; left: 20px; }
+    .contact-value { font-size: 13.5px; } /* Ensures long emails still fit on tiny screens */
   }
 `;
 
@@ -867,28 +867,22 @@ function Contact() {
         <a href="tel:+918319600171">
           <div className="contact-card">
             <span className="contact-icon">📞</span>
-            <div className="contact-card-text">
-              <div className="contact-label">Phone</div>
-              <div className="contact-value">+91 83196 00171</div>
-            </div>
+            <div className="contact-label">Phone</div>
+            <div className="contact-value">+91 83196 00171</div>
           </div>
         </a>
         <a href="mailto:manish.starhealth.in@gmail.com">
           <div className="contact-card">
             <span className="contact-icon">✉️</span>
-            <div className="contact-card-text">
-              <div className="contact-label">Email</div>
-              <div className="contact-value">manish.starhealth.in@gmail.com</div>
-            </div>
+            <div className="contact-label">Email</div>
+            <div className="contact-value">manish.starhealth.in@gmail.com</div>
           </div>
         </a>
         <a href={WA_LINK} target="_blank" rel="noopener noreferrer">
           <div className="contact-card">
             <span className="contact-icon">💬</span>
-            <div className="contact-card-text">
-              <div className="contact-label">WhatsApp</div>
-              <div className="contact-value">Chat with us now</div>
-            </div>
+            <div className="contact-label">WhatsApp</div>
+            <div className="contact-value">Chat with us now</div>
           </div>
         </a>
       </div>
