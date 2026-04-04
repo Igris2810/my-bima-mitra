@@ -545,47 +545,50 @@ function CuratedPlans() {
         
         <div className="curated-grid">
           
-          {/* Plan 1 */}
+          {/* Plan 1: Star Health Assure */}
           <div className="cp-card">
             <div className="cp-icon-wrap">
-              <i className="fa-solid fa-people-roof"></i>
+              <i className="fa-solid fa-shield-heart"></i>
             </div>
-            <h3 className="cp-title">Family Health Optima</h3>
-            <p className="cp-desc">Comprehensive coverage for the entire family under a single sum insured. Includes maternity and newborn cover.</p>
+            <h3 className="cp-title">Star Health Assure</h3>
+            <p className="cp-desc">A comprehensive, premium indemnity health insurance product offering unmatched features and modern treatments.</p>
             <ul className="cp-features">
-              <li><i className="fa-solid fa-circle-check"></i> 400+ Daycare Procedures</li>
-              <li><i className="fa-solid fa-circle-check"></i> Automatic Restoration</li>
+              <li><i className="fa-solid fa-circle-check"></i> Unlimited Restoration</li>
+              <li><i className="fa-solid fa-circle-check"></i> In-built Maternity Cover</li>
+              <li><i className="fa-solid fa-circle-check"></i> Consumables Covered</li>
             </ul>
-            <a href="#/plans" className="cp-btn cp-btn-outline">View Plan Details</a>
+            <a href="#/star-health-assure" className="cp-btn cp-btn-outline">View Plan Details</a>
           </div>
 
-          {/* Plan 2 (Highlighted: Super Star Flexi) */}
+          {/* Plan 2 (Highlighted): Super Star Flexi */}
           <div className="cp-card highlight">
             <div className="cp-badge">Most Popular</div>
             <div className="cp-icon-wrap">
               <i className="fa-solid fa-star"></i>
             </div>
             <h3 className="cp-title">Super Star Flexi</h3>
-            <p className="cp-desc">The ultimate flexibility in health insurance. Customizable room rent, tailored OPD covers, and limitless bonus.</p>
+            <p className="cp-desc">The ultimate future-proof health insurance. This revolutionary plan adapts to your life stage and needs.</p>
             <ul className="cp-features">
-              <li><i className="fa-solid fa-circle-check"></i> Flexible Sum Insured Options</li>
+              <li><i className="fa-solid fa-circle-check"></i> Freeze Your Age</li>
+              <li><i className="fa-solid fa-circle-check"></i> Premium Return</li>
               <li><i className="fa-solid fa-circle-check"></i> Limitless Loyalty Bonus</li>
             </ul>
             <a href="#/super-star-flexi" className="cp-btn cp-btn-solid">View Plan Details</a>
           </div>
 
-          {/* Plan 3 */}
+          {/* Plan 3: Star Women Care */}
           <div className="cp-card">
             <div className="cp-icon-wrap">
-              <i className="fa-solid fa-person-cane"></i>
+              <i className="fa-solid fa-hand-holding-heart"></i>
             </div>
-            <h3 className="cp-title">Senior Citizens Red Carpet</h3>
-            <p className="cp-desc">Specifically designed for ages 60+. No pre-policy medical checkup required and covers pre-existing diseases.</p>
+            <h3 className="cp-title">Star Women Care</h3>
+            <p className="cp-desc">An exclusively crafted policy for women and mothers. Enjoy industry-leading maternity and newborn benefits.</p>
             <ul className="cp-features">
-              <li><i className="fa-solid fa-circle-check"></i> Quick Claim Settlement</li>
-              <li><i className="fa-solid fa-circle-check"></i> ICU Charges Covered</li>
+              <li><i className="fa-solid fa-circle-check"></i> 1-Year Maternity Waiting Period</li>
+              <li><i className="fa-solid fa-circle-check"></i> Day 1 Newborn Cover</li>
+              <li><i className="fa-solid fa-circle-check"></i> No Pre-Policy Medicals</li>
             </ul>
-            <a href="#/plans" className="cp-btn cp-btn-outline">View Plan Details</a>
+            <a href="#/women-care" className="cp-btn cp-btn-outline">View Plan Details</a>
           </div>
 
         </div>
