@@ -78,16 +78,31 @@ const CSS = `
   }
   .announce-bar a:hover { background: rgba(255,255,255,0.2); transform: translateX(2px); }
 
-  /* ---- Navbar ---- */
+  /* ---- Navbar (PERMANENT LOGO FIX) ---- */
   .navbar-container { position: sticky; top: 0; z-index: 1000; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(226, 232, 240, 0.6); }
-  .navbar { display: flex; justify-content: space-between; align-items: center; height: 84px; }
-  .navbar-brand { display: flex; align-items: center; gap: 16px; }
-  .navbar-brand:hover .navbar-logo { transform: scale(1.05); }
-  .navbar-logo { height: 56px; width: auto; object-fit: contain; transition: var(--transition); }
-  .navbar-title { font-size: 22px; font-weight: 900; color: var(--dark); line-height: 1.1; letter-spacing: -0.5px; margin-bottom: 2px; }
-  .navbar-sub { font-size: 11px; color: var(--brand); font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; }
   
-  .navbar-links { display: flex; align-items: center; gap: 8px; }
+  /* Increased min-height to give the logo plenty of vertical room */
+  .navbar { display: flex; justify-content: space-between; align-items: center; min-height: 120px; max-width: 1400px; margin: 0 auto; padding: 12px 32px; }
+  
+  /* Increased gap so the scaled logo doesn't hit the text */
+  .navbar-brand { display: flex; align-items: center; gap: 24px; transition: var(--transition); }
+  
+  /* PERM LOGO FIX: 
+    1. Forced height to 90px.
+    2. scale(1.25) zooms the logo in by 25% to eliminate empty white margins in the image file.
+  */
+  .navbar-logo { 
+    height: 90px !important; 
+    width: auto !important; 
+    object-fit: contain; 
+    transform: scale(1.25); 
+    transform-origin: left center;
+  }
+  
+  .navbar-title { font-size: 24px; font-weight: 900; color: var(--dark); line-height: 1.1; letter-spacing: -0.5px; margin-bottom: 2px; }
+  .navbar-sub { font-size: 12px; color: var(--brand); font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; }
+  
+  .navbar-links { display: flex; align-items: center; gap: 12px; }
   .nav-link { padding: 10px 16px; border-radius: 100px; font-weight: 600; font-size: 15px; color: var(--muted); transition: var(--transition); }
   .nav-link:hover { color: var(--dark); background: var(--bg); }
   .nav-link.cta { background: var(--dark); color: white; padding: 12px 24px; margin-left: 8px; box-shadow: 0 4px 12px rgba(15,23,42,0.15); }
@@ -256,7 +271,7 @@ const CSS = `
 
   /* ---- Fixed Action Buttons ---- */
   .fixed-actions { position: fixed; bottom: 24px; left: 0; width: 100%; padding: 0 24px; display: flex; justify-content: space-between; align-items: flex-end; z-index: 9999; pointer-events: none; }
-  .action-btn { pointer-events: auto; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 16px 28px; border-radius: 100px; font-weight: 700; font-size: 16px; color: white; border: none; cursor: pointer; box-shadow: var(--shadow-lg); transition: var(--transition); }
+  .action-btn { pointer-events: auto; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 16px 28px; border-radius: 100px; font-weight: 700; font-size: 16px; color: white; border: none; cursor: pointer; box-shadow: var(--shadow-lg); transition: var(--transition); text-decoration: none; }
   .action-btn:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 20px 40px -10px rgba(0,0,0,0.2); }
   .btn-call { background: var(--dark); }
   .btn-wa-round { width: 68px; height: 68px; padding: 0; border-radius: 50%; background: #25D366; font-size: 34px; }
@@ -284,8 +299,8 @@ const CSS = `
 
   @media (max-width: 768px) {
     .navbar-links { display: none; }
-    .navbar { height: 70px; }
-    .navbar-logo { height: 48px; }
+    .navbar { min-height: 90px; }
+    .navbar-logo { height: 60px !important; transform: scale(1.1); }
     .navbar-title { font-size: 18px; }
     .section { padding: 60px 0; }
     .section-title { font-size: 32px; }
@@ -349,7 +364,7 @@ function Navbar() {
     <div className="navbar-container">
       <nav className="container navbar">
         <a href="#/" className="navbar-brand">
-          <img src="/logo.png" className="navbar-logo" alt="My Bima Mitra" />
+          <img src="/logo.png" className="navbar-logo" alt="My Bima Mitra" onError={(e) => e.target.style.display='none'} />
           <div>
             <div className="navbar-title">My Bima Mitra</div>
             <div className="navbar-sub">Star Health Advisory</div>
