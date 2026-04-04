@@ -422,7 +422,7 @@ const CSS = `
   .action-btn { 
     pointer-events: auto; display: flex; align-items: center; justify-content: center; gap: 10px; 
     padding: 16px 28px; border-radius: 100px; font-weight: 700; font-size: 16px; color: white; 
-    border: none; cursor: pointer; box-shadow: var(--shadow-lg); transition: var(--transition); 
+    border: none; cursor: pointer; box-shadow: var(--shadow-lg); transition: var(--transition); text-decoration: none; 
   }
   .action-btn:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 20px 40px -10px rgba(0,0,0,0.2); }
   .btn-call { background: var(--dark); }
@@ -469,7 +469,7 @@ const CSS = `
     .action-btn { padding: 14px 20px; font-size: 15px; }
     .btn-wa-round { width: 60px; height: 60px; font-size: 30px; }
   }
-\`;
+`;
 
 // ===== SVGs & ICONS =====
 const TranslateIcon = () => (
@@ -500,13 +500,13 @@ function toggleLanguage() {
   const isHi = document.cookie.includes('googtrans=/en/hi') || document.cookie.includes('googtrans=/auto/hi');
   const domain = window.location.hostname;
   if (isHi) {
-    document.cookie = 'googtrans=/en/en; path=/';
-    document.cookie = \`googtrans=/en/en; domain=\${domain}; path=/\`;
-    document.cookie = \`googtrans=/en/en; domain=.\${domain}; path=/\`;
+    document.cookie = `googtrans=/en/en; path=/`;
+    document.cookie = `googtrans=/en/en; domain=${domain}; path=/`;
+    document.cookie = `googtrans=/en/en; domain=.${domain}; path=/`;
   } else {
-    document.cookie = 'googtrans=/en/hi; path=/';
-    document.cookie = \`googtrans=/en/hi; domain=\${domain}; path=/\`;
-    document.cookie = \`googtrans=/en/hi; domain=.\${domain}; path=/\`;
+    document.cookie = `googtrans=/en/hi; path=/`;
+    document.cookie = `googtrans=/en/hi; domain=${domain}; path=/`;
+    document.cookie = `googtrans=/en/hi; domain=.${domain}; path=/`;
   }
   window.location.reload();
 }
@@ -547,7 +547,7 @@ function Navbar() {
             <TranslateIcon />
           </button>
           {links.map(({ label, path }) => (
-            <a key={path} href={\`#/\${path}\`} className="nav-link">{label}</a>
+            <a key={path} href={`#/${path}`} className="nav-link">{label}</a>
           ))}
           <a href="#/consultation" className="nav-link cta">Free Consultation</a>
         </div>
@@ -698,10 +698,10 @@ function FAQ() {
           {faqs.map((f, i) => {
             const isOpen = open === i;
             return (
-              <div key={i} className={\`faq-item \${isOpen ? 'open' : ''}\`}>
+              <div key={i} className={`faq-item ${isOpen ? 'open' : ''}`}>
                 <div className="faq-q" onClick={() => setOpen(isOpen ? null : i)}>
                   <span>{f.q}</span>
-                  <span className={\`faq-chevron\`}>▼</span>
+                  <span className={`faq-chevron`}>▼</span>
                 </div>
                 {isOpen && <div className="faq-a">{f.a}</div>}
               </div>
@@ -825,7 +825,7 @@ function Footer() {
           <div>
             <div className="footer-title">Quick Links</div>
             <div className="footer-links">
-              {links.map(({ label, path }) => <a key={path} href={\`#/\${path}\`} className="footer-link">{label}</a>)}
+              {links.map(({ label, path }) => <a key={path} href={`#/${path}`} className="footer-link">{label}</a>)}
             </div>
           </div>
           <div>
@@ -859,7 +859,7 @@ export default function App() {
     "star-health-assure": StarHealthAssure, 
     "women-care": WomenCare, 
     "cancer-care": CancerCare,
-    "cardiac-care": CardiacCare,
+    "card-care": CardiacCare,
     "overseas": Overseas 
   }[route] ?? (() => <><Hero /><Plans /><FAQ /></>);
   
@@ -899,3 +899,4 @@ export default function App() {
       <Footer />
     </>
   );
+}
