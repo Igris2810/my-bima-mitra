@@ -56,6 +56,7 @@ const CSS = `
   .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
   .reveal.visible { opacity: 1; transform: translateY(0); }
   @keyframes slideUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
 
   /* ---- Google Translate Override ---- */
   #google_translate_element, .skiptranslate, .goog-te-banner-frame { display: none !important; }
@@ -77,16 +78,31 @@ const CSS = `
   }
   .announce-bar a:hover { background: rgba(255,255,255,0.2); transform: translateX(2px); }
 
-  /* ---- Navbar ---- */
+  /* ---- Navbar (PERMANENT LOGO FIX) ---- */
   .navbar-container { position: sticky; top: 0; z-index: 1000; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(226, 232, 240, 0.6); }
-  .navbar { display: flex; justify-content: space-between; align-items: center; height: 84px; }
-  .navbar-brand { display: flex; align-items: center; gap: 16px; }
-  .navbar-brand:hover .navbar-logo { transform: scale(1.05); }
-  .navbar-logo { height: 90px !important; width: auto !important; object-fit: contain; transform: scale(1.25); transform-origin: left center; transition: var(--transition); }
-  .navbar-title { font-size: 22px; font-weight: 900; color: var(--dark); line-height: 1.1; letter-spacing: -0.5px; margin-bottom: 2px; }
-  .navbar-sub { font-size: 11px; color: var(--brand); font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.9; }
   
-  .navbar-links { display: flex; align-items: center; gap: 8px; }
+  /* Increased min-height to give the logo plenty of vertical room */
+  .navbar { display: flex; justify-content: space-between; align-items: center; min-height: 120px; max-width: 1400px; margin: 0 auto; padding: 12px 32px; }
+  
+  /* Increased gap so the scaled logo doesn't hit the text */
+  .navbar-brand { display: flex; align-items: center; gap: 24px; transition: var(--transition); }
+  
+  /* PERM LOGO FIX: 
+    1. Forced height to 90px.
+    2. scale(1.25) zooms the logo in by 25% to eliminate empty white margins in the image file.
+  */
+  .navbar-logo { 
+    height: 90px !important; 
+    width: auto !important; 
+    object-fit: contain; 
+    transform: scale(1.25); 
+    transform-origin: left center;
+  }
+  
+  .navbar-title { font-size: 24px; font-weight: 900; color: var(--dark); line-height: 1.1; letter-spacing: -0.5px; margin-bottom: 2px; }
+  .navbar-sub { font-size: 12px; color: var(--brand); font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; }
+  
+  .navbar-links { display: flex; align-items: center; gap: 12px; }
   .nav-link { padding: 10px 16px; border-radius: 100px; font-weight: 600; font-size: 15px; color: var(--muted); transition: var(--transition); }
   .nav-link:hover { color: var(--dark); background: var(--bg); }
   .nav-link.cta { background: var(--dark); color: white; padding: 12px 24px; margin-left: 8px; box-shadow: 0 4px 12px rgba(15,23,42,0.15); }
@@ -109,45 +125,6 @@ const CSS = `
   .btn-outline { background: transparent; color: var(--dark); border: 2px solid #cbd5e1; }
   .btn-outline:hover { border-color: var(--dark); background: var(--dark); color: white; transform: translateY(-3px); }
 
-  /* ---- Hero ---- */
-  .hero { padding: 80px 0; background-color: var(--surface); background-image: radial-gradient(circle at 15% 50%, rgba(37, 99, 235, 0.04) 0%, transparent 50%), radial-gradient(circle at 85% 30%, rgba(16, 185, 129, 0.04) 0%, transparent 50%); position: relative; overflow: hidden; }
-  .hero-inner { display: flex; align-items: center; justify-content: space-between; gap: 60px; }
-  .hero-text { flex: 1; max-width: 640px; }
-  .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: white; border: 1px solid var(--border); padding: 8px 16px; border-radius: 100px; font-size: 13px; font-weight: 800; color: var(--dark); margin-bottom: 32px; box-shadow: var(--shadow-soft); text-transform: uppercase; letter-spacing: 0.05em; }
-  .hero-badge-dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 0 4px var(--accent-light); }
-  .hero h1 { font-size: 58px; line-height: 1.1; margin-bottom: 24px; letter-spacing: -0.04em; }
-  .hero h1 span { color: var(--brand); }
-  .hero p { font-size: 20px; line-height: 1.6; color: var(--muted); margin-bottom: 40px; font-weight: 500; }
-  
-  /* Hero Form Card */
-  .hero-visual { flex: 1; max-width: 480px; position: relative; z-index: 2; }
-  .hero-form-card { background: white; border-radius: var(--radius-lg); padding: 40px 32px; box-shadow: 0 24px 50px -12px rgba(15, 23, 42, 0.15); border: 1px solid var(--border); }
-  .hero-form-card h3 { font-size: 24px; margin-bottom: 24px; color: var(--dark); line-height: 1.3; text-align: center; }
-  
-  .hero-input-standalone { width: 100%; padding: 16px 20px; margin-bottom: 16px; border: 1px solid var(--border); border-radius: 12px; font-size: 16px; font-weight: 600; color: var(--dark); background: var(--bg); transition: var(--transition); }
-  .hero-input-standalone:focus { border-color: var(--brand); background: white; box-shadow: 0 0 0 4px var(--brand-light); outline: none; }
-  
-  .hero-input-group { display: flex; align-items: center; margin-bottom: 20px; background: var(--bg); border: 1px solid var(--border); border-radius: 12px; transition: var(--transition); overflow: hidden; }
-  .hero-input-group:focus-within { border-color: var(--brand); background: white; box-shadow: 0 0 0 4px var(--brand-light); }
-  .input-prefix { padding: 16px 0 16px 20px; font-weight: 800; color: var(--muted); font-size: 16px; }
-  .hero-input { width: 100%; padding: 16px 20px; border: none; background: transparent; font-size: 16px; font-weight: 600; color: var(--dark); outline: none; }
-  
-  .hero-btn { width: 100%; padding: 18px; font-size: 18px; font-weight: 800; border-radius: 12px; background: var(--dark); color: white; border: none; cursor: pointer; transition: var(--transition); box-shadow: var(--shadow-sm); }
-  .hero-btn:hover:not(:disabled) { background: var(--brand); transform: translateY(-2px); box-shadow: var(--shadow-md); }
-  .hero-btn:disabled { opacity: 0.7; cursor: not-allowed; }
-  
-  .success-msg { text-align: center; padding: 20px 10px; }
-  .success-msg div { font-size: 56px; margin-bottom: 16px; }
-  .success-msg h4 { font-size: 24px; margin-bottom: 8px; color: var(--dark); }
-
-  /* ---- New Trust Strip ---- */
-  .trust-strip { background: white; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 48px 0; }
-  .trust-strip-inner { display: flex; justify-content: space-between; gap: 32px; flex-wrap: wrap; align-items: center; }
-  .trust-stat { display: flex; align-items: center; gap: 20px; flex: 1 1 200px; }
-  .trust-stat-icon { font-size: 36px; color: var(--brand); background: var(--brand-light); width: 72px; height: 72px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: inset 0 0 0 1px rgba(37,99,235,0.1); }
-  .trust-stat-text strong { font-size: 26px; color: var(--dark); display: block; margin-bottom: 4px; font-weight: 900; letter-spacing: -0.5px; line-height: 1; }
-  .trust-stat-text span { font-size: 14px; color: var(--muted); font-weight: 600; line-height: 1.4; display: block; text-transform: uppercase; letter-spacing: 0.05em; }
-
   /* ---- Section Structure ---- */
   .section { padding: 100px 0; position: relative; }
   .section-header { text-align: center; max-width: 700px; margin: 0 auto 56px; }
@@ -160,6 +137,26 @@ const CSS = `
   .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 32px; align-items: stretch; }
   .card { background: var(--surface); border-radius: var(--radius-lg); box-shadow: var(--shadow-soft); border: 1px solid var(--border); padding: 40px; transition: var(--transition); display: flex; flex-direction: column; height: 100%; position: relative; overflow: hidden; }
   .card:hover { transform: translateY(-8px); box-shadow: var(--shadow-md); border-color: #cbd5e1; }
+
+  /* ---- Hero ---- */
+  .hero { padding: 80px 0 100px; background-color: var(--surface); background-image: radial-gradient(circle at 15% 50%, rgba(37, 99, 235, 0.04) 0%, transparent 50%), radial-gradient(circle at 85% 30%, rgba(16, 185, 129, 0.04) 0%, transparent 50%); position: relative; overflow: hidden; }
+  .hero-inner { display: flex; align-items: center; justify-content: space-between; gap: 60px; }
+  .hero-text { flex: 1; max-width: 640px; }
+  .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: white; border: 1px solid var(--border); padding: 8px 16px; border-radius: 100px; font-size: 13px; font-weight: 700; color: var(--dark); margin-bottom: 32px; box-shadow: var(--shadow-soft); }
+  .hero-badge-dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 0 4px var(--accent-light); }
+  .hero h1 { font-size: 64px; line-height: 1.1; margin-bottom: 24px; letter-spacing: -0.04em; }
+  .hero h1 span { color: var(--brand); }
+  .hero p { font-size: 20px; line-height: 1.6; color: var(--muted); margin-bottom: 40px; font-weight: 500; }
+  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+  .hero-visual { flex: 1; max-width: 500px; position: relative; }
+  
+  .trust-card { background: rgba(255,255,255,0.8); backdrop-filter: blur(20px); border: 1px solid white; border-radius: var(--radius-lg); padding: 40px; box-shadow: var(--shadow-md); animation: float 8s ease-in-out infinite; }
+  .trust-card h3 { font-size: 22px; margin-bottom: 24px; }
+  .stat-item { display: flex; align-items: center; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--border); }
+  .stat-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .stat-icon { width: 52px; height: 52px; background: var(--brand-light); color: var(--brand); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; }
+  .stat-text { font-size: 16px; font-weight: 700; color: var(--dark); }
+  .stat-sub { font-size: 13px; color: var(--muted); font-weight: 500; }
 
   /* ---- Why Choose Us ---- */
   .why-bg { background: var(--dark); color: white; }
@@ -235,7 +232,7 @@ const CSS = `
   .back-link { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 40px; padding: 8px 16px; background: var(--bg); border-radius: 100px; }
   .back-link:hover { color: var(--dark); background: #e2e8f0; transform: translateX(-4px); }
   .plan-detail h2 { font-size: 48px; margin-bottom: 24px; }
-  .plan-detail > p { font-size: 20px; color: var(--muted); line-height: 1.8; margin-bottom: 48px; font-weight: 500; }
+  .plan-detail > p { font-size: 20px; color: var(--muted); line-height: 1.7; margin-bottom: 48px; font-weight: 500; }
   
   .age-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 60px; }
   .age-card { background: var(--bg); border-radius: 16px; padding: 24px; border: 1px solid var(--border); }
@@ -269,12 +266,12 @@ const CSS = `
   .form-wrapper { background: white; padding: 48px; border-radius: var(--radius-lg); box-shadow: var(--shadow-md); border: 1px solid var(--border); max-width: 600px; margin: auto; }
   .form-field { width: 100%; padding: 18px 20px; margin-bottom: 20px; background: var(--bg); border: 1px solid var(--border); border-radius: 12px; font-size: 16px; color: var(--dark); transition: var(--transition); }
   .form-field:focus { background: white; border-color: var(--brand); box-shadow: 0 0 0 4px var(--brand-light); }
-  .form-submit { width: 100%; padding: 18px; background: var(--dark); color: white; border: none; border-radius: 12px; font-size: 18px; font-weight: 700; cursor: pointer; transition: var(--transition); }
+  .form-submit { width: 100%; padding: 18px; background: var(--brand); color: white; border: none; border-radius: 12px; font-size: 18px; font-weight: 700; cursor: pointer; transition: var(--transition); }
   .form-submit:hover:not(:disabled) { background: var(--brand-hover); transform: translateY(-2px); box-shadow: var(--shadow-md); }
 
   /* ---- Fixed Action Buttons ---- */
   .fixed-actions { position: fixed; bottom: 24px; left: 0; width: 100%; padding: 0 24px; display: flex; justify-content: space-between; align-items: flex-end; z-index: 9999; pointer-events: none; }
-  .action-btn { pointer-events: auto; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 16px 28px; border-radius: 100px; font-weight: 700; font-size: 16px; color: white; border: none; cursor: pointer; box-shadow: var(--shadow-lg); transition: var(--transition); text-decoration: none;}
+  .action-btn { pointer-events: auto; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 16px 28px; border-radius: 100px; font-weight: 700; font-size: 16px; color: white; border: none; cursor: pointer; box-shadow: var(--shadow-lg); transition: var(--transition); text-decoration: none; }
   .action-btn:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 20px 40px -10px rgba(0,0,0,0.2); }
   .btn-call { background: var(--dark); }
   .btn-wa-round { width: 68px; height: 68px; padding: 0; border-radius: 50%; background: #25D366; font-size: 34px; }
@@ -293,18 +290,16 @@ const CSS = `
   /* ---- Mobile Adjustments ---- */
   @media (max-width: 992px) {
     .hero-inner { flex-direction: column; text-align: center; }
-    .hero-text { max-width: 100%; margin: 0 auto; }
-    .hero-visual { width: 100%; max-width: 600px; margin: 0 auto; }
+    .hero-text { max-width: 100%; }
     .hero-actions { justify-content: center; }
     .hero h1 { font-size: 48px; }
     .trust-card { display: none; }
     .footer-inner { grid-template-columns: 1fr; gap: 48px; }
-    .trust-strip-inner { justify-content: center; }
   }
 
   @media (max-width: 768px) {
     .navbar-links { display: none; }
-    .navbar { height: 70px; min-height: 70px; }
+    .navbar { min-height: 90px; }
     .navbar-logo { height: 60px !important; transform: scale(1.1); }
     .navbar-title { font-size: 18px; }
     .section { padding: 60px 0; }
@@ -315,8 +310,6 @@ const CSS = `
     .fixed-actions { padding: 0 16px; bottom: 16px; }
     .action-btn { padding: 14px 20px; font-size: 15px; }
     .btn-wa-round { width: 60px; height: 60px; font-size: 30px; }
-    .hero-form-card { padding: 32px 24px; }
-    .hero-form-card h3 { font-size: 20px; }
   }
 `;
 
@@ -395,116 +388,46 @@ function Navbar() {
 }
 
 function Hero() {
-  const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [formData, setFormData] = useState({ name: "", phone: "", city: "Hero Form Lead", message: "Lead from Homepage Hero Form" });
-  
-  const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setLoading(true);
-    emailjs.send("service_prwxv5e", "template_lnnkfoo", formData, "6LcmS8gSIq2vvPppX")
-      .then(() => { setSubmitted(true); setLoading(false); }).catch(() => setLoading(false));
-  };
-
+  const stats = [
+    { icon: "🏆", title: "18+ Years", sub: "Insurance Leadership" },
+    { icon: "👥", title: "7,000+", sub: "Clients Guided" },
+    { icon: "🏥", title: "14,000+", sub: "Network Hospitals" },
+  ];
   return (
-    <>
-      <section className="hero">
-        <div className="container hero-inner">
-          
-          <div className="hero-text reveal">
-            <div className="hero-badge">
-              <span className="hero-badge-dot" />
-              India's highest claims settling health insurance co.
-            </div>
-            <h1>Protect your family's future with the best <span>Health Insurance</span> in India</h1>
-            <p>
-              Led by <strong>ManishPal Singh Sisodiya</strong>. Over 18 years of experience
-              protecting families with the right Star Health coverage tailored to your needs.
-            </p>
-            <div className="hero-actions">
-              <a href="#/plans" className="btn btn-outline">Explore Plans</a>
-            </div>
+    <section className="hero">
+      <div className="container hero-inner">
+        <div className="hero-text reveal">
+          <div className="hero-badge">
+            <span className="hero-badge-dot" />
+            India's Leading Health Insurance
           </div>
-          
-          <div className="hero-visual reveal" style={{transitionDelay: "0.2s"}}>
-            <div className="hero-form-card">
-              <h3>Find the best health insurance plan tailored for you</h3>
-              {submitted ? (
-                <div className="success-msg">
-                  <div>✅</div>
-                  <h4>Request Received</h4>
-                  <p style={{color: "var(--muted)", fontSize: "15px"}}>Our advisor will call you shortly.</p>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit}>
-                  <input 
-                    name="name" 
-                    type="text" 
-                    placeholder="Your name" 
-                    value={formData.name} 
-                    onChange={handleChange} 
-                    required 
-                    className="hero-input-standalone" 
-                  />
-                  <div className="hero-input-group">
-                    <span className="input-prefix">+91</span>
-                    <input 
-                      name="phone" 
-                      type="tel" 
-                      placeholder="Enter 10-digit mobile number" 
-                      pattern="[0-9]{10}" 
-                      value={formData.phone} 
-                      onChange={handleChange} 
-                      required 
-                      className="hero-input" 
-                    />
-                  </div>
-                  <button type="submit" className="hero-btn" disabled={loading}>
-                    {loading ? "Sending..." : "Get Started"}
-                  </button>
-                </form>
-              )}
-            </div>
+          <h1>Expert Health Advisory <span>& Guidance</span></h1>
+          <p>
+            Led by <strong>ManishPal Singh Sisodiya</strong>. Over 18 years of experience
+            protecting families with the right Star Health coverage tailored to your needs.
+          </p>
+          <div className="hero-actions">
+            <a href="#/consultation" className="btn btn-primary">Talk to an Expert</a>
+            <a href="#/plans" className="btn btn-outline">Explore Plans</a>
           </div>
-
         </div>
-      </section>
-
-      {/* Trust Strip (FinTech Style directly below Hero) */}
-      <div className="trust-strip reveal" style={{transitionDelay: "0.4s"}}>
-        <div className="trust-strip-inner">
-          <div className="trust-stat">
-            <span className="trust-stat-icon">🛡️</span>
-            <div className="trust-stat-text">
-              <strong>5.5 Crore+</strong>
-              <span>Lives covered</span>
-            </div>
-          </div>
-          <div className="trust-stat">
-            <span className="trust-stat-icon">🏥</span>
-            <div className="trust-stat-text">
-              <strong>14,000+</strong>
-              <span>Network Hospitals</span>
-            </div>
-          </div>
-          <div className="trust-stat">
-            <span className="trust-stat-icon">⚡</span>
-            <div className="trust-stat-text">
-              <strong>90% Cashless</strong>
-              <span>Claims settled in &lt; 2 Hrs</span>
-            </div>
-          </div>
-          <div className="trust-stat">
-            <span className="trust-stat-icon">👨‍💼</span>
-            <div className="trust-stat-text">
-              <strong>3.5 Lakh+</strong>
-              <span>Agents & Brokers</span>
-            </div>
+        
+        <div className="hero-visual reveal" style={{transitionDelay: "0.2s"}}>
+          <div className="trust-card">
+            <h3>Experience & Trust</h3>
+            {stats.map(({ icon, title, sub }, i) => (
+              <div key={i} className="stat-item">
+                <div className="stat-icon">{icon}</div>
+                <div>
+                  <div className="stat-text">{title}</div>
+                  <div className="stat-sub">{sub}</div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
-    </>
+    </section>
   );
 }
 
@@ -769,12 +692,115 @@ function PlanDetail({ title, description, ages, features, ctaLabel = "Request Co
 }
 
 // Plan specific components
-function SuperStarFlexi() { return <PlanDetail title="Super Star Flexi" description="The ultimate future-proof health insurance. This revolutionary plan adapts to your life stage, allowing you to lock in your entry age, accumulate limitless bonuses, and even get your premium returned." ages={[{ label: "Adult Entry Age", value: "18+ Years" }, { label: "Child Entry Age", value: "91 Days - 25 Yrs" }]} features={["<b>Freeze Your Age:</b> Your premiums are locked at your entry age until you make your first claim.", "<b>Premium Return:</b> Get your 1st-year base premium fully returned if you have no IPD claim for 5 years.", "<b>Limitless Loyalty Bonus:</b> Earn a 100% boost to your Sum Insured every year, with NO maximum cap.", "<b>Health Booster & NCB:</b> Get a 100% SI boost for every 7 claim-free years, plus a 50% No Claim Bonus annually.", "<b>Flexible Coverage:</b> Cashless treatment at 14,000+ network hospitals with Day Care procedures covered."]} ctaLabel="Request Flexi Quote" />; }
-function StarHealthAssure() { return <PlanDetail title="Star Health Assure" description="A comprehensive, premium indemnity health insurance product covering extensive hospitalization expenses, modern treatments, and unmatched automatic restoration features." ages={[{ label: "Adult Entry Age", value: "18 to 75 Years" }, { label: "Child Entry Age", value: "16 Days to 17 Yrs" }]} features={["<b>Unlimited Restoration:</b> Automatic Restoration of Sum Insured for an unlimited number of times.", "<b>Consumables Covered:</b> Non-Medical items like gloves, masks, and food charges are covered up to SI.", "<b>Fetal & Maternity:</b> In Utero Fetal Surgery, Maternity expenses, and Assisted Reproduction Treatment.", "<b>Home & AYUSH Care:</b> Home care treatment and traditional AYUSH treatments covered up to Sum Insured."]} ctaLabel="Request Assure Quote" />; }
-function WomenCare() { return <PlanDetail title="Star Women Care" description="An exclusively crafted policy for women and mothers. Enjoy industry-leading maternity benefits, instant newborn coverage, and preventive health features." ages={[{ label: "Individual (Females)", value: "18 to 75 Years" }, { label: "Floater (Min 1 Female)", value: "18 to 75 Years" }, { label: "Dependent Child", value: "91 Days - 25 Yrs" }]} features={["<b>Accelerated Maternity Cover:</b> Maternity & delivery expenses covered with just a <b>1-Year (12 months) waiting period</b> (for SI ₹15L and above).", "<b>Day 1 Newborn Cover:</b> Newborn baby is covered from Day 1 without any prior medical check-up (if pre-scans are submitted).", "<b>Comprehensive Female Care:</b> Covers voluntary sterilization expenses and routine preventive health check-ups.", "<b>No Pre-Policy Medicals:</b> Hassle-free issuance with no pre-policy medical check-up required."]} ctaLabel="Get Women Care Quote" />; }
-function CancerCare() { return <PlanDetail title="Star Cancer Care Platinum" description="A highly specialized health insurance policy providing critical indemnity coverage for persons previously diagnosed with Cancer (any stage)." ages={[{ label: "Patient Entry Age", value: "5 Months - 65 Yrs" }, { label: "Sum Insured Options", value: "₹5L, ₹7.5L, ₹10L" }]} features={["<b>Pre-Diagnosed Acceptance:</b> Designed specifically for individuals who have already been diagnosed with Cancer.", "<b>Dual Protection:</b> Provides strong indemnity coverage for BOTH cancer and non-cancer medical hospitalizations.", "<b>Optional Lump-Sum:</b> Lump-sum cover available as an optional section for immediate financial relief.", "<b>Pan-India Cashless:</b> Access to Star Health's massive cashless treatment network across India."]} ctaLabel="Get Cancer Care Details" />; }
-function CardiacCare() { return <PlanDetail title="Star Cardiac Care Platinum" description="Dedicated insurance for individuals who have undergone a Cardiac ailment, surgical intervention, or procedure in the past." ages={[{ label: "Patient Entry Age", value: "7 to 70 Years" }, { label: "Sum Insured Options", value: "Up to ₹15 Lakhs" }]} features={["<b>No Pre-Medical Screening:</b> No pre-acceptance medical tests required (simply submit past medical records).", "<b>Cardiac & Beyond:</b> Provides vital coverage for pre-existing cardiac conditions as well as Non-Cardiac treatments.", "<b>Accident Coverage:</b> Fully covers accident-related hospitalizations alongside medical illnesses.", "<b>Flexible Options:</b> Choose from Sum Insured options of ₹5L, ₹7.5L, ₹10L, and ₹15 Lakhs."]} ctaLabel="Get Cardiac Care Details" />; }
-function Overseas() { return <PlanDetail title="Star Travel Protect" description="Complete medical and emergency protection for international travel, ensuring you and your family are safe from transit emergencies anywhere in the world." ages={[{ label: "Standard Age Limit", value: "6 Mths - 70 Yrs" }, { label: "Senior Citizens", value: "Subject to Loading" }]} features={["<b>Global Medical Cover:</b> Payment of expenses following any Medical Emergency during your international stay.", "<b>Transit Emergencies:</b> Protection against Flight Delay, Missed Connections, and Trip Cancellation.", "<b>Baggage & Passport:</b> Compensation for Loss of Passport and Loss or Delay of Checked-in Baggage.", "<b>Dental & Evacuation:</b> Covers dental emergencies following an accident and emergency medical evacuation."]} ctaLabel="Get Travel Quote" />; }
+function SuperStarFlexi() { 
+  return <PlanDetail 
+    title="Super Star Flexi" 
+    description="The ultimate future-proof health insurance. This revolutionary plan adapts to your life stage, allowing you to lock in your entry age, accumulate limitless bonuses, and even get your premium returned." 
+    ages={[
+      { label: "Adult Entry Age", value: "18 - 65 Yrs" }, 
+      { label: "Child Entry Age", value: "91 Days - 25 Yrs" }
+    ]} 
+    features={[
+      "<b>Freeze Your Age:</b> Your premiums are locked at your entry age until you make your first claim.", 
+      "<b>Premium Return:</b> Get your 1st-year base premium fully returned if you have no IPD claim for 5 years.", 
+      "<b>Limitless Loyalty Bonus:</b> Earn a 100% boost to your Sum Insured every year, with NO maximum cap.", 
+      "<b>Health Booster & NCB:</b> Get a 100% SI boost for every 7 claim-free years, plus a 50% No Claim Bonus annually.", 
+      "<b>Flexible Coverage:</b> Cashless treatment at 14,000+ network hospitals with Day Care procedures covered."
+    ]} 
+    ctaLabel="Request Flexi Quote" 
+  />; 
+}
+
+function StarHealthAssure() { 
+  return <PlanDetail 
+    title="Star Health Assure" 
+    description="A comprehensive, premium indemnity health insurance product covering extensive hospitalization expenses, modern treatments, and unmatched automatic restoration features." 
+    ages={[
+      { label: "Adult Entry Age", value: "18 to 75 Yrs" }, 
+      { label: "Child Entry Age", value: "16 Days - 17 Yrs" }
+    ]} 
+    features={[
+      "<b>Unlimited Restoration:</b> Automatic Restoration of Sum Insured for an unlimited number of times.", 
+      "<b>Consumables Covered:</b> Non-Medical items like gloves, masks, and food charges are covered up to SI.", 
+      "<b>Fetal & Maternity:</b> In Utero Fetal Surgery, Maternity expenses, and Assisted Reproduction Treatment.", 
+      "<b>Home & AYUSH Care:</b> Home care treatment and traditional AYUSH treatments covered up to Sum Insured."
+    ]} 
+    ctaLabel="Request Assure Quote" 
+  />; 
+}
+
+function WomenCare() { 
+  return <PlanDetail 
+    title="Star Women Care" 
+    description="An exclusively crafted policy for women and mothers. Enjoy industry-leading maternity benefits, instant newborn coverage, and preventive health features." 
+    ages={[
+      { label: "Individual (Females)", value: "18 to 75 Yrs" }, 
+      { label: "Floater (Min 1 Female)", value: "18 to 75 Yrs" }, 
+      { label: "Dependent Child", value: "91 Days - 25 Yrs" }
+    ]} 
+    features={[
+      "<b>Accelerated Maternity Cover:</b> Maternity & delivery expenses covered with just a <b>1-Year (12 months) waiting period</b> (for SI ₹15L and above).", 
+      "<b>Day 1 Newborn Cover:</b> Newborn baby is covered from Day 1 without any prior medical check-up (if pre-scans are submitted).", 
+      "<b>Comprehensive Female Care:</b> Covers voluntary sterilization expenses and routine preventive health check-ups.", 
+      "<b>No Pre-Policy Medicals:</b> Hassle-free issuance with no pre-policy medical check-up required."
+    ]} 
+    ctaLabel="Get Women Care Quote" 
+  />; 
+}
+
+function CancerCare() { 
+  return <PlanDetail 
+    title="Star Cancer Care Platinum" 
+    description="A highly specialized health insurance policy providing critical indemnity coverage for persons previously diagnosed with Cancer (any stage)." 
+    ages={[
+      { label: "Patient Entry Age", value: "5 Mths - 65 Yrs" }, 
+      { label: "Sum Insured Options", value: "₹5L, ₹7.5L, ₹10L" }
+    ]} 
+    features={[
+      "<b>Pre-Diagnosed Acceptance:</b> Designed specifically for individuals who have already been diagnosed with Cancer.", 
+      "<b>Dual Protection:</b> Provides strong indemnity coverage for BOTH cancer and non-cancer medical hospitalizations.", 
+      "<b>Optional Lump-Sum:</b> Lump-sum cover available as an optional section for immediate financial relief.", 
+      "<b>Pan-India Cashless:</b> Access to Star Health's massive cashless treatment network across India."
+    ]} 
+    ctaLabel="Get Cancer Care Details" 
+  />; 
+}
+
+function CardiacCare() { 
+  return <PlanDetail 
+    title="Star Cardiac Care Platinum" 
+    description="Dedicated insurance for individuals who have undergone a Cardiac ailment, surgical intervention, or procedure in the past." 
+    ages={[
+      { label: "Patient Entry Age", value: "7 to 70 Yrs" }, 
+      { label: "Sum Insured Options", value: "Up to ₹15 Lakhs" }
+    ]} 
+    features={[
+      "<b>No Pre-Medical Screening:</b> No pre-acceptance medical tests required (simply submit past medical records).", 
+      "<b>Cardiac & Beyond:</b> Provides vital coverage for pre-existing cardiac conditions as well as Non-Cardiac treatments.", 
+      "<b>Accident Coverage:</b> Fully covers accident-related hospitalizations alongside medical illnesses.", 
+      "<b>Flexible Options:</b> Choose from Sum Insured options of ₹5L, ₹7.5L, ₹10L, and ₹15 Lakhs."
+    ]} 
+    ctaLabel="Get Cardiac Care Details" 
+  />; 
+}
+
+function Overseas() { 
+  return <PlanDetail 
+    title="Star Travel Protect" 
+    description="Complete medical and emergency protection for international travel, ensuring you and your family are safe from transit emergencies anywhere in the world." 
+    ages={[
+      { label: "Standard Age Limit", value: "6 Mths - 70 Yrs" }, 
+      { label: "Senior Citizens", value: "Subject to Loading" }
+    ]} 
+    features={[
+      "<b>Global Medical Cover:</b> Payment of expenses following any Medical Emergency during your international stay.", 
+      "<b>Transit Emergencies:</b> Protection against Flight Delay, Missed Connections, and Trip Cancellation.", 
+      "<b>Baggage & Passport:</b> Compensation for Loss of Passport and Loss or Delay of Checked-in Baggage.", 
+      "<b>Dental & Evacuation:</b> Covers dental emergencies following an accident and emergency medical evacuation."
+    ]} 
+    ctaLabel="Get Travel Quote" 
+  />; 
+}
 
 function FAQ() {
   const faqs = [
@@ -928,7 +954,7 @@ function Footer() {
           <div>
             <div className="footer-title">Quick Links</div>
             <div className="footer-links">
-              {links.map(({ label, path }) => <a key={path} href={`#/${path}`} className="footer-link">{label}</a>)}
+              {links.map(({ label, path }) => <a key={path} href={"#/" + path} className="footer-link">{label}</a>)}
             </div>
           </div>
           <div>
