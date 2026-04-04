@@ -8,6 +8,7 @@ const WA_LINK = "https://wa.me/918319600171?text=" + WA_MSG;
 // ===== GLOBAL CSS =====
 const CSS = `
   @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap');
+  @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -78,27 +79,11 @@ const CSS = `
   }
   .announce-bar a:hover { background: rgba(255,255,255,0.2); transform: translateX(2px); }
 
-  /* ---- Navbar (PERMANENT LOGO FIX) ---- */
+  /* ---- Navbar ---- */
   .navbar-container { position: sticky; top: 0; z-index: 1000; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(226, 232, 240, 0.6); }
-  
-  /* Increased min-height to give the logo plenty of vertical room */
   .navbar { display: flex; justify-content: space-between; align-items: center; min-height: 120px; max-width: 1400px; margin: 0 auto; padding: 12px 32px; }
-  
-  /* Increased gap so the scaled logo doesn't hit the text */
   .navbar-brand { display: flex; align-items: center; gap: 24px; transition: var(--transition); }
-  
-  /* PERM LOGO FIX: 
-    1. Forced height to 90px.
-    2. scale(1.25) zooms the logo in by 25% to eliminate empty white margins in the image file.
-  */
-  .navbar-logo { 
-    height: 90px !important; 
-    width: auto !important; 
-    object-fit: contain; 
-    transform: scale(1.25); 
-    transform-origin: left center;
-  }
-  
+  .navbar-logo { height: 90px !important; width: auto !important; object-fit: contain; transform: scale(1.25); transform-origin: left center; }
   .navbar-title { font-size: 24px; font-weight: 900; color: var(--dark); line-height: 1.1; letter-spacing: -0.5px; margin-bottom: 2px; }
   .navbar-sub { font-size: 12px; color: var(--brand); font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; }
   
@@ -175,7 +160,37 @@ const CSS = `
   .leader-role { font-size: 13px; font-weight: 800; color: var(--brand); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; }
   .leader-bio { font-size: 15px; color: var(--muted); line-height: 1.7; flex-grow: 1; }
 
-  /* ---- Plans Grid ---- */
+  /* ---- CURATED PLANS (NEW) ---- */
+  .curated-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; text-align: left; }
+  .curated-header .section-title { margin-bottom: 8px; }
+  .curated-nav { display: none; gap: 12px; }
+  @media(min-width: 768px) { .curated-nav { display: flex; } }
+  .curated-nav-btn { width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; background: white; transition: var(--transition); color: var(--muted); }
+  .curated-nav-btn:hover { background: var(--bg); color: var(--dark); }
+  
+  .curated-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; padding-top: 16px; }
+  .cp-card { background: var(--bg); border-radius: 24px; padding: 32px; display: flex; flex-direction: column; position: relative; transition: var(--transition); border: 2px solid transparent; }
+  .cp-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); border-color: var(--border); }
+  
+  /* Highlighted Card (Super Star Flexi) */
+  .cp-card.highlight { background: white; border: 2px solid var(--brand); transform: translateY(-12px); box-shadow: var(--shadow-md); z-index: 1; }
+  .cp-card.highlight:hover { transform: translateY(-18px); box-shadow: var(--shadow-lg); }
+  .cp-badge { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: var(--brand); color: white; font-size: 11px; font-weight: 800; padding: 6px 16px; border-radius: 100px; text-transform: uppercase; letter-spacing: 1px; white-space: nowrap; box-shadow: 0 4px 10px rgba(37,99,235,0.3); }
+  
+  .cp-icon-wrap { width: 56px; height: 56px; background: var(--brand-light); color: var(--brand); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 24px; }
+  .cp-title { font-size: 22px; margin-bottom: 12px; font-weight: 800; color: var(--dark); }
+  .cp-desc { font-size: 15px; color: var(--muted); line-height: 1.6; flex-grow: 1; margin-bottom: 24px; }
+  .cp-features { list-style: none; margin-bottom: 32px; }
+  .cp-features li { display: flex; align-items: center; gap: 12px; font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 14px; }
+  .cp-features li i { color: #059669; font-size: 16px; }
+  
+  .cp-btn { width: 100%; padding: 14px; border-radius: 100px; font-weight: 700; font-size: 15px; text-align: center; border: 2px solid var(--brand); transition: var(--transition); display: block; }
+  .cp-btn-outline { color: var(--brand); background: transparent; }
+  .cp-btn-outline:hover { background: var(--brand-light); }
+  .cp-btn-solid { color: white; background: var(--brand); }
+  .cp-btn-solid:hover { background: var(--brand-hover); border-color: var(--brand-hover); }
+
+  /* ---- Standard Plans Grid (for /plans route) ---- */
   .plans-bg { background: linear-gradient(180deg, var(--bg) 0%, white 100%); }
   .plan-card { padding: 32px; }
   .plan-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: var(--border); transition: var(--transition); }
@@ -244,23 +259,14 @@ const CSS = `
   .feature-check { color: white; font-size: 14px; font-weight: 900; background: var(--accent); width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
   .feature-list b { color: var(--dark); font-weight: 800; display: block; margin-bottom: 4px; font-size: 17px; }
 
-  /* ---- Resources ---- */
+  /* ---- Resources & Contact ---- */
   .resource-card { flex-direction: row; align-items: center; gap: 24px; padding: 32px; }
   .resource-icon { font-size: 32px; background: var(--brand-light); width: 64px; height: 64px; display: flex; align-items: center; justify-content: center; border-radius: 16px; color: var(--brand); flex-shrink: 0; }
-
-  /* ---- Contact (The Bulletproof Email Wrap Fix) ---- */
   .contact-card { text-align: center; justify-content: center; align-items: center; padding: 48px 32px; }
   .contact-icon { font-size: 32px; background: var(--brand-light); width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; border-radius: 24px; margin-bottom: 24px; color: var(--brand); }
   .contact-label { font-size: 13px; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; }
   .contact-value { font-size: 20px; font-weight: 800; color: var(--dark); }
-  .contact-value.email-text { 
-    white-space: normal !important; 
-    word-break: break-all !important; 
-    overflow-wrap: break-word !important; 
-    font-size: 16px; 
-    line-height: 1.4; 
-    width: 100%; 
-  }
+  .contact-value.email-text { white-space: normal !important; word-break: break-all !important; overflow-wrap: break-word !important; font-size: 16px; line-height: 1.4; width: 100%; }
 
   /* ---- Consultation Form ---- */
   .form-wrapper { background: white; padding: 48px; border-radius: var(--radius-lg); box-shadow: var(--shadow-md); border: 1px solid var(--border); max-width: 600px; margin: auto; }
@@ -270,11 +276,37 @@ const CSS = `
   .form-submit:hover:not(:disabled) { background: var(--brand-hover); transform: translateY(-2px); box-shadow: var(--shadow-md); }
 
   /* ---- Fixed Action Buttons ---- */
-  .fixed-actions { position: fixed; bottom: 24px; left: 0; width: 100%; padding: 0 24px; display: flex; justify-content: space-between; align-items: flex-end; z-index: 9999; pointer-events: none; }
+  .fixed-actions { position: fixed; bottom: 24px; left: 0; width: 100%; padding: 0 24px; display: flex; justify-content: flex-start; align-items: flex-end; z-index: 9999; pointer-events: none; }
   .action-btn { pointer-events: auto; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 16px 28px; border-radius: 100px; font-weight: 700; font-size: 16px; color: white; border: none; cursor: pointer; box-shadow: var(--shadow-lg); transition: var(--transition); text-decoration: none; }
   .action-btn:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 20px 40px -10px rgba(0,0,0,0.2); }
   .btn-call { background: var(--dark); }
-  .btn-wa-round { width: 68px; height: 68px; padding: 0; border-radius: 50%; background: #25D366; font-size: 34px; }
+
+  /* ---- HEALTH CONCIERGE WIDGET (NEW) ---- */
+  .concierge-wrapper { position: fixed; bottom: 24px; right: 24px; z-index: 10000; display: flex; flex-direction: column; align-items: flex-end; gap: 16px; }
+  .concierge-toggle { width: 68px; height: 68px; border-radius: 50%; background: #10b981; color: white; border: none; font-size: 28px; cursor: pointer; box-shadow: var(--shadow-lg); transition: var(--transition); display: flex; align-items: center; justify-content: center; position: relative; }
+  .concierge-toggle:hover { transform: scale(1.05) translateY(-4px); background: #059669; }
+  .concierge-toggle .status-dot { position: absolute; bottom: 4px; right: 4px; width: 14px; height: 14px; background: #34d399; border: 2px solid white; border-radius: 50%; }
+  
+  .concierge-window { width: 340px; background: white; border-radius: 28px; box-shadow: 0 12px 40px rgba(0,0,0,0.15); border: 1px solid var(--border); overflow: hidden; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); transform-origin: bottom right; opacity: 0; transform: scale(0.9) translateY(20px); pointer-events: none; position: absolute; bottom: 90px; right: 0; }
+  .concierge-window.open { opacity: 1; transform: scale(1) translateY(0); pointer-events: auto; }
+  
+  .cw-body { padding: 24px; }
+  .cw-header { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+  .cw-avatar { width: 52px; height: 52px; background: #10b981; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 22px; position: relative; }
+  .cw-avatar .status-dot { position: absolute; bottom: 0; right: 0; width: 14px; height: 14px; background: #10b981; border: 2px solid white; border-radius: 50%; }
+  .cw-title { font-size: 18px; font-weight: 800; color: var(--dark); line-height: 1.2; }
+  .cw-sub { font-size: 13px; color: var(--muted); margin-top: 2px; }
+  
+  .cw-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+  .cw-action { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 18px 8px; border-radius: 20px; color: var(--muted); transition: var(--transition); cursor: pointer; text-decoration: none; }
+  .cw-action:hover { background: var(--bg); }
+  .cw-action.active { background: var(--accent-light); color: #059669; }
+  .cw-action i { font-size: 24px; margin-bottom: 10px; color: #94a3b8; }
+  .cw-action.active i { color: #059669; }
+  .cw-action span { font-size: 13px; font-weight: 700; }
+  
+  .cw-btn { width: 100%; background: #10b981; color: white; border: none; padding: 16px; border-radius: 100px; font-weight: 700; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: var(--transition); text-decoration: none;}
+  .cw-btn:hover { background: #059669; }
 
   /* ---- Footer ---- */
   .footer { background: var(--dark); color: #cbd5e1; padding: 100px 0 40px; }
@@ -307,9 +339,14 @@ const CSS = `
     .plan-detail { padding: 32px 24px; margin: 24px auto 60px; }
     .plan-detail h2 { font-size: 36px; }
     .form-wrapper { padding: 32px 24px; }
+    
     .fixed-actions { padding: 0 16px; bottom: 16px; }
     .action-btn { padding: 14px 20px; font-size: 15px; }
-    .btn-wa-round { width: 60px; height: 60px; font-size: 30px; }
+    .concierge-wrapper { bottom: 16px; right: 16px; }
+    .concierge-toggle { width: 60px; height: 60px; font-size: 24px; }
+    .concierge-window { width: calc(100vw - 32px); bottom: 80px; }
+    
+    .curated-header { flex-direction: column; text-align: center; }
   }
 `;
 
@@ -490,6 +527,74 @@ function Leadership() {
   );
 }
 
+// ===== NEW COMPONENT: CURATED PLANS =====
+function CuratedPlans() {
+  return (
+    <section className="section" style={{background: "white", paddingBottom: "120px"}}>
+      <div className="container reveal">
+        <div className="curated-header">
+          <div>
+            <h2 className="section-title">Curated Health Plans</h2>
+            <p className="section-sub">We've hand-picked the best Star Health products for every life stage.</p>
+          </div>
+          <div className="curated-nav">
+            <button className="curated-nav-btn"><i className="fa-solid fa-chevron-left"></i></button>
+            <button className="curated-nav-btn"><i className="fa-solid fa-chevron-right"></i></button>
+          </div>
+        </div>
+        
+        <div className="curated-grid">
+          
+          {/* Plan 1 */}
+          <div className="cp-card">
+            <div className="cp-icon-wrap">
+              <i className="fa-solid fa-people-roof"></i>
+            </div>
+            <h3 className="cp-title">Family Health Optima</h3>
+            <p className="cp-desc">Comprehensive coverage for the entire family under a single sum insured. Includes maternity and newborn cover.</p>
+            <ul className="cp-features">
+              <li><i className="fa-solid fa-circle-check"></i> 400+ Daycare Procedures</li>
+              <li><i className="fa-solid fa-circle-check"></i> Automatic Restoration</li>
+            </ul>
+            <a href="#/plans" className="cp-btn cp-btn-outline">View Plan Details</a>
+          </div>
+
+          {/* Plan 2 (Highlighted: Super Star Flexi) */}
+          <div className="cp-card highlight">
+            <div className="cp-badge">Most Popular</div>
+            <div className="cp-icon-wrap">
+              <i className="fa-solid fa-star"></i>
+            </div>
+            <h3 className="cp-title">Super Star Flexi</h3>
+            <p className="cp-desc">The ultimate flexibility in health insurance. Customizable room rent, tailored OPD covers, and limitless bonus.</p>
+            <ul className="cp-features">
+              <li><i className="fa-solid fa-circle-check"></i> Flexible Sum Insured Options</li>
+              <li><i className="fa-solid fa-circle-check"></i> Limitless Loyalty Bonus</li>
+            </ul>
+            <a href="#/super-star-flexi" className="cp-btn cp-btn-solid">View Plan Details</a>
+          </div>
+
+          {/* Plan 3 */}
+          <div className="cp-card">
+            <div className="cp-icon-wrap">
+              <i className="fa-solid fa-person-cane"></i>
+            </div>
+            <h3 className="cp-title">Senior Citizens Red Carpet</h3>
+            <p className="cp-desc">Specifically designed for ages 60+. No pre-policy medical checkup required and covers pre-existing diseases.</p>
+            <ul className="cp-features">
+              <li><i className="fa-solid fa-circle-check"></i> Quick Claim Settlement</li>
+              <li><i className="fa-solid fa-circle-check"></i> ICU Charges Covered</li>
+            </ul>
+            <a href="#/plans" className="cp-btn cp-btn-outline">View Plan Details</a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// Keeping Original Plans Grid for the '/plans' page
 function Plans() {
   const plans = [
     { title: "Super Star Flexi", link: "#/super-star-flexi", desc: "Our most powerful plan. Freeze your age, enjoy limitless loyalty bonuses, and get your premium returned." },
@@ -504,7 +609,7 @@ function Plans() {
       <div className="container section reveal">
         <div className="section-header">
           <span className="section-tag">Coverage Options</span>
-          <h2 className="section-title">Featured Insurance Plans</h2>
+          <h2 className="section-title">All Insurance Plans</h2>
           <p className="section-sub">Choose official Star Health coverage that perfectly fits your life stage, health condition, and budget.</p>
         </div>
         <div className="grid-3">
@@ -524,21 +629,20 @@ function Plans() {
   );
 }
 
-// ===== PREMIUM ESTIMATOR COMPONENT =====
-const PREMIUM_TABLE = {
-  "1":   { "18-35": [350,600],   "36-45": [550,950],   "46-55": [900,1500],  "56-65": [1400,2400], "65+": [2200,3800] },
-  "2":   { "18-35": [600,1000],  "36-45": [950,1600],  "46-55": [1500,2600], "56-65": [2400,4000], "65+": [3600,6000] },
-  "3-4": { "18-35": [900,1500],  "36-45": [1400,2400], "46-55": [2200,3600], "56-65": [3400,5600], "65+": [5000,8200] },
-  "5+":  { "18-35": [1200,2000], "36-45": [1800,3000], "46-55": [2800,4600], "56-65": [4400,7200], "65+": [6400,10500] },
-};
-const SUM_MULTIPLIER = { "5": 1.0, "7.5": 1.2, "10": 1.45, "15": 1.85, "20": 2.2, "25": 2.5, "50": 3.5, "100": 5.0, "unlimited": 6.5 };
-const fmt = (n) => "₹" + n.toLocaleString("en-IN");
-
 function PremiumEstimator() {
   const [members, setMembers] = useState("1");
   const [age, setAge] = useState("18-35");
   const [sum, setSum] = useState("5");
   const [result, setResult] = useState(null);
+
+  const PREMIUM_TABLE = {
+    "1":   { "18-35": [350,600],   "36-45": [550,950],   "46-55": [900,1500],  "56-65": [1400,2400], "65+": [2200,3800] },
+    "2":   { "18-35": [600,1000],  "36-45": [950,1600],  "46-55": [1500,2600], "56-65": [2400,4000], "65+": [3600,6000] },
+    "3-4": { "18-35": [900,1500],  "36-45": [1400,2400], "46-55": [2200,3600], "56-65": [3400,5600], "65+": [5000,8200] },
+    "5+":  { "18-35": [1200,2000], "36-45": [1800,3000], "46-55": [2800,4600], "56-65": [4400,7200], "65+": [6400,10500] },
+  };
+  const SUM_MULTIPLIER = { "5": 1.0, "7.5": 1.2, "10": 1.45, "15": 1.85, "20": 2.2, "25": 2.5, "50": 3.5, "100": 5.0, "unlimited": 6.5 };
+  const fmt = (n) => "₹" + n.toLocaleString("en-IN");
 
   const estimate = () => {
     const [min, max] = PREMIUM_TABLE[members][age];
@@ -691,7 +795,6 @@ function PlanDetail({ title, description, ages, features, ctaLabel = "Request Co
   );
 }
 
-// Plan specific components
 function SuperStarFlexi() { 
   return <PlanDetail 
     title="Super Star Flexi" 
@@ -975,11 +1078,69 @@ function Footer() {
   );
 }
 
+// ===== NEW COMPONENT: HEALTH CONCIERGE WIDGET =====
+function HealthConcierge() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <div className="concierge-wrapper">
+      
+      {/* Floating Window */}
+      <div className={`concierge-window ${isOpen ? 'open' : ''}`}>
+        <div className="cw-body">
+          <div className="cw-header">
+            <div className="cw-avatar">
+              <i className="fa-solid fa-headset"></i>
+              <div className="status-dot"></div>
+            </div>
+            <div>
+              <div className="cw-title">Health Concierge</div>
+              <div className="cw-sub">Online & Ready to Help</div>
+            </div>
+          </div>
+          
+          <div className="cw-grid">
+            <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="cw-action">
+              <i className="fa-brands fa-whatsapp" style={{color: '#25D366'}}></i>
+              <span>WhatsApp</span>
+            </a>
+            <a href="tel:+918319600171" className="cw-action">
+              <i className="fa-solid fa-phone-volume"></i>
+              <span>Call Support</span>
+            </a>
+            <a href="#/contact" onClick={() => setIsOpen(false)} className="cw-action">
+              <i className="fa-solid fa-shield-halved"></i>
+              <span>Reviews</span>
+            </a>
+            <div className="cw-action active">
+              <i className="fa-solid fa-user-tie"></i>
+              <span>Concierge</span>
+            </div>
+          </div>
+          
+          <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="cw-btn">
+            Start Chat <i className="fa-solid fa-paper-plane" style={{ marginLeft: "4px" }}></i>
+          </a>
+        </div>
+      </div>
+
+      {/* Toggle Button */}
+      <button className="concierge-toggle" onClick={() => setIsOpen(!isOpen)}>
+        {isOpen ? <i className="fa-solid fa-xmark"></i> : <i className="fa-solid fa-headset"></i>}
+        {!isOpen && <div className="status-dot"></div>}
+      </button>
+      
+    </div>
+  );
+}
+
 // ===== MAIN APP =====
 export default function App() {
   const route = useRoute();
+  
+  // Replaced generic 'Plans' with 'CuratedPlans' for the homepage for higher conversion
   const Page = { 
-    "": () => <><Hero /><WhyChooseUs /><Leadership /><Plans /><PremiumEstimator /><Testimonials /><FAQ /></>, 
+    "": () => <><Hero /><WhyChooseUs /><Leadership /><CuratedPlans /><PremiumEstimator /><Testimonials /><FAQ /></>, 
     plans: Plans, 
     resources: Resources, 
     consultation: Consultation, 
@@ -990,7 +1151,7 @@ export default function App() {
     "cancer-care": CancerCare,
     "cardiac-care": CardiacCare,
     "overseas": Overseas 
-  }[route] ?? (() => <><Hero /><WhyChooseUs /><Leadership /><Plans /><PremiumEstimator /><Testimonials /><FAQ /></>);
+  }[route] ?? (() => <><Hero /><WhyChooseUs /><Leadership /><CuratedPlans /><PremiumEstimator /><Testimonials /><FAQ /></>);
   
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -1017,14 +1178,14 @@ export default function App() {
         <Page />
       </main>
       
+      {/* Updated Fixed Actions (Left for Call, Concierge handles the Right) */}
       <div className="fixed-actions">
         <a href="tel:+918319600171" className="action-btn btn-call">
           📞 Call Now
         </a>
-        <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="action-btn btn-wa-round" title="Chat on WhatsApp">
-          <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%'}}>💬</div>
-        </a>
       </div>
+      
+      <HealthConcierge />
 
       <Footer />
     </>
