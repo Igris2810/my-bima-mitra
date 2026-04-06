@@ -3,7 +3,7 @@ import emailjs from "@emailjs/browser";
 
 // ===== CONSTANTS =====
 const WA_MSG = encodeURIComponent("Hi, I'd like a free consultation");
-const WA_LINK = "https://wa.me/918319600171?text=" + WA_MSG;
+const WA_LINK = "https://wa.me/919575056250?text=" + WA_MSG;
 
 // ===== GLOBAL CSS =====
 const CSS = `
@@ -644,7 +644,7 @@ function PremiumEstimator() {
     "5+":  { "18-35": [17000, 23000], "36-45": [21000, 28000], "46-55": [28000, 39000], "56-65": [42000, 58000], "65+": [62000, 85000] },
   };
 
-  // FIXED: Realistic insurance scaling. Higher sums don't cost proportionally more.
+  // Fixed multipliers to flatten out the cost for high sum-insured plans
   const SUM_MULTIPLIER = { 
     "5": 1.0, 
     "7.5": 1.15, 
@@ -663,7 +663,7 @@ function PremiumEstimator() {
     const [min, max] = BASE_ANNUAL_PREMIUM[members][age];
     const m = SUM_MULTIPLIER[sum] || 1;
     setResult({
-      min: Math.round((min * m) / 100) * 100, // Calculates and rounds to nearest 100
+      min: Math.round((min * m) / 100) * 100,
       max: Math.round((max * m) / 100) * 100,
     });
   };
@@ -1035,10 +1035,10 @@ function Contact() {
         <p className="section-sub">We are here to help you secure the best health coverage.</p>
       </div>
       <div className="grid-3">
-        <a href="tel:+918319600171" className="card contact-card">
+        <a href="tel:+919575056250" className="card contact-card">
           <span className="contact-icon">📞</span>
           <div className="contact-label">Call Us</div>
-          <div className="contact-value">+91 83196 00171</div>
+          <div className="contact-value">+91 95750 56250</div>
         </a>
         <a href="mailto:manish.starhealth.in@gmail.com" className="card contact-card">
           <span className="contact-icon">✉️</span>
@@ -1080,7 +1080,7 @@ function HealthConcierge() {
               <i className="fa-brands fa-whatsapp" style={{color: '#25D366'}}></i>
               <span>WhatsApp</span>
             </a>
-            <a href="tel:+918319600171" className="cw-action">
+            <a href="tel:+919575056250" className="cw-action">
               <i className="fa-solid fa-phone-volume"></i>
               <span>Call Support</span>
             </a>
@@ -1133,7 +1133,7 @@ function Footer() {
           <div>
             <div className="footer-title">Contact</div>
             <div className="footer-links">
-              <a href="tel:+918319600171" className="footer-link">📞 +91 83196 00171</a>
+              <a href="tel:+919575056250" className="footer-link">📞 +91 95750 56250</a>
               <a href="mailto:manish.starhealth.in@gmail.com" className="footer-link">✉️ Email Support</a>
               <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="footer-link" style={{color: '#4ade80', fontWeight: '600'}}>💬 WhatsApp Chat</a>
             </div>
@@ -1192,7 +1192,7 @@ export default function App() {
       </main>
       
       <div className="fixed-actions">
-        <a href="tel:+918319600171" className="action-btn btn-call">
+        <a href="tel:+919575056250" className="action-btn btn-call">
           📞 Call Now
         </a>
       </div>
