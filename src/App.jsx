@@ -101,7 +101,7 @@ const CSS = `
   .lang-toggle:hover { border-color: var(--brand); background: var(--brand-light); transform: rotate(10deg); }
   .lang-hi { color: var(--dark); font-weight: 800; font-size: 15px; }
   .lang-divider { color: var(--muted); margin: 0 4px; font-size: 12px; font-weight: 300; }
-  .lang-en { color: #f97316; font-weight: 800; font-size: 15px; }
+  .lang-en { color: var(--brand); font-weight: 800; font-size: 15px; }
 
   /* ---- Buttons ---- */
   .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 16px 32px; border-radius: 100px; font-weight: 700; font-size: 16px; cursor: pointer; transition: var(--transition); border: none; text-align: center; }
@@ -809,7 +809,7 @@ function SuperStarFlexi() {
       "<b>Premium Return:</b> Get your 1st-year base premium fully returned if you have no IPD claim for 5 years.", 
       "<b>Limitless Loyalty Bonus & NCB:</b> Earn a 100% boost to your Sum Insured every year (Limitless), plus a 50% No Claim Bonus annually up to 100%.", 
       "<b>Quick Shield:</b> Covers Pre-Existing Diseases (PED) such as diabetes, hypertension, hyperlipidemia, asthma, and coronary artery disease with PTCA done prior to 1 year.", 
-      "<b>Stay Fit Benefit:</b> Wellness tracking and rewards designed to encourage and support a healthy, active lifestyle."
+      "<b>Stay Fit Benefit:</b> 7 sessions per week in empaneled fitness centres (gym and fitness studios)."
     ]} 
     ctaLabel="Request Flexi Quote" 
   />; 
