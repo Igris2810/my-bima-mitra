@@ -160,7 +160,7 @@ const CSS = `
   .leader-role { font-size: 13px; font-weight: 800; color: var(--brand); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; }
   .leader-bio { font-size: 15px; color: var(--muted); line-height: 1.7; flex-grow: 1; }
 
-  /* ---- CURATED PLANS (NEW) ---- */
+  /* ---- CURATED PLANS ---- */
   .curated-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; text-align: left; }
   .curated-header .section-title { margin-bottom: 8px; }
   .curated-nav { display: none; gap: 12px; }
@@ -281,7 +281,7 @@ const CSS = `
   .action-btn:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 20px 40px -10px rgba(0,0,0,0.2); }
   .btn-call { background: var(--dark); }
 
-  /* ---- HEALTH CONCIERGE WIDGET (NEW) ---- */
+  /* ---- HEALTH CONCIERGE WIDGET ---- */
   .concierge-wrapper { position: fixed; bottom: 24px; right: 24px; z-index: 10000; display: flex; flex-direction: column; align-items: flex-end; gap: 16px; }
   .concierge-toggle { width: 68px; height: 68px; border-radius: 50%; background: #10b981; color: white; border: none; font-size: 28px; cursor: pointer; box-shadow: var(--shadow-lg); transition: var(--transition); display: flex; align-items: center; justify-content: center; position: relative; }
   .concierge-toggle:hover { transform: scale(1.05) translateY(-4px); background: #059669; }
@@ -527,7 +527,6 @@ function Leadership() {
   );
 }
 
-// ===== NEW COMPONENT: CURATED PLANS =====
 function CuratedPlans() {
   return (
     <section className="section" style={{background: "white", paddingBottom: "120px"}}>
@@ -597,7 +596,6 @@ function CuratedPlans() {
   );
 }
 
-// Keeping Original Plans Grid for the '/plans' page
 function Plans() {
   const plans = [
     { title: "Super Star Flexi", link: "#/super-star-flexi", desc: "Our most powerful plan. Freeze your age, enjoy limitless loyalty bonuses, and get your premium returned." },
@@ -803,15 +801,15 @@ function SuperStarFlexi() {
     title="Super Star Flexi" 
     description="The ultimate future-proof health insurance. This revolutionary plan adapts to your life stage, allowing you to lock in your entry age, accumulate limitless bonuses, and even get your premium returned." 
     ages={[
-      { label: "Adult Entry Age", value: "18 - 65 Yrs" }, 
+      { label: "Adult Entry Age", value: "18 to 100 Yrs" }, 
       { label: "Child Entry Age", value: "91 Days - 25 Yrs" }
     ]} 
     features={[
       "<b>Freeze Your Age:</b> Your premiums are locked at your entry age until you make your first claim.", 
       "<b>Premium Return:</b> Get your 1st-year base premium fully returned if you have no IPD claim for 5 years.", 
-      "<b>Limitless Loyalty Bonus:</b> Earn a 100% boost to your Sum Insured every year, with NO maximum cap.", 
-      "<b>Health Booster & NCB:</b> Get a 100% SI boost for every 7 claim-free years, plus a 50% No Claim Bonus annually.", 
-      "<b>Flexible Coverage:</b> Cashless treatment at 14,000+ network hospitals with Day Care procedures covered."
+      "<b>Limitless Loyalty Bonus & NCB:</b> Earn a 100% boost to your Sum Insured every year (Limitless), plus a 50% No Claim Bonus annually up to 100%.", 
+      "<b>Quick Shield:</b> Covers Pre-Existing Diseases (PED) such as diabetes, hypertension, hyperlipidemia, asthma, and coronary artery disease with PTCA done prior to 1 year.", 
+      "<b>Stay Fit Benefit:</b> Wellness tracking and rewards designed to encourage and support a healthy, active lifestyle."
     ]} 
     ctaLabel="Request Flexi Quote" 
   />; 
@@ -823,12 +821,12 @@ function StarHealthAssure() {
     description="A comprehensive, premium indemnity health insurance product covering extensive hospitalization expenses, modern treatments, and unmatched automatic restoration features." 
     ages={[
       { label: "Adult Entry Age", value: "18 to 75 Yrs" }, 
-      { label: "Child Entry Age", value: "16 Days - 17 Yrs" }
+      { label: "Dependent Children", value: "16 Days to 25 Yrs" }
     ]} 
     features={[
-      "<b>Unlimited Restoration:</b> Automatic Restoration of Sum Insured for an unlimited number of times.", 
+      "<b>Automatic Restoration of Sum Insured:</b> Automatic Restoration of Sum Insured for an unlimited number of times in a policy year.", 
       "<b>Consumables Covered:</b> Non-Medical items like gloves, masks, and food charges are covered up to SI.", 
-      "<b>Fetal & Maternity:</b> In Utero Fetal Surgery, Maternity expenses, and Assisted Reproduction Treatment.", 
+      "<b>In-built Maternity & Fetal Care:</b> In Utero Fetal Surgery, Maternity expenses, and Assisted Reproduction Treatment.", 
       "<b>Home & AYUSH Care:</b> Home care treatment and traditional AYUSH treatments covered up to Sum Insured."
     ]} 
     ctaLabel="Request Assure Quote" 
@@ -859,7 +857,7 @@ function CancerCare() {
     title="Star Cancer Care Platinum" 
     description="A highly specialized health insurance policy providing critical indemnity coverage for persons previously diagnosed with Cancer (any stage)." 
     ages={[
-      { label: "Patient Entry Age", value: "5 Mths - 65 Yrs" }, 
+      { label: "Patient Entry Age", value: "5 Mths to 65 Yrs" }, 
       { label: "Sum Insured Options", value: "₹5L, ₹7.5L, ₹10L" }
     ]} 
     features={[
@@ -895,7 +893,7 @@ function Overseas() {
     title="Star Travel Protect" 
     description="Complete medical and emergency protection for international travel, ensuring you and your family are safe from transit emergencies anywhere in the world." 
     ages={[
-      { label: "Standard Age Limit", value: "6 Mths - 70 Yrs" }, 
+      { label: "Standard Age Limit", value: "6 Mths to 75 Yrs" }, 
       { label: "Senior Citizens", value: "Subject to Loading" }
     ]} 
     features={[
@@ -1043,6 +1041,61 @@ function Contact() {
   );
 }
 
+function HealthConcierge() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <div className="concierge-wrapper">
+      
+      {/* Floating Window */}
+      <div className={`concierge-window ${isOpen ? 'open' : ''}`}>
+        <div className="cw-body">
+          <div className="cw-header">
+            <div className="cw-avatar">
+              <i className="fa-solid fa-headset"></i>
+              <div className="status-dot"></div>
+            </div>
+            <div>
+              <div className="cw-title">Health Concierge</div>
+              <div className="cw-sub">Online & Ready to Help</div>
+            </div>
+          </div>
+          
+          <div className="cw-grid">
+            <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="cw-action">
+              <i className="fa-brands fa-whatsapp" style={{color: '#25D366'}}></i>
+              <span>WhatsApp</span>
+            </a>
+            <a href="tel:+918319600171" className="cw-action">
+              <i className="fa-solid fa-phone-volume"></i>
+              <span>Call Support</span>
+            </a>
+            <a href="#/resources" onClick={() => setIsOpen(false)} className="cw-action">
+              <i className="fa-solid fa-folder-open"></i>
+              <span>Resources</span>
+            </a>
+            <div className="cw-action active">
+              <i className="fa-solid fa-user-tie"></i>
+              <span>Concierge</span>
+            </div>
+          </div>
+          
+          <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="cw-btn">
+            Start Chat <i className="fa-solid fa-paper-plane" style={{ marginLeft: "4px" }}></i>
+          </a>
+        </div>
+      </div>
+
+      {/* Toggle Button */}
+      <button className="concierge-toggle" onClick={() => setIsOpen(!isOpen)}>
+        {isOpen ? <i className="fa-solid fa-xmark"></i> : <i className="fa-solid fa-headset"></i>}
+        {!isOpen && <div className="status-dot"></div>}
+      </button>
+      
+    </div>
+  );
+}
+
 function Footer() {
   const links = [ { label: "Home", path: "" }, { label: "Explore Plans", path: "plans" }, { label: "Client Resources", path: "resources" }, { label: "Book Consultation", path: "consultation" } ];
   return (
@@ -1081,67 +1134,10 @@ function Footer() {
   );
 }
 
-// ===== NEW COMPONENT: HEALTH CONCIERGE WIDGET =====
-function HealthConcierge() {
-  const [isOpen, setIsOpen] = useState(false);
-
-  return (
-    <div className="concierge-wrapper">
-      
-      {/* Floating Window */}
-      <div className={`concierge-window ${isOpen ? 'open' : ''}`}>
-        <div className="cw-body">
-          <div className="cw-header">
-            <div className="cw-avatar">
-              <i className="fa-solid fa-headset"></i>
-              <div className="status-dot"></div>
-            </div>
-            <div>
-              <div className="cw-title">Health Concierge</div>
-              <div className="cw-sub">Online & Ready to Help</div>
-            </div>
-          </div>
-          
-          <div className="cw-grid">
-            <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="cw-action">
-              <i className="fa-brands fa-whatsapp" style={{color: '#25D366'}}></i>
-              <span>WhatsApp</span>
-            </a>
-            <a href="tel:+918319600171" className="cw-action">
-              <i className="fa-solid fa-phone-volume"></i>
-              <span>Call Support</span>
-            </a>
-            <a href="#/contact" onClick={() => setIsOpen(false)} className="cw-action">
-              <i className="fa-solid fa-shield-halved"></i>
-              <span>Reviews</span>
-            </a>
-            <div className="cw-action active">
-              <i className="fa-solid fa-user-tie"></i>
-              <span>Concierge</span>
-            </div>
-          </div>
-          
-          <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="cw-btn">
-            Start Chat <i className="fa-solid fa-paper-plane" style={{ marginLeft: "4px" }}></i>
-          </a>
-        </div>
-      </div>
-
-      {/* Toggle Button */}
-      <button className="concierge-toggle" onClick={() => setIsOpen(!isOpen)}>
-        {isOpen ? <i className="fa-solid fa-xmark"></i> : <i className="fa-solid fa-headset"></i>}
-        {!isOpen && <div className="status-dot"></div>}
-      </button>
-      
-    </div>
-  );
-}
-
 // ===== MAIN APP =====
 export default function App() {
   const route = useRoute();
   
-  // Replaced generic 'Plans' with 'CuratedPlans' for the homepage for higher conversion
   const Page = { 
     "": () => <><Hero /><WhyChooseUs /><Leadership /><CuratedPlans /><PremiumEstimator /><Testimonials /><FAQ /></>, 
     plans: Plans, 
@@ -1181,7 +1177,6 @@ export default function App() {
         <Page />
       </main>
       
-      {/* Updated Fixed Actions (Left for Call, Concierge handles the Right) */}
       <div className="fixed-actions">
         <a href="tel:+918319600171" className="action-btn btn-call">
           📞 Call Now
