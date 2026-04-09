@@ -190,6 +190,27 @@ const CSS = `
   .cp-btn-solid { color: white; background: var(--brand); }
   .cp-btn-solid:hover { background: var(--brand-hover); border-color: var(--brand-hover); }
 
+  /* ---- HOME HEALTH CARE SECTION ---- */
+  .hhc-bg { background: linear-gradient(135deg, #f8fafc 0%, #eff6ff 100%); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .hhc-feature-card { background: white; border-radius: 24px; padding: 32px; border: 1px solid var(--border); box-shadow: var(--shadow-soft); transition: var(--transition); display: flex; flex-direction: column; align-items: flex-start; height: 100%; }
+  .hhc-feature-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); border-color: #bfdbfe; }
+  .hhc-icon { width: 64px; height: 64px; background: #eff6ff; color: var(--brand); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 28px; margin-bottom: 24px; }
+  .hhc-card-title { font-size: 18px; font-weight: 800; color: var(--dark); margin-bottom: 12px; line-height: 1.3; }
+  .hhc-card-desc { font-size: 15px; color: var(--muted); line-height: 1.6; }
+  
+  .hhc-bottom-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 60px; }
+  .hhc-list-box { background: white; border-radius: 24px; padding: 40px; border: 1px solid var(--border); box-shadow: var(--shadow-soft); }
+  .hhc-list-box h3 { font-size: 22px; margin-bottom: 24px; display: flex; align-items: center; gap: 12px; }
+  .hhc-list { list-style: none; display: flex; flex-direction: column; gap: 16px; }
+  .hhc-list li { display: flex; align-items: center; gap: 16px; font-size: 16px; font-weight: 600; color: var(--text); padding-bottom: 16px; border-bottom: 1px solid var(--bg); }
+  .hhc-list li:last-child { border-bottom: none; padding-bottom: 0; }
+  .hhc-list li i { color: #10b981; font-size: 20px; background: #d1fae5; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  
+  .hhc-cta-strip { background: var(--dark); color: white; border-radius: 24px; padding: 40px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; margin-top: 40px; box-shadow: var(--shadow-lg); background-image: radial-gradient(circle at top right, rgba(37, 99, 235, 0.4), transparent 40%); }
+  .hhc-phones { display: flex; gap: 16px; flex-wrap: wrap; }
+  .hhc-phone-btn { display: inline-flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.1); padding: 14px 24px; border-radius: 100px; color: white; font-weight: 700; font-size: 16px; transition: var(--transition); border: 1px solid rgba(255,255,255,0.2); }
+  .hhc-phone-btn:hover { background: white; color: var(--dark); transform: translateY(-2px); }
+
   /* ---- Standard Plans Grid (for /plans route) ---- */
   .plans-bg { background: linear-gradient(180deg, var(--bg) 0%, white 100%); }
   .plan-card { padding: 32px; }
@@ -310,7 +331,7 @@ const CSS = `
 
   /* ---- Footer ---- */
   .footer { background: var(--dark); color: #cbd5e1; padding: 100px 0 40px; }
-  .footer-inner { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; margin-bottom: 80px; }
+  .footer-inner { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 80px; }
   .footer-brand h3 { font-size: 32px; color: white; margin-bottom: 16px; }
   .footer-brand p { font-size: 16px; line-height: 1.7; color: #94a3b8; }
   .footer-links { display: flex; flex-direction: column; gap: 16px; }
@@ -327,6 +348,8 @@ const CSS = `
     .hero h1 { font-size: 48px; }
     .trust-card { display: none; }
     .footer-inner { grid-template-columns: 1fr; gap: 48px; }
+    .hhc-bottom-wrap { grid-template-columns: 1fr; gap: 24px; }
+    .hhc-cta-strip { padding: 32px 24px; text-align: center; justify-content: center; }
   }
 
   @media (max-width: 768px) {
@@ -501,8 +524,8 @@ function WhyChooseUs() {
 
 function Leadership() {
   const leaders = [
-    { name: "ManishPal Singh Sisodiya", role: "Chief Executive Officer", bio: "18+ years of leadership in health insurance advisory, helping thousands of families get the right Star Health coverage.", img: "/ceo.jpg" },
-    { name: "Kiran Singh Sisodiya", role: "Director – Operations & Client Support", bio: "Overseeing policy servicing, renewals, and client advisory to ensure a seamless insurance experience end to end.", img: "/director.jpg" },
+    { name: "ManishPal Singh Sisodiya", role: "Chief Executive Officer", bio: "18+ years of leadership in health insurance advisory, helping thousands of families get the right Star Health coverage.", img: "/ceo.jpg.jpeg" },
+    { name: "Kiran Singh Sisodiya", role: "Director – Operations & Client Support", bio: "Overseeing policy servicing, renewals, and client advisory to ensure a seamless insurance experience end to end.", img: "/director.jpg.jpeg" },
   ];
   return (
     <section style={{background: "white"}}>
@@ -596,6 +619,71 @@ function CuratedPlans() {
   );
 }
 
+function HomeHealthCare() {
+  const features = [
+    { icon: "fa-virus-slash", title: "Coverage for Common Illnesses", desc: "Expert home treatment for fever, flu, gastritis, and other infectious diseases." },
+    { icon: "fa-file-invoice-dollar", title: "Zero Additional Cost", desc: "Expert home care provided at absolutely no extra cost to eligible policyholders." },
+    { icon: "fa-shield-virus", title: "Prevent Hospital Infections", desc: "Lower your risk of hospital-acquired infections by recovering safely at home." },
+    { icon: "fa-user-clock", title: "Specialised Timings", desc: "Dedicated professional medical assistance available daily from 8 AM to 8 PM." }
+  ];
+
+  const services = ["Doctor Home Visits", "Skilled Nursing Care", "IV Fluids & Medication Admin", "Physiotherapy Support", "Medical Equipment Setup"];
+  const idealFor = ["Elderly Patients", "Post-Hospital Recovery", "Mild to Moderate Illnesses", "Mobility Challenges", "Post-Surgery Care"];
+
+  return (
+    <section className="hhc-bg section">
+      <div className="container reveal">
+        <div className="section-header">
+          <span className="section-tag">New Feature</span>
+          <h2 className="section-title">Star Health Home Care</h2>
+          <p className="section-sub">No hospital visit needed. Get expert, personalized hospital-like care right in the comfort of your own home.</p>
+        </div>
+
+        <div className="grid-2" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))" }}>
+          {features.map((f, i) => (
+            <div key={i} className="hhc-feature-card">
+              <div className="hhc-icon"><i className={`fa-solid ${f.icon}`}></i></div>
+              <h3 className="hhc-card-title">{f.title}</h3>
+              <p className="hhc-card-desc">{f.desc}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="hhc-bottom-wrap">
+          <div className="hhc-list-box">
+            <h3><i className="fa-solid fa-user-nurse" style={{color: "var(--brand)"}}></i> Services Included</h3>
+            <ul className="hhc-list">
+              {services.map((item, i) => (
+                <li key={i}><i className="fa-solid fa-check"></i> {item}</li>
+              ))}
+            </ul>
+          </div>
+          <div className="hhc-list-box">
+            <h3><i className="fa-solid fa-bed-pulse" style={{color: "var(--brand)"}}></i> Ideal For</h3>
+            <ul className="hhc-list">
+              {idealFor.map((item, i) => (
+                <li key={i}><i className="fa-solid fa-check" style={{color: "#f59e0b", background: "#fef3c7"}}></i> {item}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <div className="hhc-cta-strip">
+          <div>
+            <h3 style={{ fontSize: "24px", color: "white", marginBottom: "8px" }}>Star Health Home Care Helpline</h3>
+            <p style={{ color: "#94a3b8", fontSize: "15px" }}>Available 8 AM - 8 PM | Hindi & English Support Available</p>
+          </div>
+          <div className="hhc-phones">
+            <a href="tel:04469006900" className="hhc-phone-btn"><i className="fa-solid fa-phone"></i> 044 6900 6900</a>
+            <a href="tel:7676905905" className="hhc-phone-btn"><i className="fa-solid fa-phone"></i> 7676 905 905</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  );
+}
+
 function Plans() {
   const plans = [
     { title: "Super Star Flexi", link: "#/super-star-flexi", desc: "Our most powerful plan. Freeze your age, enjoy limitless loyalty bonuses, and get your premium returned." },
@@ -636,7 +724,6 @@ function PremiumEstimator() {
   const [sum, setSum] = useState("5");
   const [result, setResult] = useState(null);
 
-  // Realistic Base ANNUAL Premiums for a ₹5 Lakh Policy [Min, Max]
   const BASE_ANNUAL_PREMIUM = {
     "1":   { "18-35": [6000, 8500],   "36-45": [8000, 11000],   "46-55": [12000, 17000], "56-65": [18000, 25000], "65+": [28000, 38000] },
     "2":   { "18-35": [9000, 12500],  "36-45": [11500, 16000],  "46-55": [17000, 24000], "56-65": [28000, 38000], "65+": [42000, 58000] },
@@ -644,7 +731,6 @@ function PremiumEstimator() {
     "5+":  { "18-35": [17000, 23000], "36-45": [21000, 28000], "46-55": [28000, 39000], "56-65": [42000, 58000], "65+": [62000, 85000] },
   };
 
-  // Fixed multipliers to flatten out the cost for high sum-insured plans
   const SUM_MULTIPLIER = { 
     "5": 1.0, 
     "7.5": 1.15, 
@@ -1138,6 +1224,14 @@ function Footer() {
               <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="footer-link" style={{color: '#4ade80', fontWeight: '600'}}>💬 WhatsApp Chat</a>
             </div>
           </div>
+          <div>
+            <div className="footer-title">Areas Served</div>
+            <div className="footer-links">
+              <a href="#/star-health-insurance-agent-bhopal" className="footer-link">Agent in Bhopal</a>
+              <a href="#/star-health-insurance-agent-indore" className="footer-link">Agent in Indore</a>
+              <a href="#/star-health-insurance-agent-raipur" className="footer-link">Agent in Raipur</a>
+            </div>
+          </div>
         </div>
         <div className="footer-bottom">
           <span>© {new Date().getFullYear()} My Bima Mitra. All rights reserved.</span>
@@ -1148,12 +1242,33 @@ function Footer() {
   );
 }
 
+function SEOLandingPage({ city, title, description }) {
+  return (
+    <>
+      <section className="hero" style={{ padding: "120px 0 60px", textAlign: "center" }}>
+        <div className="container reveal">
+          <div className="section-tag">Local Expert</div>
+          <h1 style={{ fontSize: "48px", marginBottom: "24px" }}>{title}</h1>
+          <p className="section-sub" style={{ maxWidth: "800px", margin: "0 auto 40px" }}>
+            {description}
+          </p>
+          <a href="#/consultation" className="btn btn-primary">Get Free Consultation in {city}</a>
+        </div>
+      </section>
+
+      <WhyChooseUs />
+      <PremiumEstimator />
+      <Contact />
+    </>
+  );
+}
+
 // ===== MAIN APP =====
 export default function App() {
   const route = useRoute();
   
   const Page = { 
-    "": () => <><Hero /><WhyChooseUs /><Leadership /><CuratedPlans /><PremiumEstimator /><Testimonials /><FAQ /></>, 
+    "": () => <><Hero /><WhyChooseUs /><Leadership /><CuratedPlans /><HomeHealthCare /><PremiumEstimator /><Testimonials /><FAQ /></>, 
     plans: Plans, 
     resources: Resources, 
     consultation: Consultation, 
@@ -1163,8 +1278,25 @@ export default function App() {
     "women-care": WomenCare, 
     "cancer-care": CancerCare,
     "cardiac-care": CardiacCare,
-    "overseas": Overseas 
-  }[route] ?? (() => <><Hero /><WhyChooseUs /><Leadership /><CuratedPlans /><PremiumEstimator /><Testimonials /><FAQ /></>);
+    "overseas": Overseas,
+    
+    // --- HIDDEN SEO PAGES ---
+    "star-health-insurance-agent-bhopal": () => <SEOLandingPage 
+        city="Bhopal" 
+        title="Authorized Star Health Insurance Agent in Bhopal" 
+        description="Looking for the best Star Health insurance plans in Bhopal? ManishPal Singh Sisodiya offers expert guidance, instant policy issuance, and end-to-end cashless claim support across top hospitals in Bhopal." 
+    />,
+    "star-health-insurance-agent-raipur": () => <SEOLandingPage 
+        city="Raipur" 
+        title="Expert Star Health Insurance Advisor in Raipur" 
+        description="Protect your family with customized Star Health insurance in Raipur. Get free quotes, premium estimations, and local claim assistance from an advisor with 18+ years of experience." 
+    />,
+    "star-health-insurance-agent-indore": () => <SEOLandingPage 
+        city="Indore" 
+        title="Top Star Health Insurance Agent in Indore" 
+        description="Secure your medical future with the right Star Health policy in Indore. We provide personalized plan comparisons, quick renewals, and dedicated support for cashless treatments." 
+    />
+  }[route] ?? (() => <><Hero /><WhyChooseUs /><Leadership /><CuratedPlans /><HomeHealthCare /><PremiumEstimator /><Testimonials /><FAQ /></>);
   
   useEffect(() => {
     window.scrollTo(0, 0);
