@@ -501,8 +501,8 @@ function WhyChooseUs() {
 
 function Leadership() {
   const leaders = [
-    { name: "ManishPal Singh Sisodiya", role: "Chief Executive Officer", bio: "18+ years of leadership in health insurance advisory, helping thousands of families get the right Star Health coverage.", img: "/ceo.jpg.jpeg" },
-    { name: "Kiran Singh Sisodiya", role: "Director – Operations & Client Support", bio: "Overseeing policy servicing, renewals, and client advisory to ensure a seamless insurance experience end to end.", img: "/director.jpg.jpeg" },
+    { name: "ManishPal Singh Sisodiya", role: "Chief Executive Officer", bio: "18+ years of leadership in health insurance advisory, helping thousands of families get the right Star Health coverage.", img: "/ceo.jpg" },
+    { name: "Kiran Singh Sisodiya", role: "Director – Operations & Client Support", bio: "Overseeing policy servicing, renewals, and client advisory to ensure a seamless insurance experience end to end.", img: "/director.jpg" },
   ];
   return (
     <section style={{background: "white"}}>
