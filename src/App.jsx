@@ -58,6 +58,8 @@ const CSS = `
   .reveal.visible { opacity: 1; transform: translateY(0); }
   @keyframes slideUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
   @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
+  @keyframes shimmer { 100% { left: 200%; } }
+  @keyframes pulseGlow { 0% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.4); } 70% { box-shadow: 0 0 0 15px rgba(245, 158, 11, 0); } 100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); } }
 
   /* ---- Google Translate Override ---- */
   #google_translate_element, .skiptranslate, .goog-te-banner-frame { display: none !important; }
@@ -135,13 +137,25 @@ const CSS = `
   .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
   .hero-visual { flex: 1; max-width: 500px; position: relative; }
   
-  .trust-card { background: rgba(255,255,255,0.8); backdrop-filter: blur(20px); border: 1px solid white; border-radius: var(--radius-lg); padding: 40px; box-shadow: var(--shadow-md); animation: float 8s ease-in-out infinite; }
+  .trust-card { background: rgba(255,255,255,0.8); backdrop-filter: blur(20px); border: 1px solid white; border-radius: var(--radius-lg); padding: 40px; box-shadow: var(--shadow-md); animation: float 8s ease-in-out infinite; position: relative; }
   .trust-card h3 { font-size: 22px; margin-bottom: 24px; }
   .stat-item { display: flex; align-items: center; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--border); }
   .stat-item:last-child { border-bottom: none; padding-bottom: 0; }
   .stat-icon { width: 52px; height: 52px; background: var(--brand-light); color: var(--brand); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; }
   .stat-text { font-size: 16px; font-weight: 700; color: var(--dark); }
   .stat-sub { font-size: 13px; color: var(--muted); font-weight: 500; }
+
+  /* ---- EMI Banner (NEW) ---- */
+  .emi-banner { background: linear-gradient(90deg, #0f172a, #1e293b); color: white; padding: 32px 0; border-bottom: 4px solid #f59e0b; position: relative; overflow: hidden; }
+  .emi-banner::before { content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent); animation: shimmer 3s infinite; transform: skewX(-20deg); }
+  .emi-inner { display: flex; align-items: center; justify-content: center; gap: 40px; flex-wrap: wrap; text-align: center; position: relative; z-index: 2; }
+  .emi-badge { background: rgba(245, 158, 11, 0.2); border: 1px solid #f59e0b; color: #fcd34d; padding: 6px 14px; border-radius: 100px; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; display: inline-block; }
+  .emi-highlight { color: #f59e0b; font-size: 48px; font-weight: 900; line-height: 1; text-shadow: 0 4px 20px rgba(245,158,11,0.3); }
+  .emi-text { text-align: left; max-width: 400px; }
+  .emi-text h3 { color: white; font-size: 22px; margin-bottom: 6px; }
+  .emi-text p { color: #cbd5e1; font-size: 15px; margin: 0; line-height: 1.6; }
+  .emi-btn { background: #f59e0b; color: #0f172a; padding: 16px 32px; border-radius: 100px; font-weight: 800; font-size: 16px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: var(--transition); box-shadow: 0 8px 20px -6px rgba(245,158,11,0.6); animation: pulseGlow 2s infinite; }
+  .emi-btn:hover { background: #fbbf24; transform: translateY(-3px); }
 
   /* ---- Why Choose Us ---- */
   .why-bg { background: var(--dark); color: white; }
@@ -310,7 +324,7 @@ const CSS = `
 
   /* ---- Footer ---- */
   .footer { background: var(--dark); color: #cbd5e1; padding: 100px 0 40px; }
-  .footer-inner { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; margin-bottom: 80px; }
+  .footer-inner { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 80px; }
   .footer-brand h3 { font-size: 32px; color: white; margin-bottom: 16px; }
   .footer-brand p { font-size: 16px; line-height: 1.7; color: #94a3b8; }
   .footer-links { display: flex; flex-direction: column; gap: 16px; }
@@ -327,6 +341,7 @@ const CSS = `
     .hero h1 { font-size: 48px; }
     .trust-card { display: none; }
     .footer-inner { grid-template-columns: 1fr; gap: 48px; }
+    .emi-text { text-align: center; max-width: 100%; }
   }
 
   @media (max-width: 768px) {
@@ -461,10 +476,36 @@ function Hero() {
                 </div>
               </div>
             ))}
+            
+            {/* Floating Gold Badge for EMI on the Hero image area */}
+            <div style={{ position: "absolute", bottom: "-24px", left: "50%", transform: "translateX(-50%)", background: "linear-gradient(135deg, #f59e0b, #d97706)", color: "white", padding: "12px 24px", borderRadius: "100px", fontWeight: "800", fontSize: "14px", whiteSpace: "nowrap", boxShadow: "0 10px 25px -5px rgba(245,158,11,0.5)", display: "flex", alignItems: "center", gap: "8px", animation: "float 4s ease-in-out infinite reverse" }}>
+              <i className="fa-solid fa-bolt"></i> ₹0 Upfront EMI Available
+            </div>
           </div>
         </div>
       </div>
     </section>
+  );
+}
+
+// ===== NEW EMI ATTRACTION BANNER =====
+function EmiBanner() {
+  return (
+    <div className="emi-banner">
+      <div className="container emi-inner">
+        <div>
+          <div className="emi-badge">Special Offer</div>
+          <div className="emi-highlight">₹0 Upfront</div>
+        </div>
+        <div className="emi-text">
+          <h3>Buy Now, Pay Monthly in Easy EMIs</h3>
+          <p>Secure your family's health today without paying the full annual premium upfront. Instant policy issuance with monthly payments.</p>
+        </div>
+        <a href="#/consultation" className="emi-btn">
+          Check EMI Eligibility <i className="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+    </div>
   );
 }
 
@@ -596,7 +637,6 @@ function CuratedPlans() {
   );
 }
 
-// ===== NEW FEATURE: HOME HEALTH CARE =====
 function HomeHealthCare() {
   const appFeatures = [
     { icon: "fa-virus", title: "Comprehensive Coverage", desc: "Coverage for fever, flu, gastritis & infectious diseases right at home." },
@@ -617,7 +657,6 @@ function HomeHealthCare() {
           <p className="section-sub">Expert, personalised hospital-like care right in the comfort of your home. No hospital visit needed.</p>
         </div>
 
-        {/* 4 Feature Cards based on official App Screenshot */}
         <div className="grid-2" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", marginBottom: "40px" }}>
           {appFeatures.map((f, i) => (
             <div key={i} style={{ background: "white", padding: "32px", borderRadius: "24px", border: "1px solid var(--border)", boxShadow: "var(--shadow-soft)", transition: "transform 0.3s" }} onMouseEnter={(e) => e.currentTarget.style.transform = "translateY(-5px)"} onMouseLeave={(e) => e.currentTarget.style.transform = "translateY(0)"}>
@@ -630,7 +669,6 @@ function HomeHealthCare() {
           ))}
         </div>
 
-        {/* Services & Ideal For split layout */}
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "32px", marginBottom: "40px" }}>
           <div style={{ background: "white", padding: "40px", borderRadius: "24px", border: "1px solid var(--border)" }}>
             <h3 style={{ fontSize: "20px", marginBottom: "24px", display: "flex", alignItems: "center", gap: "12px" }}>
@@ -658,7 +696,6 @@ function HomeHealthCare() {
           </div>
         </div>
 
-        {/* Action Strip */}
         <div style={{ background: "var(--dark)", borderRadius: "24px", padding: "40px", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "24px", backgroundImage: "radial-gradient(circle at top right, rgba(37, 99, 235, 0.3), transparent 50%)" }}>
           <div>
             <h3 style={{ color: "white", fontSize: "24px", marginBottom: "8px" }}>Star Health Helpline</h3>
@@ -714,7 +751,6 @@ function PremiumEstimator() {
   const [sum, setSum] = useState("5");
   const [result, setResult] = useState(null);
 
-  // Realistic Base ANNUAL Premiums for a ₹5 Lakh Policy [Min, Max]
   const BASE_ANNUAL_PREMIUM = {
     "1":   { "18-35": [6000, 8500],   "36-45": [8000, 11000],   "46-55": [12000, 17000], "56-65": [18000, 25000], "65+": [28000, 38000] },
     "2":   { "18-35": [9000, 12500],  "36-45": [11500, 16000],  "46-55": [17000, 24000], "56-65": [28000, 38000], "65+": [42000, 58000] },
@@ -722,7 +758,6 @@ function PremiumEstimator() {
     "5+":  { "18-35": [17000, 23000], "36-45": [21000, 28000], "46-55": [28000, 39000], "56-65": [42000, 58000], "65+": [62000, 85000] },
   };
 
-  // Fixed multipliers to flatten out the cost for high sum-insured plans
   const SUM_MULTIPLIER = { 
     "5": 1.0, 
     "7.5": 1.15, 
@@ -1216,6 +1251,17 @@ function Footer() {
               <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="footer-link" style={{color: '#4ade80', fontWeight: '600'}}>💬 WhatsApp Chat</a>
             </div>
           </div>
+          
+          {/* RESTORED SEO FOOTER LINKS */}
+          <div>
+            <div className="footer-title">Areas Served</div>
+            <div className="footer-links">
+              <a href="#/star-health-insurance-agent-bhopal" className="footer-link">Agent in Bhopal</a>
+              <a href="#/star-health-insurance-agent-indore" className="footer-link">Agent in Indore</a>
+              <a href="#/star-health-insurance-agent-raipur" className="footer-link">Agent in Raipur</a>
+            </div>
+          </div>
+          
         </div>
         <div className="footer-bottom">
           <span>© {new Date().getFullYear()} My Bima Mitra. All rights reserved.</span>
@@ -1226,12 +1272,34 @@ function Footer() {
   );
 }
 
+// ===== RESTORED SEO LANDING PAGE COMPONENT =====
+function SEOLandingPage({ city, title, description }) {
+  return (
+    <>
+      <section className="hero" style={{ padding: "120px 0 60px", textAlign: "center" }}>
+        <div className="container reveal">
+          <div className="section-tag">Local Expert</div>
+          <h1 style={{ fontSize: "48px", margin: "0 auto 24px", maxWidth: "800px" }}>{title}</h1>
+          <p className="section-sub" style={{ maxWidth: "800px", margin: "0 auto 40px" }}>
+            {description}
+          </p>
+          <a href="#/consultation" className="btn btn-primary">Get Free Consultation in {city}</a>
+        </div>
+      </section>
+
+      <WhyChooseUs />
+      <PremiumEstimator />
+      <Contact />
+    </>
+  );
+}
+
 // ===== MAIN APP =====
 export default function App() {
   const route = useRoute();
   
   const Page = { 
-    "": () => <><Hero /><WhyChooseUs /><Leadership /><CuratedPlans /><HomeHealthCare /><PremiumEstimator /><Testimonials /><FAQ /></>, 
+    "": () => <><Hero /><EmiBanner /><WhyChooseUs /><Leadership /><CuratedPlans /><HomeHealthCare /><PremiumEstimator /><Testimonials /><FAQ /></>, 
     plans: Plans, 
     resources: Resources, 
     consultation: Consultation, 
@@ -1241,8 +1309,25 @@ export default function App() {
     "women-care": WomenCare, 
     "cancer-care": CancerCare,
     "cardiac-care": CardiacCare,
-    "overseas": Overseas 
-  }[route] ?? (() => <><Hero /><WhyChooseUs /><Leadership /><CuratedPlans /><HomeHealthCare /><PremiumEstimator /><Testimonials /><FAQ /></>);
+    "overseas": Overseas,
+    
+    // --- RESTORED HIDDEN SEO PAGES ---
+    "star-health-insurance-agent-bhopal": () => <SEOLandingPage 
+        city="Bhopal" 
+        title="Authorized Star Health Insurance Agent in Bhopal" 
+        description="Looking for the best Star Health insurance plans in Bhopal? ManishPal Singh Sisodiya offers expert guidance, instant policy issuance, and end-to-end cashless claim support across top hospitals in Bhopal." 
+    />,
+    "star-health-insurance-agent-raipur": () => <SEOLandingPage 
+        city="Raipur" 
+        title="Expert Star Health Insurance Advisor in Raipur" 
+        description="Protect your family with customized Star Health insurance in Raipur. Get free quotes, premium estimations, and local claim assistance from an advisor with 18+ years of experience." 
+    />,
+    "star-health-insurance-agent-indore": () => <SEOLandingPage 
+        city="Indore" 
+        title="Top Star Health Insurance Agent in Indore" 
+        description="Secure your medical future with the right Star Health policy in Indore. We provide personalized plan comparisons, quick renewals, and dedicated support for cashless treatments." 
+    />
+  }[route] ?? (() => <><Hero /><EmiBanner /><WhyChooseUs /><Leadership /><CuratedPlans /><HomeHealthCare /><PremiumEstimator /><Testimonials /><FAQ /></>);
   
   useEffect(() => {
     window.scrollTo(0, 0);
