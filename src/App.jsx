@@ -83,13 +83,14 @@ const CSS = `
 
   /* ---- Navbar ---- */
   .navbar-container { position: sticky; top: 0; z-index: 1000; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(226, 232, 240, 0.6); }
-  .navbar { display: flex; justify-content: space-between; align-items: center; min-height: 120px; max-width: 1400px; margin: 0 auto; padding: 12px 32px; }
-  .navbar-brand { display: flex; align-items: center; gap: 24px; transition: var(--transition); }
+  .navbar { display: flex; justify-content: space-between; align-items: center; min-height: 120px; max-width: 1400px; margin: 0 auto; padding: 12px 32px; position: relative; }
+  .navbar-brand { display: flex; align-items: center; gap: 24px; transition: var(--transition); z-index: 1001; }
   .navbar-logo { height: 90px !important; width: auto !important; object-fit: contain; transform: scale(1.25); transform-origin: left center; }
   .navbar-title { font-size: 24px; font-weight: 900; color: var(--dark); line-height: 1.1; letter-spacing: -0.5px; margin-bottom: 2px; }
   .navbar-sub { font-size: 12px; color: var(--brand); font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; }
   
-  .navbar-links { display: flex; align-items: center; gap: 12px; }
+  .mobile-menu-btn { display: none; background: transparent; border: none; font-size: 28px; color: var(--dark); cursor: pointer; z-index: 1001; }
+  .navbar-links { display: flex; align-items: center; gap: 12px; transition: var(--transition); }
   .nav-link { padding: 10px 16px; border-radius: 100px; font-weight: 600; font-size: 15px; color: var(--muted); transition: var(--transition); }
   .nav-link:hover { color: var(--dark); background: var(--bg); }
   .nav-link.cta { background: var(--dark); color: white; padding: 12px 24px; margin-left: 8px; box-shadow: 0 4px 12px rgba(15,23,42,0.15); }
@@ -145,7 +146,7 @@ const CSS = `
   .stat-text { font-size: 16px; font-weight: 700; color: var(--dark); }
   .stat-sub { font-size: 13px; color: var(--muted); font-weight: 500; }
 
-  /* ---- EMI Banner (NEW) ---- */
+  /* ---- EMI Banner ---- */
   .emi-banner { background: linear-gradient(90deg, #0f172a, #1e293b); color: white; padding: 32px 0; border-bottom: 4px solid #f59e0b; position: relative; overflow: hidden; }
   .emi-banner::before { content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent); animation: shimmer 3s infinite; transform: skewX(-20deg); }
   .emi-inner { display: flex; align-items: center; justify-content: center; gap: 40px; flex-wrap: wrap; text-align: center; position: relative; z-index: 2; }
@@ -204,7 +205,7 @@ const CSS = `
   .cp-btn-solid { color: white; background: var(--brand); }
   .cp-btn-solid:hover { background: var(--brand-hover); border-color: var(--brand-hover); }
 
-  /* ---- Standard Plans Grid (for /plans route) ---- */
+  /* ---- Standard Plans Grid ---- */
   .plans-bg { background: linear-gradient(180deg, var(--bg) 0%, white 100%); }
   .plan-card { padding: 32px; }
   .plan-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: var(--border); transition: var(--transition); }
@@ -345,7 +346,12 @@ const CSS = `
   }
 
   @media (max-width: 768px) {
-    .navbar-links { display: none; }
+    .mobile-menu-btn { display: block; }
+    .navbar-links { position: absolute; top: 100%; left: 0; width: 100%; background: white; padding: 24px; flex-direction: column; box-shadow: var(--shadow-md); border-top: 1px solid var(--border); display: none; }
+    .navbar-links.open { display: flex !important; }
+    .nav-link.cta { margin-left: 0; text-align: center; width: 100%; }
+    .lang-toggle { margin: 0 auto 16px; }
+
     .navbar { min-height: 90px; }
     .navbar-logo { height: 60px !important; transform: scale(1.1); }
     .navbar-title { font-size: 18px; }
@@ -406,6 +412,7 @@ function AnnounceBar() {
 }
 
 function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
   const links = [
     { label: "Home", path: "" },
     { label: "Plans", path: "plans" },
@@ -415,14 +422,19 @@ function Navbar() {
   return (
     <div className="navbar-container">
       <nav className="container navbar">
-        <a href="#/" className="navbar-brand">
+        <a href="#/" className="navbar-brand" onClick={() => setIsOpen(false)}>
           <img src="/logo.png" className="navbar-logo" alt="My Bima Mitra" onError={(e) => e.target.style.display='none'} />
           <div>
             <div className="navbar-title">My Bima Mitra</div>
             <div className="navbar-sub">Star Health Advisory</div>
           </div>
         </a>
-        <div className="navbar-links">
+        
+        <button className="mobile-menu-btn" onClick={() => setIsOpen(!isOpen)}>
+          <i className={`fa-solid ${isOpen ? 'fa-xmark' : 'fa-bars'}`}></i>
+        </button>
+
+        <div className={`navbar-links ${isOpen ? 'open' : ''}`}>
           <div id="google_translate_element"></div>
           <button className="lang-toggle" onClick={toggleLanguage} title="Translate">
             <span className="lang-hi">अ</span>
@@ -430,9 +442,9 @@ function Navbar() {
             <span className="lang-en">A</span>
           </button>
           {links.map(({ label, path }) => (
-            <a key={path} href={"#/" + path} className="nav-link">{label}</a>
+            <a key={path} href={"#/" + path} className="nav-link" onClick={() => setIsOpen(false)}>{label}</a>
           ))}
-          <a href="#/consultation" className="nav-link cta">Free Consultation</a>
+          <a href="#/consultation" className="nav-link cta" onClick={() => setIsOpen(false)}>Free Consultation</a>
         </div>
       </nav>
     </div>
@@ -488,7 +500,6 @@ function Hero() {
   );
 }
 
-// ===== NEW EMI ATTRACTION BANNER =====
 function EmiBanner() {
   return (
     <div className="emi-banner">
