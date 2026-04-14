@@ -324,7 +324,7 @@ const CSS = `
   .cw-btn:hover { background: #059669; }
 
   /* ---- Footer ---- */
-  .footer { background: var(--dark); color: #cbd5e1; padding: 100px 0 40px; }
+  .footer { background: var(--dark); color: #cbd5e1; padding: 100px 0 120px; } /* Increased bottom padding to prevent buttons overlapping footer */
   .footer-inner { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 80px; }
   .footer-brand h3 { font-size: 32px; color: white; margin-bottom: 16px; }
   .footer-brand p { font-size: 16px; line-height: 1.7; color: #94a3b8; }
@@ -361,10 +361,11 @@ const CSS = `
     .plan-detail h2 { font-size: 36px; }
     .form-wrapper { padding: 32px 24px; }
     
-    .fixed-actions { padding: 0 16px; bottom: 16px; }
-    .action-btn { padding: 14px 20px; font-size: 15px; }
+    /* ---- Scaled Down Mobile Floating Buttons ---- */
+    .fixed-actions { padding: 0 16px; bottom: 16px; width: auto; }
+    .action-btn { padding: 12px 20px; font-size: 14px; border-radius: 100px; }
     .concierge-wrapper { bottom: 16px; right: 16px; }
-    .concierge-toggle { width: 60px; height: 60px; font-size: 24px; }
+    .concierge-toggle { width: 54px; height: 54px; font-size: 22px; }
     .concierge-window { width: calc(100vw - 32px); bottom: 80px; }
     
     .curated-header { flex-direction: column; text-align: center; }
@@ -527,7 +528,7 @@ function WhyChooseUs() {
     { icon: "🏥", title: "14,000+ Hospitals", desc: "Access to one of India's largest cashless hospital networks across every major city." },
     { icon: "📋", title: "Plan Comparison", desc: "We compare plans across sum insured, waiting periods, and benefits to find your best fit." },
     { icon: "🔄", title: "Renewal Reminders", desc: "Never miss a renewal — we proactively remind and assist you every year." },
-    { icon: "🧑‍👩‍👧", title: "All Plan Types", desc: "Individual, family floater, senior citizen, and corporate group plans — all under one roof." },
+    { icon: "👪", title: "All Plan Types", desc: "Individual, family floater, senior citizen, and corporate group plans — all under one roof." },
   ];
   return (
     <section className="why-bg">
