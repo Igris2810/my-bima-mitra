@@ -36,14 +36,20 @@ const CSS = `
     --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  html { scroll-behavior: smooth; }
+  html, body { 
+    scroll-behavior: smooth; 
+    overflow-x: hidden; 
+    width: 100%; 
+    max-width: 100vw; 
+    margin: 0; 
+    padding: 0; 
+  }
   body { 
     font-family: 'Plus Jakarta Sans', sans-serif; 
     background: var(--bg); 
     color: var(--text); 
     -webkit-font-smoothing: antialiased; 
     -moz-osx-font-smoothing: grayscale;
-    overflow-x: hidden; 
   }
   
   h1, h2, h3, h4, h5, h6 { color: var(--dark); font-weight: 800; letter-spacing: -0.03em; line-height: 1.2; }
