@@ -291,8 +291,9 @@ const CSS = `
   .form-submit:hover:not(:disabled) { background: var(--brand-hover); transform: translateY(-2px); box-shadow: var(--shadow-md); }
 
   /* ---- Fixed Action Buttons ---- */
-  .fixed-actions { position: fixed; bottom: 24px; left: 24px; z-index: 9999; pointer-events: none; display: flex; }
-  .action-btn { pointer-events: auto; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 16px 28px; border-radius: 100px; font-weight: 700; font-size: 16px; color: white; border: none; cursor: pointer; box-shadow: var(--shadow-lg); transition: var(--transition); text-decoration: none; }
+  /* ---- Fixed Action Buttons ---- */
+  .fixed-actions { position: fixed; bottom: 24px; left: 24px; z-index: 9999; display: flex; align-items: flex-end; }
+  .action-btn { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 16px 28px; border-radius: 100px; font-weight: 700; font-size: 16px; color: white; border: none; cursor: pointer; box-shadow: var(--shadow-lg); transition: var(--transition); text-decoration: none; }
   .action-btn:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 20px 40px -10px rgba(0,0,0,0.2); }
   .btn-call { background: var(--dark); }
 
@@ -361,12 +362,13 @@ const CSS = `
     .plan-detail h2 { font-size: 36px; }
     .form-wrapper { padding: 32px 24px; }
     
-    /* ---- Scaled Down Mobile Floating Buttons ---- */
-    .fixed-actions { left: 16px; bottom: 16px; padding: 0; }
-    .action-btn { padding: 12px 20px; font-size: 14px; border-radius: 100px; }
-    .concierge-wrapper { bottom: 16px; right: 16px; }
+/* ---- Permanent Mobile Floating Fix (Both on Left) ---- */
+    .concierge-wrapper { bottom: 16px; right: auto; left: 16px; align-items: flex-start; }
     .concierge-toggle { width: 54px; height: 54px; font-size: 22px; }
-    .concierge-window { width: calc(100vw - 32px); bottom: 80px; }
+    .concierge-window { right: auto; left: 0; bottom: 70px; width: calc(100vw - 32px); transform-origin: bottom left; }
+    
+    .fixed-actions { bottom: 16px; left: 80px; padding: 0; width: auto; }
+    .action-btn { padding: 12px 20px; font-size: 14px; border-radius: 100px; white-space: nowrap; }
     
     .curated-header { flex-direction: column; text-align: center; }
   }
