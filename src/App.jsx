@@ -559,7 +559,50 @@ function WhyChooseUs() {
     </section>
   );
 }
+function CashlessProcess() {
+  const steps = [
+    { 
+      num: "1", 
+      icon: "fa-hospital-user", 
+      title: "Visit Network Hospital", 
+      desc: "Walk into any of our 15,000+ PAN-India cashless network hospitals. Show your valid ID proof (Aadhar/PAN) and current Star Health policy number at the TPA desk." 
+    },
+    { 
+      num: "2", 
+      icon: "fa-file-signature", 
+      title: "Pre-Auth Request", 
+      desc: "The hospital's TPA will instantly send out the pre-auth request for you. We ensure rapid approvals so you get a stress-free admission and can get ready for treatment." 
+    },
+    { 
+      num: "3", 
+      icon: "fa-headset", 
+      title: "Priority Claim Support", 
+      desc: "If any problem occurs, call our direct helpline at +91 95750 56250. We will personally help you provide missing documents and ease your claim process immediately." 
+    }
+  ];
 
+  return (
+    <section className="section claim-section">
+      <div className="container reveal">
+        <div className="section-header">
+          <span className="section-tag" style={{ background: "rgba(16, 185, 129, 0.1)", color: "var(--accent)" }}>Stress-Free Admissions</span>
+          <h2 className="section-title">3-Step Cashless Claim</h2>
+          <p className="section-sub">Focus entirely on your family's recovery. Here is exactly how we ensure your hospital admission is completely hassle-free.</p>
+        </div>
+        <div className="process-grid">
+          {steps.map((s, i) => (
+            <div key={i} className="process-card">
+              <div className="process-num">{s.num}</div>
+              <div className="process-icon"><i className={`fa-solid ${s.icon}`}></i></div>
+              <h3 className="process-title">{s.title}</h3>
+              <p className="process-desc">{s.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
 function Leadership() {
   const leaders = [
     { name: "ManishPal Singh Sisodiya", role: "Chief Executive Officer", bio: "18+ years of leadership in health insurance advisory, helping thousands of families get the right Star Health coverage.", img: "/ceo.jpg" },
@@ -1347,7 +1390,7 @@ export default function App() {
         title="Top Star Health Insurance Agent in Indore" 
         description="Secure your medical future with the right Star Health policy in Indore. We provide personalized plan comparisons, quick renewals, and dedicated support for cashless treatments." 
     />
-  }[route] ?? (() => <><Hero /><EmiBanner /><WhyChooseUs /><Leadership /><CuratedPlans /><HomeHealthCare /><PremiumEstimator /><Testimonials /><FAQ /></>);
+ "": () => <><Hero /><EmiBanner /><WhyChooseUs /><CashlessProcess /><Leadership /><CuratedPlans /><HomeHealthCare /><PremiumEstimator /><Testimonials /><FAQ /></>,
   
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -1384,5 +1427,21 @@ export default function App() {
 
       <Footer />
     </>
+    /* ---- 3-Step Claim Timeline ---- */
+  .claim-section { background: linear-gradient(180deg, white 0%, var(--bg) 100%); }
+  .process-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; position: relative; margin-top: 40px; }
+  .process-card { background: white; border: 1px solid var(--border); border-radius: 24px; padding: 48px 32px 40px; position: relative; text-align: center; box-shadow: var(--shadow-soft); transition: var(--transition); z-index: 2; }
+  .process-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-md); border-color: var(--brand); }
+  .process-num { position: absolute; top: -24px; left: 50%; transform: translateX(-50%); width: 48px; height: 48px; background: var(--dark); color: white; font-weight: 900; font-size: 18px; border-radius: 50%; border: 4px solid var(--bg); display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(15,23,42,0.2); transition: var(--transition); }
+  .process-card:hover .process-num { background: var(--brand); border-color: var(--brand-light); }
+  .process-icon { width: 72px; height: 72px; background: var(--brand-light); color: var(--brand); border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 32px; margin: 0 auto 24px; transition: var(--transition); }
+  .process-card:hover .process-icon { transform: scale(1.1) rotate(-5deg); background: var(--brand); color: white; }
+  .process-title { font-size: 20px; margin-bottom: 16px; color: var(--dark); }
+  .process-desc { font-size: 15px; color: var(--muted); line-height: 1.7; }
+  
+  /* Connecting Line for Desktop */
+  @media (min-width: 992px) {
+    .process-grid::before { content: ''; position: absolute; top: 24px; left: 10%; right: 10%; height: 2px; background: var(--border); z-index: 1; }
+  }
   );
 }
