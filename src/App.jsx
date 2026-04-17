@@ -717,7 +717,27 @@ function CuratedPlans() {
     </section>
   );
 }
+function PlanMatchmaker() {
+  const matchMsg = encodeURIComponent("Hi ManishPal, I'm confused about which Star Health plan is best for me. Can you help me find the right one based on my age and family needs?");
+  const matchLink = "https://wa.me/919575056250?text=" + matchMsg;
 
+  return (
+    <section className="section" style={{ background: "var(--dark)", color: "white", textAlign: "center", padding: "80px 0" }}>
+      <div className="container reveal">
+        <h2 style={{ fontSize: "36px", marginBottom: "20px", color: "white" }}>Confused by all the plans?</h2>
+        <p style={{ fontSize: "18px", color: "#cbd5e1", maxWidth: "700px", margin: "0 auto 40px", lineHeight: "1.7" }}>
+          Whether you are a young professional, planning for a baby, or securing coverage for senior parents with existing conditions—don't guess. Let our 18 years of expertise find your perfect fit.
+        </p>
+        <a href={matchLink} target="_blank" rel="noopener noreferrer" className="btn" style={{ background: "#25D366", color: "white", padding: "18px 40px", fontSize: "18px", border: "none", boxShadow: "0 10px 25px -5px rgba(37, 211, 102, 0.4)" }}>
+          <i className="fa-brands fa-whatsapp" style={{ fontSize: "24px" }}></i> Get a Personalized Recommendation
+        </a>
+        <p style={{ marginTop: "24px", fontSize: "14px", color: "#94a3b8" }}>
+          <i className="fa-solid fa-lock" style={{ color: "#10b981" }}></i> Zero-Spam. Chat directly with ManishPal.
+        </p>
+      </div>
+    </section>
+  );
+}
 function HomeHealthCare() {
   const appFeatures = [
     { icon: "fa-virus", title: "Comprehensive Coverage", desc: "Coverage for fever, flu, gastritis & infectious diseases right at home." },
@@ -1193,7 +1213,7 @@ function Consultation() {
       .then(() => { setSubmitted(true); setLoading(false); }).catch(() => setLoading(false));
   };
   
-  return (
+ return (
     <div className="container section reveal">
       <div className="section-header">
         <span className="section-tag">Let's Connect</span>
@@ -1214,11 +1234,14 @@ function Consultation() {
           <input name="city" type="text" placeholder="City" value={formData.city} onChange={handleChange} required className="form-field" />
           <textarea name="message" placeholder="Tell us about your requirement (optional)" value={formData.message} onChange={handleChange} rows={4} className="form-field" style={{ resize: "vertical" }} />
           <button type="submit" className="form-submit" disabled={loading}>{loading ? "Sending Request..." : "Submit Details"}</button>
+          
+          <p style={{marginTop: "20px", fontSize: "13px", color: "var(--muted)", textAlign: "center", lineHeight: "1.5"}}>
+            <i className="fa-solid fa-shield-halved" style={{color: "var(--accent)"}}></i> <b>Zero-Spam Promise:</b> Your details go straight to ManishPal's personal phone. No call centers, no shared data, and absolutely no spam.
+          </p>
         </form>
       )}
     </div>
   );
-}
 
 function Contact() {
   return (
@@ -1408,7 +1431,7 @@ export default function App() {
         title="Top Star Health Insurance Agent in Indore" 
         description="Secure your medical future with the right Star Health policy in Indore. We provide personalized plan comparisons, quick renewals, and dedicated support for cashless treatments." 
     />
-  }[route] ?? (() => <><Hero /><EmiBanner /><WhyChooseUs /><CashlessProcess /><Leadership /><CuratedPlans /><HomeHealthCare /><PremiumEstimator /><Testimonials /><FAQ /></>);
+  }[route] ?? (() => <><Hero /><EmiBanner /><WhyChooseUs /><CashlessProcess /><Leadership /><CuratedPlans /><PlanMatchmaker /><HomeHealthCare /><PremiumEstimator /><Testimonials /><FAQ /></>;
   
   useEffect(() => {
     window.scrollTo(0, 0);
