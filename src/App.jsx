@@ -297,7 +297,6 @@ const CSS = `
   .form-submit:hover:not(:disabled) { background: var(--brand-hover); transform: translateY(-2px); box-shadow: var(--shadow-md); }
 
   /* ---- Fixed Action Buttons ---- */
-  /* ---- Fixed Action Buttons ---- */
   .fixed-actions { position: fixed; bottom: 24px; left: 24px; z-index: 9999; display: flex; align-items: flex-end; }
   .action-btn { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 16px 28px; border-radius: 100px; font-weight: 700; font-size: 16px; color: white; border: none; cursor: pointer; box-shadow: var(--shadow-lg); transition: var(--transition); text-decoration: none; }
   .action-btn:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 20px 40px -10px rgba(0,0,0,0.2); }
@@ -329,6 +328,23 @@ const CSS = `
   
   .cw-btn { width: 100%; background: #10b981; color: white; border: none; padding: 16px; border-radius: 100px; font-weight: 700; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: var(--transition); text-decoration: none;}
   .cw-btn:hover { background: #059669; }
+
+  /* ---- 3-Step Claim Timeline ---- */
+  .claim-section { background: linear-gradient(180deg, white 0%, var(--bg) 100%); }
+  .process-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; position: relative; margin-top: 40px; }
+  .process-card { background: white; border: 1px solid var(--border); border-radius: 24px; padding: 48px 32px 40px; position: relative; text-align: center; box-shadow: var(--shadow-soft); transition: var(--transition); z-index: 2; }
+  .process-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-md); border-color: var(--brand); }
+  .process-num { position: absolute; top: -24px; left: 50%; transform: translateX(-50%); width: 48px; height: 48px; background: var(--dark); color: white; font-weight: 900; font-size: 18px; border-radius: 50%; border: 4px solid var(--bg); display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(15,23,42,0.2); transition: var(--transition); }
+  .process-card:hover .process-num { background: var(--brand); border-color: var(--brand-light); }
+  .process-icon { width: 72px; height: 72px; background: var(--brand-light); color: var(--brand); border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 32px; margin: 0 auto 24px; transition: var(--transition); }
+  .process-card:hover .process-icon { transform: scale(1.1) rotate(-5deg); background: var(--brand); color: white; }
+  .process-title { font-size: 20px; margin-bottom: 16px; color: var(--dark); }
+  .process-desc { font-size: 15px; color: var(--muted); line-height: 1.7; }
+  
+  /* Connecting Line for Desktop */
+  @media (min-width: 992px) {
+    .process-grid::before { content: ''; position: absolute; top: 24px; left: 10%; right: 10%; height: 2px; background: var(--border); z-index: 1; }
+  }
 
   /* ---- Footer ---- */
   .footer { background: var(--dark); color: #cbd5e1; padding: 100px 0 120px; } /* Increased bottom padding to prevent buttons overlapping footer */
@@ -368,7 +384,7 @@ const CSS = `
     .plan-detail h2 { font-size: 36px; }
     .form-wrapper { padding: 32px 24px; }
     
-/* ---- Permanent Mobile Floating Fix (Both on Left) ---- */
+    /* ---- Permanent Mobile Floating Fix (Both on Left) ---- */
     .concierge-wrapper { bottom: 16px; right: auto; left: 16px; align-items: flex-start; }
     .concierge-toggle { width: 54px; height: 54px; font-size: 22px; }
     .concierge-window { right: auto; left: 0; bottom: 70px; width: calc(100vw - 32px); transform-origin: bottom left; }
@@ -559,6 +575,7 @@ function WhyChooseUs() {
     </section>
   );
 }
+
 function CashlessProcess() {
   const steps = [
     { 
@@ -603,6 +620,7 @@ function CashlessProcess() {
     </section>
   );
 }
+
 function Leadership() {
   const leaders = [
     { name: "ManishPal Singh Sisodiya", role: "Chief Executive Officer", bio: "18+ years of leadership in health insurance advisory, helping thousands of families get the right Star Health coverage.", img: "/ceo.jpg" },
@@ -1362,7 +1380,7 @@ export default function App() {
   const route = useRoute();
   
   const Page = { 
-    "": () => <><Hero /><EmiBanner /><WhyChooseUs /><Leadership /><CuratedPlans /><HomeHealthCare /><PremiumEstimator /><Testimonials /><FAQ /></>, 
+    "": () => <><Hero /><EmiBanner /><WhyChooseUs /><CashlessProcess /><Leadership /><CuratedPlans /><HomeHealthCare /><PremiumEstimator /><Testimonials /><FAQ /></>, 
     plans: Plans, 
     resources: Resources, 
     consultation: Consultation, 
@@ -1390,7 +1408,7 @@ export default function App() {
         title="Top Star Health Insurance Agent in Indore" 
         description="Secure your medical future with the right Star Health policy in Indore. We provide personalized plan comparisons, quick renewals, and dedicated support for cashless treatments." 
     />
- "": () => <><Hero /><EmiBanner /><WhyChooseUs /><CashlessProcess /><Leadership /><CuratedPlans /><HomeHealthCare /><PremiumEstimator /><Testimonials /><FAQ /></>,
+  }[route] ?? (() => <><Hero /><EmiBanner /><WhyChooseUs /><CashlessProcess /><Leadership /><CuratedPlans /><HomeHealthCare /><PremiumEstimator /><Testimonials /><FAQ /></>);
   
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -1427,21 +1445,5 @@ export default function App() {
 
       <Footer />
     </>
-    /* ---- 3-Step Claim Timeline ---- */
-  .claim-section { background: linear-gradient(180deg, white 0%, var(--bg) 100%); }
-  .process-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; position: relative; margin-top: 40px; }
-  .process-card { background: white; border: 1px solid var(--border); border-radius: 24px; padding: 48px 32px 40px; position: relative; text-align: center; box-shadow: var(--shadow-soft); transition: var(--transition); z-index: 2; }
-  .process-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-md); border-color: var(--brand); }
-  .process-num { position: absolute; top: -24px; left: 50%; transform: translateX(-50%); width: 48px; height: 48px; background: var(--dark); color: white; font-weight: 900; font-size: 18px; border-radius: 50%; border: 4px solid var(--bg); display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(15,23,42,0.2); transition: var(--transition); }
-  .process-card:hover .process-num { background: var(--brand); border-color: var(--brand-light); }
-  .process-icon { width: 72px; height: 72px; background: var(--brand-light); color: var(--brand); border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 32px; margin: 0 auto 24px; transition: var(--transition); }
-  .process-card:hover .process-icon { transform: scale(1.1) rotate(-5deg); background: var(--brand); color: white; }
-  .process-title { font-size: 20px; margin-bottom: 16px; color: var(--dark); }
-  .process-desc { font-size: 15px; color: var(--muted); line-height: 1.7; }
-  
-  /* Connecting Line for Desktop */
-  @media (min-width: 992px) {
-    .process-grid::before { content: ''; position: absolute; top: 24px; left: 10%; right: 10%; height: 2px; background: var(--border); z-index: 1; }
-  }
   );
 }
