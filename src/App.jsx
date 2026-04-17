@@ -174,6 +174,23 @@ const CSS = `
   .why-title { font-size: 20px; font-weight: 800; margin-bottom: 12px; color: white; }
   .why-desc { font-size: 15px; color: #cbd5e1; line-height: 1.7; flex-grow: 1; }
 
+  /* ---- 3-Step Claim Timeline ---- */
+  .claim-section { background: linear-gradient(180deg, white 0%, var(--bg) 100%); }
+  .process-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; position: relative; margin-top: 40px; }
+  .process-card { background: white; border: 1px solid var(--border); border-radius: 24px; padding: 48px 32px 40px; position: relative; text-align: center; box-shadow: var(--shadow-soft); transition: var(--transition); z-index: 2; }
+  .process-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-md); border-color: var(--brand); }
+  .process-num { position: absolute; top: -24px; left: 50%; transform: translateX(-50%); width: 48px; height: 48px; background: var(--dark); color: white; font-weight: 900; font-size: 18px; border-radius: 50%; border: 4px solid var(--bg); display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(15,23,42,0.2); transition: var(--transition); }
+  .process-card:hover .process-num { background: var(--brand); border-color: var(--brand-light); }
+  .process-icon { width: 72px; height: 72px; background: var(--brand-light); color: var(--brand); border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 32px; margin: 0 auto 24px; transition: var(--transition); }
+  .process-card:hover .process-icon { transform: scale(1.1) rotate(-5deg); background: var(--brand); color: white; }
+  .process-title { font-size: 20px; margin-bottom: 16px; color: var(--dark); }
+  .process-desc { font-size: 15px; color: var(--muted); line-height: 1.7; }
+  
+  /* Connecting Line for Desktop */
+  @media (min-width: 992px) {
+    .process-grid::before { content: ''; position: absolute; top: 24px; left: 10%; right: 10%; height: 2px; background: var(--border); z-index: 1; }
+  }
+
   /* ---- Leadership ---- */
   .leader-card { text-align: center; padding: 40px 32px; }
   .leader-avatar { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin: 0 auto 20px; display: block; border: 4px solid var(--brand-light); }
@@ -328,23 +345,6 @@ const CSS = `
   
   .cw-btn { width: 100%; background: #10b981; color: white; border: none; padding: 16px; border-radius: 100px; font-weight: 700; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: var(--transition); text-decoration: none;}
   .cw-btn:hover { background: #059669; }
-
-  /* ---- 3-Step Claim Timeline ---- */
-  .claim-section { background: linear-gradient(180deg, white 0%, var(--bg) 100%); }
-  .process-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; position: relative; margin-top: 40px; }
-  .process-card { background: white; border: 1px solid var(--border); border-radius: 24px; padding: 48px 32px 40px; position: relative; text-align: center; box-shadow: var(--shadow-soft); transition: var(--transition); z-index: 2; }
-  .process-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-md); border-color: var(--brand); }
-  .process-num { position: absolute; top: -24px; left: 50%; transform: translateX(-50%); width: 48px; height: 48px; background: var(--dark); color: white; font-weight: 900; font-size: 18px; border-radius: 50%; border: 4px solid var(--bg); display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(15,23,42,0.2); transition: var(--transition); }
-  .process-card:hover .process-num { background: var(--brand); border-color: var(--brand-light); }
-  .process-icon { width: 72px; height: 72px; background: var(--brand-light); color: var(--brand); border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 32px; margin: 0 auto 24px; transition: var(--transition); }
-  .process-card:hover .process-icon { transform: scale(1.1) rotate(-5deg); background: var(--brand); color: white; }
-  .process-title { font-size: 20px; margin-bottom: 16px; color: var(--dark); }
-  .process-desc { font-size: 15px; color: var(--muted); line-height: 1.7; }
-  
-  /* Connecting Line for Desktop */
-  @media (min-width: 992px) {
-    .process-grid::before { content: ''; position: absolute; top: 24px; left: 10%; right: 10%; height: 2px; background: var(--border); z-index: 1; }
-  }
 
   /* ---- Footer ---- */
   .footer { background: var(--dark); color: #cbd5e1; padding: 100px 0 120px; } /* Increased bottom padding to prevent buttons overlapping footer */
@@ -717,6 +717,7 @@ function CuratedPlans() {
     </section>
   );
 }
+
 function PlanMatchmaker() {
   const matchMsg = encodeURIComponent("Hi ManishPal, I'm confused about which Star Health plan is best for me. Can you help me find the right one based on my age and family needs?");
   const matchLink = "https://wa.me/919575056250?text=" + matchMsg;
@@ -738,6 +739,7 @@ function PlanMatchmaker() {
     </section>
   );
 }
+
 function HomeHealthCare() {
   const appFeatures = [
     { icon: "fa-virus", title: "Comprehensive Coverage", desc: "Coverage for fever, flu, gastritis & infectious diseases right at home." },
@@ -1213,7 +1215,7 @@ function Consultation() {
       .then(() => { setSubmitted(true); setLoading(false); }).catch(() => setLoading(false));
   };
   
- return (
+  return (
     <div className="container section reveal">
       <div className="section-header">
         <span className="section-tag">Let's Connect</span>
@@ -1242,6 +1244,7 @@ function Consultation() {
       )}
     </div>
   );
+}
 
 function Contact() {
   return (
@@ -1403,7 +1406,7 @@ export default function App() {
   const route = useRoute();
   
   const Page = { 
-    "": () => <><Hero /><EmiBanner /><WhyChooseUs /><CashlessProcess /><Leadership /><CuratedPlans /><HomeHealthCare /><PremiumEstimator /><Testimonials /><FAQ /></>, 
+    "": () => <><Hero /><EmiBanner /><WhyChooseUs /><CashlessProcess /><Leadership /><CuratedPlans /><PlanMatchmaker /><HomeHealthCare /><PremiumEstimator /><Testimonials /><FAQ /></>, 
     plans: Plans, 
     resources: Resources, 
     consultation: Consultation, 
@@ -1431,7 +1434,7 @@ export default function App() {
         title="Top Star Health Insurance Agent in Indore" 
         description="Secure your medical future with the right Star Health policy in Indore. We provide personalized plan comparisons, quick renewals, and dedicated support for cashless treatments." 
     />
-  }[route] ?? (() => <><Hero /><EmiBanner /><WhyChooseUs /><CashlessProcess /><Leadership /><CuratedPlans /><PlanMatchmaker /><HomeHealthCare /><PremiumEstimator /><Testimonials /><FAQ /></>;
+  }[route] ?? (() => <><Hero /><EmiBanner /><WhyChooseUs /><CashlessProcess /><Leadership /><CuratedPlans /><PlanMatchmaker /><HomeHealthCare /><PremiumEstimator /><Testimonials /><FAQ /></>);
   
   useEffect(() => {
     window.scrollTo(0, 0);
