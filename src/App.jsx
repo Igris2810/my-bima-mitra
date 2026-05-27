@@ -1173,6 +1173,7 @@ function FAQ() {
 
 function Resources() {
   const resources = [
+    { icon: "🏥", title: "Locate Network Hospital", link: "https://www.starhealth.in/component/lookup/hospital/" },
     { icon: "📄", title: "Download Claim Form", link: "https://d28c6jni2fmamz.cloudfront.net/CLAIMFORM_89ec9742bd.pdf" },
     { icon: "🔍", title: "Check Claim Status", link: "https://www.starhealth.in/claims/claim-status" },
     { icon: "🔄", title: "Instant Policy Renewal", link: "https://customer.starhealth.in/customerportal/instant-renewal/" },
