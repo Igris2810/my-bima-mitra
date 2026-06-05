@@ -740,6 +740,46 @@ function PlanMatchmaker() {
   );
 }
 
+function TalkToStar() {
+  const features = [
+    { icon: "fa-hospital", title: "Planning Hospitalization?", desc: "Call us 48 hours prior to planned or elective surgeries for expert guidance." },
+    { icon: "fa-user-doctor", title: "Advised Surgery?", desc: "Not sure if you need it? Get guidance to know if your surgery is truly required." },
+    { icon: "fa-bed", title: "Right Room & Hospital", desc: "Make the right choice of room type and network hospitals to avoid claim deductions." },
+    { icon: "fa-file-contract", title: "Avoid Claim Surprises", desc: "Understand your policy inclusions & exclusions clearly before getting admitted." }
+  ];
+
+  return (
+    <section className="section" style={{ background: "linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%)", color: "white" }}>
+      <div className="container reveal">
+        <div className="section-header" style={{ marginBottom: "40px" }}>
+          <span className="section-tag" style={{ background: "rgba(255,255,255,0.2)", color: "white" }}>Free Teleconsultation</span>
+          <h2 className="section-title" style={{ color: "white" }}>Talk to Star</h2>
+          <p className="section-sub" style={{ color: "#bfdbfe" }}>Guiding you toward the right care decisions. Be an informed customer prior to hospitalization.</p>
+        </div>
+        
+        <div style={{ textAlign: "center", marginBottom: "48px" }}>
+          <div style={{ display: "inline-flex", alignItems: "center", gap: "16px", background: "white", padding: "16px 40px", borderRadius: "100px", boxShadow: "0 20px 40px rgba(0,0,0,0.2)" }}>
+            <i className="fa-solid fa-phone-volume" style={{ fontSize: "32px", color: "var(--brand)" }}></i>
+            <a href="tel:7676905905" style={{ fontSize: "36px", fontWeight: "900", color: "var(--dark)", textDecoration: "none", letterSpacing: "1px" }}>76 76 905 905</a>
+          </div>
+        </div>
+
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: "24px" }}>
+          {features.map((f, i) => (
+            <div key={i} style={{ background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.2)", borderRadius: "24px", padding: "32px", backdropFilter: "blur(10px)", transition: "transform 0.3s" }} onMouseEnter={(e) => e.currentTarget.style.transform = "translateY(-5px)"} onMouseLeave={(e) => e.currentTarget.style.transform = "translateY(0)"}>
+              <div style={{ width: "48px", height: "48px", background: "rgba(255,255,255,0.2)", color: "white", borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "20px", marginBottom: "20px" }}>
+                <i className={`fa-solid ${f.icon}`}></i>
+              </div>
+              <h3 style={{ fontSize: "18px", fontWeight: "800", marginBottom: "12px", color: "white" }}>{f.title}</h3>
+              <p style={{ fontSize: "14px", color: "#e2e8f0", lineHeight: "1.6" }}>{f.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function HomeHealthCare() {
   const appFeatures = [
     { icon: "fa-virus", title: "Comprehensive Coverage", desc: "Coverage for fever, flu, gastritis & infectious diseases right at home." },
@@ -1407,7 +1447,7 @@ export default function App() {
   const route = useRoute();
   
   const Page = { 
-    "": () => <><Hero /><EmiBanner /><WhyChooseUs /><CashlessProcess /><Leadership /><CuratedPlans /><PlanMatchmaker /><HomeHealthCare /><PremiumEstimator /><Testimonials /><FAQ /></>, 
+    "": () => <><Hero /><EmiBanner /><WhyChooseUs /><CashlessProcess /><Leadership /><CuratedPlans /><PlanMatchmaker /><TalkToStar /><HomeHealthCare /><PremiumEstimator /><Testimonials /><FAQ /></>, 
     plans: Plans, 
     resources: Resources, 
     consultation: Consultation, 
@@ -1435,7 +1475,7 @@ export default function App() {
         title="Top Star Health Insurance Agent in Indore" 
         description="Secure your medical future with the right Star Health policy in Indore. We provide personalized plan comparisons, quick renewals, and dedicated support for cashless treatments." 
     />
-  }[route] ?? (() => <><Hero /><EmiBanner /><WhyChooseUs /><CashlessProcess /><Leadership /><CuratedPlans /><PlanMatchmaker /><HomeHealthCare /><PremiumEstimator /><Testimonials /><FAQ /></>);
+  }[route] ?? (() => <><Hero /><EmiBanner /><WhyChooseUs /><CashlessProcess /><Leadership /><CuratedPlans /><PlanMatchmaker /><TalkToStar /><HomeHealthCare /><PremiumEstimator /><Testimonials /><FAQ /></>);
   
   useEffect(() => {
     window.scrollTo(0, 0);
