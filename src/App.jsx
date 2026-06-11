@@ -79,11 +79,12 @@ const CSS = `
     background-size: 200% auto;
     color: white; text-align: center; padding: 10px 24px; font-size: 13px; font-weight: 600; 
     letter-spacing: 0.05em; text-transform: uppercase;
-    display: flex; justify-content: center; align-items: center; gap: 12px;
+    display: flex; justify-content: center; align-items: center; gap: 12px; flex-wrap: wrap;
   }
   .announce-bar a { 
     color: #fde047; text-decoration: none; display: inline-flex; align-items: center;
-    background: rgba(255,255,255,0.1); padding: 2px 10px; border-radius: 100px;
+    background: rgba(255,255,255,0.1); padding: 4px 14px; border-radius: 100px;
+    white-space: nowrap; flex-shrink: 0;
   }
   .announce-bar a:hover { background: rgba(255,255,255,0.2); transform: translateX(2px); }
 
@@ -393,6 +394,10 @@ const CSS = `
     .action-btn { padding: 12px 20px; font-size: 14px; border-radius: 100px; white-space: nowrap; }
     
     .curated-header { flex-direction: column; text-align: center; }
+
+    /* ---- Announce Bar Mobile Fix ---- */
+    .ab-hide { display: none !important; }
+    .announce-bar { font-size: 12px; padding: 8px 16px; }
   }
 `;
 
@@ -428,8 +433,8 @@ function toggleLanguage() {
 function AnnounceBar() {
   return (
     <div className="announce-bar">
-      <span>🛡️ Authorized Star Health Advisor</span>
-      <span style={{opacity: 0.5}}>|</span>
+      <span className="ab-hide">🛡️ Authorized Star Health Advisor</span>
+      <span className="ab-hide" style={{opacity: 0.5}}>|</span>
       <span>Free consultation for new clients</span>
       <a href={"#/consultation"}>Book Now →</a>
     </div>
