@@ -129,7 +129,7 @@ const CSS = `
 
   /* ---- Cards Grid ---- */
   .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px; align-items: stretch; }
-  .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 32px; align-items: stretch; }
+  .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px; align-items: stretch; }
   .card { background: var(--surface); border-radius: var(--radius-lg); box-shadow: var(--shadow-soft); border: 1px solid var(--border); padding: 40px; transition: var(--transition); display: flex; flex-direction: column; height: 100%; position: relative; overflow: hidden; }
   .card:hover { transform: translateY(-8px); box-shadow: var(--shadow-md); border-color: #cbd5e1; }
 
