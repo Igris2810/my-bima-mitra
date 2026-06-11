@@ -663,10 +663,6 @@ function CuratedPlans() {
             <h2 className="section-title">Curated Health Plans</h2>
             <p className="section-sub">We've hand-picked the best Star Health products for every life stage.</p>
           </div>
-          <div className="curated-nav">
-            <button className="curated-nav-btn"><i className="fa-solid fa-chevron-left"></i></button>
-            <button className="curated-nav-btn"><i className="fa-solid fa-chevron-right"></i></button>
-          </div>
         </div>
         
         <div className="curated-grid">
